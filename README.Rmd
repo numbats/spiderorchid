@@ -60,21 +60,21 @@ find_cran_packages("Michael", "Lydeamore")
 
 ## 2. `get_publications`
 
-This function retrieves research publications from Google Scholar and ORCID, combining the results into a single data frame. It allows for flexibility in querying either platform based on the availability of IDs.
+This function retrieves research publications from Google Scholar and/or ORCID, combining the results into a single data frame. Both id arguments can be vectors of the same length.
 
 ```{r}
 # Example 1: Retrieve publications from both ORCID and Google Scholar
-get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")
+get_publications(orcid_id = "0000-0002-2140-5352", scholar_id = "vamErfkAAAAJ")
 ```
 
 ```{r}
 # Example 2: Retrieve publications only from Google Scholar
-get_publications(NA, "vamErfkAAAAJ")
+get_publications(scholar_id = "vamErfkAAAAJ")
 ```
 
 ```{r}
 # Example 3: Retrieve publications only from ORCID
-get_publications("0000-0002-2140-5352", NA)
+get_publications(orcid_id = "0000-0002-2140-5352")
 ```
 
 

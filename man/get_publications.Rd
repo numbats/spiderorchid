@@ -4,7 +4,7 @@
 \alias{get_publications}
 \title{get_publications}
 \usage{
-get_publications(orcid_id, scholar_id)
+get_publications(orcid_id = NULL, scholar_id = NULL)
 }
 \arguments{
 \item{orcid_id}{ORCID ID}

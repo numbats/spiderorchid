@@ -1,25 +1,27 @@
-#' get_publications_from_orcid
-#'
-#' @description
-#' The `get_publications_from_orcid` function retrieves publications for given ORCID IDs using the rorcid package.
-#' It fetches all works associated with each ORCID ID and combines them into a single data frame.
-#'
-#' @param orcid_ids A character vector of ORCID IDs for which publication information is requested.
-#'
-#' @return A data frame containing all publications for the specified ORCID IDs.
-#'
+#' @importFrom scholar get_publications
+#' @importFrom dplyr select
+#' @importFrom tibble tibble
 #' @importFrom rorcid orcid_works
 #' @importFrom dplyr select bind_rows mutate
 #' @importFrom tibble tibble
-#' @importFrom magrittr %>%
-#'
-#' @examples
-#' \dontrun{
-#' get_publications_from_orcid(c("0000-0003-2531-9408", "0000-0001-5738-1471"))
-#' }
-#'
-#' @name get_publications_from_orcid
-#' @export
+
+# get_publications_from_orcid
+#
+# @description
+# The `get_publications_from_orcid` function retrieves publications for given ORCID IDs using the rorcid package.
+# It fetches all works associated with each ORCID ID and combines them into a single data frame.
+#
+# @param orcid_ids A character vector of ORCID IDs for which publication information is requested.
+#
+# @return A data frame containing all publications for the specified ORCID IDs.
+#
+#
+# @examples
+# \dontrun{
+# get_publications_from_orcid(c("0000-0003-2531-9408", "0000-0001-5738-1471"))
+# }
+#
+# @name get_publications_from_orcid
 
 get_publications_from_orcid <- function(orcid_ids) {
   orcid_ids <- as.vector(orcid_ids)
@@ -50,7 +52,7 @@ get_publications_from_orcid <- function(orcid_ids) {
         append_column_if_missing("authors", default_value = NA_character_) |>
         append_column_if_missing("publication_year", default_value = NA_integer_) |>
         append_column_if_missing("journal_name", default_value = NA_character_) |>
-        mutate(
+        dplyr::mutate(
           # the `external-ids` contains lots of things, not just DOI. It is a list containing a dataframe
           # Mapping over that list, we can filter out just the 'doi' type
           # Then pull it into a character vector
@@ -83,25 +85,20 @@ get_publications_from_orcid <- function(orcid_ids) {
 
 
 
-#' get_publications_from_scholar
-#'
-#' @description
-#' This function retrieves publications for a given Google Scholar ID and formats them into a structured tibble.
-#'
-#' @param scholar_id A character string representing the Google Scholar ID.
-#'
-#' @return A tibble containing all publications for the specified Google Scholar ID.
-#'
-#' @importFrom scholar get_publications
-#' @importFrom dplyr select
-#' @importFrom tibble tibble
-#'
-#' @examples
-#' \dontrun{
-#' get_publications_from_scholar("vamErfkAAAAJ")
-#' }
-#' @name get_publications_from_scholar
-#' @export
+# get_publications_from_scholar
+#
+# @description
+# This function retrieves publications for a given Google Scholar ID and formats them into a structured tibble.
+#
+# @param scholar_id A character string representing the Google Scholar ID.
+#
+# @return A tibble containing all publications for the specified Google Scholar ID.
+# @examples
+# \dontrun{
+# get_publications_from_scholar("vamErfkAAAAJ")
+# }
+# @name get_publications_from_scholar
+
 get_publications_from_scholar <- function(scholar_id) {
   if (length(scholar_id) == 0) {
     return(tibble::tibble(
@@ -223,14 +220,14 @@ find_cran_packages <- function(first_name, last_name) {
 #'
 #' @name get_publications
 #' @export
-get_publications <- function(orcid_id, scholar_id) {
-  if (is.na(scholar_id)) {
+get_publications <- function(orcid_id = NULL, scholar_id = NULL) {
+  if (is.null(scholar_id)) {
     scholar_pubs <- NULL
   } else {
     scholar_pubs <- get_publications_from_scholar(scholar_id)
   }
 
-  if (is.na(orcid_id)) {
+  if (is.null(orcid_id)) {
     orcid_pubs <- NULL
   } else {
     orcid_pubs <- get_publications_from_orcid(orcid_id)

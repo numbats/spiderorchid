@@ -18,11 +18,17 @@ This function retrieves research publications from Google Scholar and ORCID base
 }
 \examples{
 # Example 1: Retrieve publications from both ORCID and Google Scholar
-\dontrun{get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")}
+\dontrun{
+get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")
+}
 
-\dontrun{get_publications(NA, "vamErfkAAAAJ")}
+\dontrun{
+get_publications(NA, "vamErfkAAAAJ")
+}
 
 # Example 3: Retrieve publications only from ORCID
-\dontrun{get_publications("0000-0002-2140-5352", NA)}
+\dontrun{
+get_publications("0000-0002-2140-5352", NA)
+}
 
 }

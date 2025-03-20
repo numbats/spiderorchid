@@ -14,7 +14,9 @@
 #' @importFrom magrittr %>%
 #'
 #' @examples
-#' \dontrun{get_publications_from_orcid(c("0000-0003-2531-9408", "0000-0001-5738-1471"))}
+#' \dontrun{
+#' get_publications_from_orcid(c("0000-0003-2531-9408", "0000-0001-5738-1471"))
+#' }
 #'
 #' @name get_publications_from_orcid
 #' @export
@@ -56,15 +58,16 @@ get_publications_from_orcid <- function(orcid_ids) {
           DOI = purrr::map_chr(
             .x = DOI,
             .f = function(x) {
-              if(length(x) == 0L)
+              if (length(x) == 0L) {
                 return(NA)
+              }
               doi <- dplyr::filter(x, `external-id-type` == "doi") |>
                 dplyr::pull(`external-id-value`)
 
               if (length(doi) == 0L) {
-                return (NA)
+                return(NA)
               } else {
-                return (doi[1])
+                return(doi[1])
               }
             }
           ),
@@ -94,11 +97,12 @@ get_publications_from_orcid <- function(orcid_ids) {
 #' @importFrom tibble tibble
 #'
 #' @examples
-#' \dontrun{get_publications_from_scholar("vamErfkAAAAJ")}
+#' \dontrun{
+#' get_publications_from_scholar("vamErfkAAAAJ")
+#' }
 #' @name get_publications_from_scholar
 #' @export
 get_publications_from_scholar <- function(scholar_id) {
-
   if (length(scholar_id) == 0) {
     return(tibble::tibble(
       title = character(0),
@@ -152,13 +156,14 @@ get_publications_from_scholar <- function(scholar_id) {
 #' @importFrom stringr str_detect
 #'
 #' @examples
-#' \dontrun{find_cran_packages("Michael", "Lydeamore")}
+#' \dontrun{
+#' find_cran_packages("Michael", "Lydeamore")
+#' }
 #'
 #' @name find_cran_packages
 #' @export
 
 find_cran_packages <- function(first_name, last_name) {
-
   author_name <- paste(first_name, last_name)
 
   results <- pkgsearch::ps(author_name, size = 200)
@@ -177,7 +182,6 @@ find_cran_packages <- function(first_name, last_name) {
   }
 
   package_frame <- lapply(1:num_packages, function(i) {
-
     tibble(
       name = results$package[i],
       downloads = results$package_data[[i]]$downloads,
@@ -203,13 +207,19 @@ find_cran_packages <- function(first_name, last_name) {
 #'
 #' @examples
 #' # Example 1: Retrieve publications from both ORCID and Google Scholar
-#' \dontrun{get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")}
+#' \dontrun{
+#' get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")
+#' }
 #'
 #  # Example 2: Retrieve publications only from Google Scholar
-#' \dontrun{get_publications(NA, "vamErfkAAAAJ")}
+#' \dontrun{
+#' get_publications(NA, "vamErfkAAAAJ")
+#' }
 #'
 #' # Example 3: Retrieve publications only from ORCID
-#' \dontrun{get_publications("0000-0002-2140-5352", NA)}
+#' \dontrun{
+#' get_publications("0000-0002-2140-5352", NA)
+#' }
 #'
 #' @name get_publications
 #' @export
@@ -244,6 +254,3 @@ get_publications <- function(orcid_id, scholar_id) {
 
   return(tibble::as_tibble(research_df))
 }
-
-
-

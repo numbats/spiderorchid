@@ -12,15 +12,16 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = FALSE, 
+  echo = FALSE,
   eval = FALSE,
-  warning = FALSE, 
-  message = FALSE, 
-  fig.width =8, 
-  fig.height=5,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 8,
+  fig.height = 5,
   fig.align = "center",
   out.width = "100%",
-  dpi =300)
+  dpi = 300
+)
 ```
 
 ```{r loading libraries}
@@ -39,17 +40,23 @@ all_publications |>
   group_by(lookup_name) |>
   summarise(total_publications = n()) |>
   arrange(desc(total_publications)) |>
-  slice_max(total_publications, n = 5) |>  
-  ggplot(aes(x = reorder(lookup_name, total_publications), 
-             y = total_publications)) + 
+  slice_max(total_publications, n = 5) |>
+  ggplot(aes(
+    x = reorder(lookup_name, total_publications),
+    y = total_publications
+  )) +
   geom_bar(stat = "identity", fill = "blue") +
   coord_flip() +
   theme_bw() +
-  labs(title = "Top 5 Authors by Number of Publications",
-       x = "Author",
-       y = "Number of Publications") +
-theme(plot.title = element_text(size = 16, face = "bold"),
-      axis.title = element_text(size = 12))
+  labs(
+    title = "Top 5 Authors by Number of Publications",
+    x = "Author",
+    y = "Number of Publications"
+  ) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
 ```
 
 ## Analysis
@@ -69,19 +76,23 @@ top_authors <- all_publications |>
   pull(lookup_name)
 
 all_publications |>
-  filter(lookup_name %in% top_authors) |>  
-  group_by(lookup_name, publication_year) |> 
-  summarise(total_publications = n()) |> 
-  ggplot(aes(x = publication_year, y = total_publications, color = lookup_name)) +  
-  geom_line(size = 1.2) +  
+  filter(lookup_name %in% top_authors) |>
+  group_by(lookup_name, publication_year) |>
+  summarise(total_publications = n()) |>
+  ggplot(aes(x = publication_year, y = total_publications, color = lookup_name)) +
+  geom_line(size = 1.2) +
   theme_bw() +
-  labs(title = "Publication Trend of Top Authors Over Time",
-       x = "Year",
-       y = "Total Publications",
-       color = "Author") +
-  theme(plot.title = element_text(size = 16, face = "bold"),
-        axis.title = element_text(size = 12),
-        legend.position = "bottom")
+  labs(
+    title = "Publication Trend of Top Authors Over Time",
+    x = "Year",
+    y = "Total Publications",
+    color = "Author"
+  ) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 12),
+    legend.position = "bottom"
+  )
 ```
 
 ## Analysis
@@ -104,12 +115,14 @@ Similar to the bar chart, the publication trends over time may be affected by do
 get_all_publications(staff_ids) |>
   dplyr::filter(!is.na(publication_year)) |>
   dplyr::count(publication_year) |>
-  ggplot(aes(x = as.numeric(publication_year), y = n)) +  
-  geom_line(color= "red") +
-   theme_bw() +
+  ggplot(aes(x = as.numeric(publication_year), y = n)) +
+  geom_line(color = "red") +
+  theme_bw() +
   labs(title = "Publications Over Time", x = "Year", y = "Number of Publications") +
-theme(plot.title = element_text(size = 16, face = "bold"),
-      axis.title = element_text(size = 12))
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
 ```
 
 ## Analysis
@@ -123,22 +136,26 @@ The inflated publication figures in 2010 are thus a result of these data inconsi
 
 # Publications by Journal
 ```{r}
-get_all_publications(staff_ids) |> 
-  filter(!is.na(journal_name) & journal_name != "") |> 
-  filter(!journal_name %in% c("arXiv preprint arXiv:", "Available at SSRN", "Monash University", "Monash Econometrics and Business Statistics Working Papers")) |> 
-  group_by(journal_name) |> 
-  summarise(total_publications = n()) |> 
-  arrange(desc(total_publications)) |> 
-  slice_max(total_publications, n = 10) |>  
-  ggplot(aes(x = reorder(journal_name, total_publications), y = total_publications))  +
+get_all_publications(staff_ids) |>
+  filter(!is.na(journal_name) & journal_name != "") |>
+  filter(!journal_name %in% c("arXiv preprint arXiv:", "Available at SSRN", "Monash University", "Monash Econometrics and Business Statistics Working Papers")) |>
+  group_by(journal_name) |>
+  summarise(total_publications = n()) |>
+  arrange(desc(total_publications)) |>
+  slice_max(total_publications, n = 10) |>
+  ggplot(aes(x = reorder(journal_name, total_publications), y = total_publications)) +
   geom_bar(stat = "identity", fill = "lightskyblue4") +
   coord_flip() +
-   theme_bw() +
-  labs(title = "Top 10 Journals by Number of Publications",
-       x = "Journal",
-       y = "Number of Publications") +
-theme(plot.title = element_text(size = 16, face = "bold"),
-      axis.title = element_text(size = 12))
+  theme_bw() +
+  labs(
+    title = "Top 10 Journals by Number of Publications",
+    x = "Journal",
+    y = "Number of Publications"
+  ) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
 ```
 
 ## Analysis
@@ -148,21 +165,27 @@ The bar chart highlights the top 10 journals where Monash EBS staff frequently p
 
 # Top Packages by Downloads 
 ```{r}
-cran_all_pubs(staff_ids) |> 
-  dplyr::arrange(desc(downloads)) |> 
-  dplyr::top_n(10, downloads) |> 
-  ggplot(aes(x = reorder(name, downloads), 
-             y = downloads, 
-             fill = ifelse(name == first(name), "highlight", "normal"))) +  
-  geom_bar(stat = "identity") + 
-  scale_fill_manual(values = c("highlight" = "gold", "normal" = "gold"), guide = FALSE) +  
-  coord_flip() + 
-   theme_bw() +
-  labs(title = "Top 10 Packages by Downloads", 
-       x = "Package Name", 
-       y = "Downloads") +
-theme(plot.title = element_text(size = 16, face = "bold"),
-      axis.title = element_text(size = 12))
+cran_all_pubs(staff_ids) |>
+  dplyr::arrange(desc(downloads)) |>
+  dplyr::top_n(10, downloads) |>
+  ggplot(aes(
+    x = reorder(name, downloads),
+    y = downloads,
+    fill = ifelse(name == first(name), "highlight", "normal")
+  )) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("highlight" = "gold", "normal" = "gold"), guide = FALSE) +
+  coord_flip() +
+  theme_bw() +
+  labs(
+    title = "Top 10 Packages by Downloads",
+    x = "Package Name",
+    y = "Downloads"
+  ) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 12)
+  )
 ```
 
 ## Analysis

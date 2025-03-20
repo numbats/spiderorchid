@@ -18,17 +18,18 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-# Research and CRAN Publications Retrieval Package
+# Download and wrangle publication data for Monash EBS academic staff
 
 ## Overview
 
 The `spiderorchid` R package offers tools to retrieve research publications from Google Scholar and ORCID, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN, including publication updates and downloads.
 
 The main functions included are:
-- `find_cran_packages`: Searches for CRAN packages by an author's first and last name and returns relevant package information such as the number of downloads and last update date.
-- `get_publications`: Retrieves publications from both Google Scholar and ORCID based on provided IDs.
-- `get_all_publications`: Retrieves publications from multiple authors.
-- `cran_all_pubs`: Combines CRAN package data for multiple authors.
+
+* `find_cran_packages`: Searches for CRAN packages by an author's first and last name and returns relevant package information such as the number of downloads and last update date.
+* `get_publications`: Retrieves publications from both Google Scholar and ORCID based on provided IDs.
+* `get_all_publications`: Retrieves publications from multiple authors.
+* `cran_all_pubs`: Combines CRAN package data for multiple authors.
 
 ## Installation
 
@@ -62,17 +63,17 @@ find_cran_packages("Michael", "Lydeamore")
 This function retrieves research publications from Google Scholar and ORCID, combining the results into a single data frame. It allows for flexibility in querying either platform based on the availability of IDs.
 
 ```{r}
-#Example 1: Retrieve publications from both ORCID and Google Scholar
+# Example 1: Retrieve publications from both ORCID and Google Scholar
 get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")
 ```
 
 ```{r}
-#Example 2: Retrieve publications only from Google Scholar
+# Example 2: Retrieve publications only from Google Scholar
 get_publications(NA, "vamErfkAAAAJ")
 ```
 
 ```{r}
-#Example 3: Retrieve publications only from ORCID
+# Example 3: Retrieve publications only from ORCID
 get_publications("0000-0002-2140-5352", NA)
 ```
 
@@ -83,8 +84,8 @@ This function takes a data frame of authors, each with an ORCID ID and a Google 
 
 ```{r}
 authors_df <- tibble::tibble(
-orcid_id = c("0000-0002-2140-5352", "0000-0002-1825-0097", NA, "0000-0001-5109-3700"),
-scholar_id = c(NA, "vamErfkAAAAJ", "4bahYMkAAAAJ", NA)
+  orcid_id = c("0000-0002-2140-5352", "0000-0002-1825-0097", NA, "0000-0001-5109-3700"),
+  scholar_id = c(NA, "vamErfkAAAAJ", "4bahYMkAAAAJ", NA)
 )
 get_all_publications(authors_df)
 ```

@@ -18,6 +18,8 @@ A data frame returning package name, number of downloads,author names and last u
 This function searches for CRAN packages by a given author's first and last name.
 }
 \examples{
-\dontrun{find_cran_packages("Michael", "Lydeamore")}
+\dontrun{
+find_cran_packages("Michael", "Lydeamore")
+}
 
 }

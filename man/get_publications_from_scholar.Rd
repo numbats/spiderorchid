@@ -16,5 +16,7 @@ A tibble containing all publications for the specified Google Scholar ID.
 This function retrieves publications for a given Google Scholar ID and formats them into a structured tibble.
 }
 \examples{
-\dontrun{get_publications_from_scholar("vamErfkAAAAJ")}
+\dontrun{
+get_publications_from_scholar("vamErfkAAAAJ")
+}
 }

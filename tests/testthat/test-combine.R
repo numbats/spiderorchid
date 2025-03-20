@@ -40,7 +40,8 @@ test_that("get_publications fills missing columns with NA", {
 test_that("cran_all_pubs returns a dataframe for valid authors", {
   cran_authors <- tibble::tibble(
     first_name = c("Michael", "Rob"),
-    last_name = c("Lydeamore", "Hyndman"))
+    last_name = c("Lydeamore", "Hyndman")
+  )
   result <- cran_all_pubs(cran_authors)
   expect_s3_class(result, "tbl_df")
   expect_true(all(c("name", "downloads", "authors", "last_update_date") %in% colnames(result)))
@@ -52,7 +53,8 @@ test_that("cran_all_pubs returns a dataframe for valid authors", {
 test_that("cran_all_pubs returns a dataframe for a single valid author", {
   cran_authors <- tibble::tibble(
     first_name = "Rob",
-    last_name = "Hyndman")
+    last_name = "Hyndman"
+  )
   result <- cran_all_pubs(cran_authors)
   expect_s3_class(result, "tbl_df")
   expect_true(all(c("name", "downloads", "authors", "last_update_date") %in% colnames(result)))
@@ -62,7 +64,8 @@ test_that("cran_all_pubs returns a dataframe for a single valid author", {
 test_that("cran_all_pubs returns empty dataframe for unknown authors", {
   cran_authors <- tibble::tibble(
     first_name = c("Harvey"),
-    last_name = c("Spector"))
+    last_name = c("Spector")
+  )
   result <- cran_all_pubs(cran_authors)
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), 0)
@@ -71,7 +74,8 @@ test_that("cran_all_pubs returns empty dataframe for unknown authors", {
 test_that("cran_all_pubs returns distinct rows", {
   cran_authors <- tibble::tibble(
     first_name = c("Michael", "Michael"),
-    last_name = c("Lydeamore", "Lydeamore"))
+    last_name = c("Lydeamore", "Lydeamore")
+  )
   result <- cran_all_pubs(cran_authors)
   expect_s3_class(result, "tbl_df")
   expect_true(nrow(result) == nrow(dplyr::distinct(result)))
@@ -83,6 +87,3 @@ test_that("cran_all_pubs returns an empty dataframe if no authors are provided",
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), 0)
 })
-
-
-

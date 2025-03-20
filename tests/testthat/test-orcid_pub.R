@@ -31,5 +31,3 @@ test_that("get_publications_from_orcid returns empty data frame for invalid ORCI
   orcid_ids <- c("0000-0000-0000-0000")
   expect_error(get_publications_from_orcid(orcid_ids), "Invalid ORCID ID")
 })
-
-

@@ -33,7 +33,7 @@ library(dplyr)
 # Top Authors by Publications
 
 ```{r}
-all_publications <- get_all_publications(orcid_gsid)
+all_publications <- get_all_publications(staff_ids)
 all_publications |>
   filter(lookup_name != "Jiti Gao") |>
   group_by(lookup_name) |>
@@ -101,7 +101,7 @@ Similar to the bar chart, the publication trends over time may be affected by do
 
 # Publications by Year 
 ```{r}
-get_all_publications(orcid_gsid) |>
+get_all_publications(staff_ids) |>
   dplyr::filter(!is.na(publication_year)) |>
   dplyr::count(publication_year) |>
   ggplot(aes(x = as.numeric(publication_year), y = n)) +  
@@ -123,7 +123,7 @@ The inflated publication figures in 2010 are thus a result of these data inconsi
 
 # Publications by Journal
 ```{r}
-get_all_publications(orcid_gsid) |> 
+get_all_publications(staff_ids) |> 
   filter(!is.na(journal_name) & journal_name != "") |> 
   filter(!journal_name %in% c("arXiv preprint arXiv:", "Available at SSRN", "Monash University", "Monash Econometrics and Business Statistics Working Papers")) |> 
   group_by(journal_name) |> 
@@ -148,7 +148,7 @@ The bar chart highlights the top 10 journals where Monash EBS staff frequently p
 
 # Top Packages by Downloads 
 ```{r}
-cran_all_pubs(orcid_gsid) |> 
+cran_all_pubs(staff_ids) |> 
   dplyr::arrange(desc(downloads)) |> 
   dplyr::top_n(10, downloads) |> 
   ggplot(aes(x = reorder(name, downloads), 

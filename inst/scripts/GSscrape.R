@@ -6,7 +6,7 @@
 library(scholar)
 library(dplyr)
 
-nonna_scholars <- orcid_gsid |>
+nonna_scholars <- staff_ids |>
   filter(!is.na(gsuser_id))
 
 all_pubs <- lapply(nonna_scholars$gsuser_id, function(scholar_id) {

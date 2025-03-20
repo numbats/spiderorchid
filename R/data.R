@@ -1,4 +1,4 @@
-#' orcid_gsid
+#' staff_ids
 #'
 #' @description
 #' This dataset contains the mappings between researcher names and their respective ORCID
@@ -13,4 +13,4 @@
 #'  \item{scholar_id}{\code{character}. The Google Scholar user ID.}
 #' }
 #' @source \url{https://www.monash.edu/business/ebs/our-people/staff-directory}
-"orcid_gsid"
+"staff_ids"

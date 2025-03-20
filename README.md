@@ -182,14 +182,14 @@ cran_all_pubs(cran_authors)
 
 ## Dataset
 
-`orcid_gsid.csv`
+`staff_ids.csv`
 
 This dataset contains mappings between researchers’ names and their
 respective ORCID and Google Scholar IDs. It is useful for linking and
 identifying academic profiles across different platforms.
 
 ``` r
-print(orcid_gsid)
+print(staff_ids)
 #> # A tibble: 56 × 4
 #>    first_name last_name orcid_id            gsuser_id   
 #>    <chr>      <chr>     <chr>               <chr>       

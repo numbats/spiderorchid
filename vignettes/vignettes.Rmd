@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r loading libraries}
-library(publicationsscraper)
+library(spiderorchid)
 library(ggplot2)
 library(dplyr)
 ```

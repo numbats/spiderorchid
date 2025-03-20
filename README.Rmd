@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# publicationsscraper
+# spiderorchid
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The `publicationsscraper` R package offers tools to retrieve research publications from Google Scholar and ORCID, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN, including publication updates and downloads.
+The `spiderorchid` R package offers tools to retrieve research publications from Google Scholar and ORCID, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN, including publication updates and downloads.
 
 The main functions included are:
 - `find_cran_packages`: Searches for CRAN packages by an author's first and last name and returns relevant package information such as the number of downloads and last update date.
@@ -53,7 +53,7 @@ devtools::load_all()
 This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
 
 ```{r}
-library(publicationsscraper)
+library(spiderorchid)
 find_cran_packages("Michael", "Lydeamore")
 ```
 

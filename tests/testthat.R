@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(publicationsscraper)
+library(spiderorchid)
 
-test_check("publicationsscraper")
+test_check("spiderorchid")

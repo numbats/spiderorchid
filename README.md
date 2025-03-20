@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# publicationsscraper
+# spiderorchid
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -10,7 +10,7 @@
 
 ## Overview
 
-The `publicationsscraper` R package offers tools to retrieve research
+The `spiderorchid` R package offers tools to retrieve research
 publications from Google Scholar and ORCID, along with CRAN package
 download statistics. It is tailored for academic researchers in the EBS
 department who wish to consolidate and analyze their research outputs,
@@ -50,7 +50,7 @@ specified individual. It returns a data frame containing the package
 name, number of downloads, the authors, and the last update date.
 
 ``` r
-library(publicationsscraper)
+library(spiderorchid)
 find_cran_packages("Michael", "Lydeamore")
 #> # A tibble: 4 × 4
 #>   name            downloads authors                             last_update_date

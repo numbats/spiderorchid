@@ -33,18 +33,19 @@ The main functions included are:
 
 ## Installation
 
-To install this package, you can clone the repository and load the package using:
-
 ```r
-# Clone the repository
-git clone <https://github.com/numbats/achievement-scraper.git>
+# Install the package
+pak::pak("numbats/spiderorchid")
+```
 
-# Install required packages
-install.packages(c("pkgsearch", "tibble", "dplyr", "stringr", "scholar", "rorcid"))
+Authenticate for the ORCID API by following the instructions at <https://github.com/ropensci-archive/rorcid/blob/master/README-not.md#authentication>. We have found that the second option (a 2-legged OAuth) is necessary. Then store the token obtained from `orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`. It should be of the form
 
-# Load the package
-devtools::load_all()
+```
+ORCID_TOKEN=<your token>
+```
 
+```{r}
+library(spiderorchid)
 ```
 
 ## Functions
@@ -54,7 +55,6 @@ devtools::load_all()
 This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
 
 ```{r}
-library(spiderorchid)
 find_cran_packages("Michael", "Lydeamore")
 ```
 
@@ -83,7 +83,7 @@ get_publications(orcid_id = "0000-0002-2140-5352")
 This function takes a data frame of authors, each with an ORCID ID and a Google Scholar ID, and returns their combined publications.
 
 ```{r}
-authors_df <- tibble::tibble(
+eauthors_df <- tibble::tibble(
   orcid_id = c("0000-0002-2140-5352", "0000-0002-1825-0097", NA, "0000-0001-5109-3700"),
   scholar_id = c(NA, "vamErfkAAAAJ", "4bahYMkAAAAJ", NA)
 )

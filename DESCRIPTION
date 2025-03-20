@@ -10,17 +10,16 @@ Description: A package to scrape and combine publication data from Google Schola
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: 
-    scholar,
     dplyr,
-    tibble,
-    rorcid,
-    magrittr,
     pkgsearch,
+    purrr,
+    rorcid,
+    scholar,
     stringr,
-    purrr
+    tibble
 Suggests: 
+    ggplot2,
     knitr,
-     ggplot2,
     rmarkdown,
     testthat (>= 3.0.0)
 Depends: 

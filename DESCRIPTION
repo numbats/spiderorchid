@@ -1,8 +1,10 @@
 Package: spiderorchid
-Title: Publication Scraper
+Title: Download and wrangle publication data for Monash EBS academic staff
 Version: 0.0.0.9000
 Authors@R: 
-   c(person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = c("aut", "cre")),
+   c(
+    person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut", "cre")),
+    person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = c("aut")),
     person("Parnika", "Khattri", email = "pkha0009@student.monash.edu", role = "aut"))
 Description: A package to scrape and combine publication data from Google Scholar and ORCID.
 License: MIT + file LICENSE

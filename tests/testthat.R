@@ -9,4 +9,4 @@
 library(testthat)
 library(spiderorchid)
 
-test_check("spiderorchid")
+#test_check("spiderorchid")

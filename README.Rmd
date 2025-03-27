@@ -48,59 +48,26 @@ ORCID_TOKEN=<your token>
 library(spiderorchid)
 ```
 
-## Functions
-
-## 1. `find_cran_packages`
+## CRAN packages
 
 This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
 
 ```{r}
-find_cran_packages("Michael", "Lydeamore")
+fetch_cran("Michael Lydeamore")
 ```
 
-## 2. `get_publications`
+## ORCID publications
 
-This function retrieves research publications from Google Scholar and/or ORCID, combining the results into a single data frame. Both id arguments can be vectors of the same length.
+This function retrieves research publications from ORCID.
 
 ```{r}
-# Example 1: Retrieve publications from both ORCID and Google Scholar
-get_publications(orcid_id = "0000-0002-2140-5352", scholar_id = "vamErfkAAAAJ")
+fetch_orcid("0000-0002-2140-5352")
 ```
 
-```{r}
-# Example 2: Retrieve publications only from Google Scholar
-get_publications(scholar_id = "vamErfkAAAAJ")
-```
+## Google scholar publications
 
 ```{r}
-# Example 3: Retrieve publications only from ORCID
-get_publications(orcid_id = "0000-0002-2140-5352")
-```
-
-
-## 3. `get_all_publications`
-
-This function takes a data frame of authors, each with an ORCID ID and a Google Scholar ID, and returns their combined publications.
-
-```{r}
-eauthors_df <- tibble::tibble(
-  orcid_id = c("0000-0002-2140-5352", "0000-0002-1825-0097", NA, "0000-0001-5109-3700"),
-  scholar_id = c(NA, "vamErfkAAAAJ", "4bahYMkAAAAJ", NA)
-)
-get_all_publications(authors_df)
-```
-
-## 4. `cran_all_pubs
-
-This function retrieves CRAN package download statistics for multiple authors by their first and last names.
-
-```{r}
-cran_authors <- tibble::tibble(
-  first_name = c("Michael", "Rob"),
-  last_name = c("Lydeamore", "Hyndman")
-)
-
-cran_all_pubs(cran_authors)
+fetch_scholar(scholar_id = "vamErfkAAAAJ")
 ```
 
 ## Dataset
@@ -112,27 +79,4 @@ This dataset contains mappings between researchers' names and their respective O
 ```{r}
 print(staff_ids)
 ```
-
-
-## Dependencies
-
-This package relies on the following R packages:
-
-- pkgsearch
-- tibble
-- dplyr
-- stringr
-- scholar
-- rorcid
-
-You can install these dependencies using install.packages()
-```{r eval=FALSE}
-install.packages(c("pkgsearch", "tibble", "dplyr", "stringr", "scholar", "rorcid"))
-```
-
-
-## License
-MIT License
-
-
 

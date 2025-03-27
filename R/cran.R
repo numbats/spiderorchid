@@ -1,10 +1,9 @@
-#' get_cran_packages
+#' Fetch packages from CRAN
 #'
 #' @description
-#' This function searches for CRAN packages by a given author's first and last name.
+#' This function searches for CRAN packages by author names.
 #'
-#' @param first_name A character vector representing the authors' first names.
-#' @param last_name A character vector representing the authors' last names.
+#' @param author_name A character vector containing the authors' names.
 #'
 #' @return A data frame returning package name, number of downloads,author names and last update date of the package.
 #'
@@ -15,20 +14,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' get_cran_packages("Michael", "Lydeamore")
+#' fetch_cran("Michael Lydeamore")
 #' }
 #'
-#' @name find_cran_packages
 #' @export
 
-find_cran_packages <- function(first_name, last_name) {
-  author_name <- paste(first_name, last_name)
-
-  
+fetch_cran <- function(author_name) {
+ 
   combined_df <- purrr::map_dfr(1:nrow(authors), function(i) {
     find_cran_packages(authors$first_name[i], authors$last_name[i])
   })
-
 
   results <- pkgsearch::ps(author_name, size = 200)
 
@@ -57,41 +52,4 @@ find_cran_packages <- function(first_name, last_name) {
     dplyr::filter(stringr::str_detect(authors, author_name))
 
   unique(package_frame)
-}
-
-
-
-
-# cran_all_pubs
-#
-# @description
-# This function combines the cran publications for all authors.
-#
-# @param authors A list of names of different authors.
-# @return A combined dataframe of CRAN package downloads for all authors.
-# @examples
-# \dontrun{
-# cran_authors <- tibble::tibble(
-#   first_name = c("Michael", "Rob"),
-#   last_name = c("Lydeamore", "Hyndman")
-# )
-# }
-# \dontrun{cran_all_pubs(cran_authors)}
-#
-# @name cran_all_pubs
-# @export
-
-cran_all_pubs <- function(authors) {
-  if (nrow(authors) == 0) {
-    return(tibble::tibble(name = character(), downloads = numeric(), authors = character(), last_update_date = character()))
-  }
-
-  combined_df <- purrr::map_dfr(1:nrow(authors), function(i) {
-    find_cran_packages(authors$first_name[i], authors$last_name[i])
-  })
-
-  combined_df <- combined_df |>
-    dplyr::distinct()
-
-  return(tibble::as_tibble(combined_df))
 }

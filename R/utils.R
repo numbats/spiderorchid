@@ -17,3 +17,12 @@ append_column_if_missing <- function(.data, column, default_value = NA) {
 
   return(.data)
 }
+
+
+#' @importFrom scholar get_publications
+#' @importFrom dplyr select
+#' @importFrom tibble tibble
+#' @importFrom rorcid orcid_works
+#' @importFrom dplyr select bind_rows mutate
+#' @importFrom tibble tibble
+

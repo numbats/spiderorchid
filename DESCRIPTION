@@ -7,7 +7,7 @@ Authors@R:
     person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = c("aut")),
     person("Parnika", "Khattri", email = "pkha0009@student.monash.edu", role = "aut"))
 Description: A package to scrape and combine publication data from Google Scholar and ORCID.
-License: MIT + file LICENSE
+License: MIT
 Encoding: UTF-8
 Imports: 
     dplyr,

@@ -55,65 +55,44 @@ fetch_orcid <- function(orcid_ids) {
         }
       )
       if (!is.null(pubs[[1]]$works) && nrow(pubs[[1]]$works) > 0) {
-        all_pubs[[orcid_id]] <- pubs[[1]]$works |>
-          dplyr::select(
-            title = dplyr::matches("title.title.value"),
-            DOI = dplyr::matches("external-ids.external-id"),
-            authors = dplyr::matches("source.assertion-origin-name.value"),
-            publication_year = dplyr::matches("publication-date.year.value"),
-            journal_name = dplyr::matches("journal-title.value")
-          ) |>
-          append_column_if_missing("title", default_value = NA_character_) |>
-          append_column_if_missing("DOI", default_value = NA_character_) |>
-          append_column_if_missing("authors", default_value = NA_character_) |>
-          append_column_if_missing("publication_year", default_value = NA_integer_) |>
-          append_column_if_missing("journal_name", default_value = NA_character_) |>
-          dplyr::mutate(
-            # the `external-ids` contains lots of things, not just DOI. It is a list containing a dataframe
-            # Mapping over that list, we can filter out just the 'doi' type
-            # Then pull it into a character vector
-            # Overwrite DOI with this value
-            DOI = purrr::map_chr(
-              .x = DOI,
-              .f = function(x) {
-                if (length(x) == 0L) {
-                  return(NA)
-                }
-                doi <- dplyr::filter(x, `external-id-type` == "doi") |>
-                  dplyr::pull(`external-id-value`)
-
-                if (length(doi) == 0L) {
-                  return(NA)
-                } else {
-                  return(doi[1])
-                }
-              }
-            ),
-            orcid_id = orcid_id,
-            publication_year = as.numeric(publication_year)
-          )
-        # If there are duplicate DOIs, keep the one with more author names and a later year
-        all_pubs[[orcid_id]] <- all_pubs[[orcid_id]] |>
-          dplyr::group_by(DOI) |>
-          dplyr::mutate(n_authors = stringr::str_length(authors)) |>
-          dplyr::ungroup() |>
-          dplyr::arrange(desc(n_authors), desc(publication_year)) |>
-          dplyr::distinct(DOI, .keep_all = TRUE) |>
-          dplyr::select(-n_authors)
-        # If the author field is missing, use the staff_ids to find the author
-        if (any(is.na(all_pubs[[orcid_id]]$authors))) {
-          miss <- which(is.na(all_pubs[[orcid_id]]$authors))
-          author <- staff_ids[orcid_id == staff_ids$orcid_id & !is.na(staff_ids$orcid_id),]
-          author <- paste(author$first_name, author$last_name)
-          all_pubs[[orcid_id]]$authors[miss] <- author
-        }
+        ids <- pubs[[1]]$works$`external-ids.external-id`
+        dois <- purrr::map_chr(ids, function(x) {
+          if (length(x) == 0L) {
+            return(NA)
+          }
+          doi <- dplyr::filter(x, `external-id-type` == "doi") |>
+            dplyr::pull(`external-id-value`)
+          if (length(doi) == 0L) {
+            return(NA)
+          } else {
+            return(doi[1])
+          }
+        })
+        all_pubs[[orcid_id]] <- fetch_doi(na.omit(unique(dois))) |>
+          mutate(orcid_id = orcid_id)
+        saveRDS(all_pubs[[orcid_id]], dest_file)
+      } else {
+        saveRDS(NULL, dest_file)
       }
-      saveRDS(all_pubs[[orcid_id]], dest_file)
     }
   }
 
-  dplyr::bind_rows(all_pubs) |>
-    dplyr::select(orcid_id, authors, title, publication_year, journal_name, DOI, dplyr::everything()) |>
+  output <- dplyr::bind_rows(all_pubs)
+  col_order <- intersect(
+    c(
+      "orcid_id",
+      "authors",
+      "publication_year",
+      "title",
+      "journal_name",
+      "volume",
+      "issue",
+      "DOI"
+    ),
+    colnames(output)
+  )
+  output |>
+    dplyr::select(col_order, dplyr::everything()) |>
     dplyr::arrange(orcid_id, publication_year, title, authors) |>
     tibble::as_tibble()
 }

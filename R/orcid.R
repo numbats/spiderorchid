@@ -68,8 +68,8 @@ fetch_orcid <- function(orcid_ids) {
             return(doi[1])
           }
         })
-        all_pubs[[orcid_id]] <- fetch_doi(na.omit(unique(dois))) |>
-          mutate(orcid_id = orcid_id)
+        all_pubs[[orcid_id]] <- fetch_doi(stats::na.omit(unique(dois))) |>
+          dplyr::mutate(orcid_id = orcid_id)
         saveRDS(all_pubs[[orcid_id]], dest_file)
       } else {
         saveRDS(NULL, dest_file)

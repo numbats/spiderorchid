@@ -11,7 +11,7 @@ append_column_if_missing <- function(.data, column, default_value = NA) {
   if (!column %in% current_columns) {
     return(
       .data |>
-        mutate(!!column := default_value)
+        dplyr::mutate(!!column := default_value)
     )
   }
 

@@ -61,7 +61,7 @@ fetch_scholar <- function(scholar_id) {
   }
 
   dplyr::bind_rows(all_pubs) |>
-    dplyr::select(scholar_id, authors, title, publication_year, journal_name, DOI, everything()) |>
+    dplyr::select(scholar_id, authors, title, publication_year, journal_name, DOI, dplyr::everything()) |>
     dplyr::arrange(scholar_id, publication_year, title, authors) |>
     tibble::as_tibble()
 }

@@ -98,7 +98,7 @@ fetch_orcid <- function(orcid_ids) {
   }
 
   dplyr::bind_rows(all_pubs) |>
-    dplyr::select(orcid_id, authors, title, publication_year, journal_name, DOI, everything()) |>
+    dplyr::select(orcid_id, authors, title, publication_year, journal_name, DOI, dplyr::everything()) |>
     dplyr::arrange(orcid_id, publication_year, title, authors) |>
     tibble::as_tibble()
 }

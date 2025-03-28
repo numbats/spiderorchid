@@ -30,7 +30,11 @@
 #'
 #' @export
 
-fetch_cran <- function(author_names, downloads_from = "2000-01-01", downloads_to = Sys.Date()) {
+fetch_cran <- function(
+  author_names,
+  downloads_from = "2000-01-01",
+  downloads_to = Sys.Date()
+) {
   purrr::map_dfr(author_names, fetch_cran_author, start = downloads_from, end = downloads_to) |>
     dplyr::distinct()
 }
@@ -43,8 +47,31 @@ fetch_cran_author <- function(author_name, start, end) {
     return(readRDS(dest_file))
   } else {
     # Otherwise grab the data from CRAN and store it
-    results <- pkgmeta::get_meta(cran_author = author_name, include_downloads = TRUE, start = start, end = end)
-    saveRDS(results, file=dest_file)
+    results <- try(
+      pkgmeta::get_meta(
+        cran_author = author_name,
+        include_downloads = TRUE,
+        start = start,
+        end = end
+      ),
+      silent = TRUE
+    )
+    if (inherits(results, "try-error")) {
+      results <- tibble::tibble(
+        package = character(0),
+        date = as.Date(numeric(0)),
+        title = character(0),
+        description = character(0),
+        version = character(0),
+        authors = character(0),
+        url = character(0),
+        cran_url = character(0),
+        github_url = character(0),
+        first_download = as.Date(numeric(0)),
+        downloads = integer(0)
+      )
+    }
+    saveRDS(results, file = dest_file)
     return(results)
   }
 }

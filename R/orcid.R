@@ -92,6 +92,21 @@ fetch_orcid <- function(orcid_ids) {
             orcid_id = orcid_id,
             publication_year = as.numeric(publication_year)
           )
+        # If there are duplicate DOIs, keep the one with more author names and a later year
+        all_pubs[[orcid_id]] <- all_pubs[[orcid_id]] |>
+          dplyr::group_by(DOI) |>
+          dplyr::mutate(n_authors = stringr::str_length(authors)) |>
+          dplyr::ungroup() |>
+          dplyr::arrange(desc(n_authors), desc(publication_year)) |>
+          dplyr::distinct(DOI, .keep_all = TRUE) |>
+          dplyr::select(-n_authors)
+        # If the author field is missing, use the staff_ids to find the author
+        if (any(is.na(all_pubs[[orcid_id]]$authors))) {
+          miss <- which(is.na(all_pubs[[orcid_id]]$authors))
+          author <- staff_ids[orcid_id == staff_ids$orcid_id & !is.na(staff_ids$orcid_id),]
+          author <- paste(author$first_name, author$last_name)
+          all_pubs[[orcid_id]]$authors[miss] <- author
+        }
       }
       saveRDS(all_pubs[[orcid_id]], dest_file)
     }

@@ -13,7 +13,6 @@
 #' fetch_scholar("vamErfkAAAAJ")
 #' }
 #'
-#' @rdname get_publications
 #' @export
 fetch_scholar <- function(scholar_id) {
   if (length(scholar_id) == 0) {

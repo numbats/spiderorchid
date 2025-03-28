@@ -13,7 +13,7 @@ fetch_doi(doi)
 A tibble containing the article information.
 }
 \description{
-The DOI is used to fetch the article information from the CrossRef API.
+Retrieves publications for a given list of DOIs using the CrossRef API.
 }
 \examples{
 \dontrun{

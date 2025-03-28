@@ -1,7 +1,7 @@
 #' Fetch article information given a DOI
 #'
 #' @description
-#' The DOI is used to fetch the article information from the CrossRef API.
+#' Retrieves publications for a given list of DOIs using the CrossRef API.
 #'
 #' @param doi A character vector of DOIs.
 #'

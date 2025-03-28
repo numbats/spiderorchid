@@ -19,7 +19,6 @@
 #' fetch_orcid(c("0000-0003-2531-9408", "0000-0001-5738-1471"))
 #' }
 #'
-#' @rdname get_publications
 #' @export
 
 fetch_orcid <- function(orcid_ids) {
@@ -91,8 +90,19 @@ fetch_orcid <- function(orcid_ids) {
     ),
     colnames(output)
   )
-  output |>
-    dplyr::select(col_order, dplyr::everything()) |>
-    dplyr::arrange(orcid_id, publication_year, title, authors) |>
-    tibble::as_tibble()
+  if(NROW(output) == 0) {
+    return(tibble::tibble(
+      orcid_id = character(0),
+      authors = character(0),
+      title = character(0),
+      publication_year = integer(0),
+      journal_name = character(0),
+      DOI = character(0)
+    ))
+  } else {
+    output |>
+      dplyr::select(col_order, dplyr::everything()) |>
+      dplyr::arrange(orcid_id, publication_year, title, authors) |>
+      tibble::as_tibble()
+  }
 }

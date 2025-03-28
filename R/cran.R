@@ -1,55 +1,50 @@
 #' Fetch packages from CRAN
 #'
 #' @description
-#' This function searches for CRAN packages by author names.
+#' This function searches for CRAN packages by author names. Note that some authors
+#' may use different name variations on CRAN (e.g., "Di Cook" and "Dianne Cook"),
+#' so it may be necessary to call the function
+#' with several variations.
 #'
-#' @param author_name A character vector containing the authors' names.
+#' @param author_names A character vector containing the authors' names in the form used on CRAN.
+#' @param downloads_from A date or character string in the format "YYYY-MM-DD" specifying the date
+#' from which to start counting downloads. Default is "2000-01-01".
+#' @param downloads_to A date or character string in the format "YYYY-MM-DD" specifying the last date
+#' for counting downloads. Default is current date.
 #'
-#' @return A data frame returning package name, number of downloads,author names and last update date of the package.
+#' @return A data frame returning meta data about a package including total downloads
+#' between `downloads_from` and `downloads_to`.
 #'
-#' @importFrom pkgsearch ps
 #' @importFrom tibble tibble
 #' @importFrom dplyr bind_rows filter
 #' @importFrom stringr str_detect
 #'
 #' @examples
 #' \dontrun{
-#' fetch_cran("Michael Lydeamore")
+#' cran2024 <- fetch_cran(
+#'    author_names = c("Michael Lydeamore", "Di Cook", "Dianne Cook", "Hyndman"),
+#'    downloads_from = "2024-01-01",
+#'    downloads_to = "2024-12-31"
+#' )
 #' }
 #'
 #' @export
 
-fetch_cran <- function(author_name) {
- 
-  combined_df <- purrr::map_dfr(1:nrow(authors), function(i) {
-    find_cran_packages(authors$first_name[i], authors$last_name[i])
-  })
+fetch_cran <- function(author_names, downloads_from = "2000-01-01", downloads_to = Sys.Date()) {
+  purrr::map_dfr(author_names, fetch_cran_author, start = downloads_from, end = downloads_to) |>
+    dplyr::distinct()
+}
 
-  results <- pkgsearch::ps(author_name, size = 200)
-
-  num_packages <- length(results$package)
-
-  if (num_packages == 0) {
-    return(
-      tibble::tibble(
-        name = character(0),
-        downloads = numeric(0),
-        authors = character(0),
-        last_update_date = character(0)
-      )
-    )
+fetch_cran_author <- function(author_name, start, end) {
+  # If we've already fetched this author/start/end combination, just read it from file
+  dest_folder <- tempdir()
+  dest_file <- paste0(dest_folder, "/", author_name, "_", start, "_", end, ".rds")
+  if (file.exists(dest_file)) {
+    return(readRDS(dest_file))
+  } else {
+    # Otherwise grab the data from CRAN and store it
+    results <- pkgmeta::get_meta(cran_author = author_name, include_downloads = TRUE, start = start, end = end)
+    saveRDS(results, file=dest_file)
+    return(results)
   }
-
-  package_frame <- lapply(1:num_packages, function(i) {
-    tibble(
-      name = results$package[i],
-      downloads = results$package_data[[i]]$downloads,
-      authors = results$package_data[[i]]$Author,
-      last_update_date = results$package_data[[i]]$date
-    )
-  }) |>
-    dplyr::bind_rows() |>
-    dplyr::filter(stringr::str_detect(authors, author_name))
-
-  unique(package_frame)
 }

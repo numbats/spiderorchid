@@ -7,11 +7,11 @@ Authors@R:
     person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = c("aut")),
     person("Parnika", "Khattri", email = "pkha0009@student.monash.edu", role = "aut"))
 Description: A package to scrape and combine publication data from Google Scholar and ORCID.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: 
     dplyr,
-    pkgsearch,
+    pkgmeta,
     purrr,
     rorcid,
     scholar,
@@ -24,6 +24,8 @@ Suggests:
     testthat (>= 3.0.0)
 Depends: 
     R (>= 4.1.0)
+Remotes:
+    robjhyndman/pkgmeta
 LazyData: true
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr

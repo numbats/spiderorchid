@@ -36,18 +36,19 @@ fetch_scholar <- function(scholar_id) {
       all_pubs[[id]] <- readRDS(dest_file)
     } else {
       publications <- scholar::get_publications(scholar_id)
-
-      if (!"doi" %in% colnames(publications)) {
-        publications$doi <- NA_character_
+      if (NROW(publications) == 0) {
+        publications$doi <- character(0)
+      } else {
+        if (!"doi" %in% colnames(publications)) {
+          publications$doi <- NA_character_
+        }
+        if (!"journal" %in% colnames(publications)) {
+          publications$journal <- NA_character_
+        }
+        if (!"year" %in% colnames(publications)) {
+          publications$year <- NA_integer_
+        }
       }
-
-      if (!"journal" %in% colnames(publications)) {
-        publications$journal <- NA_character_
-      }
-      if (!"year" %in% colnames(publications)) {
-        publications$year <- NA_integer_
-      }
-
       all_pubs[[id]] <- tibble::tibble(
         scholar_id = id,
         title = publications$title,
@@ -60,8 +61,20 @@ fetch_scholar <- function(scholar_id) {
     }
   }
 
-  dplyr::bind_rows(all_pubs) |>
-    dplyr::select(scholar_id, authors, title, publication_year, journal_name, DOI, dplyr::everything()) |>
+  output <- dplyr::bind_rows(all_pubs)
+  col_order <- intersect(
+    c(
+      "scholar_id",
+      "authors",
+      "title",
+      "publication_year",
+      "journal_name",
+      "DOI"
+    ),
+    colnames(output)
+  )
+  output |>
+    dplyr::select(col_order, dplyr::everything()) |>
     dplyr::arrange(scholar_id, publication_year, title, authors) |>
     tibble::as_tibble()
 }

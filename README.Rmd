@@ -46,28 +46,7 @@ ORCID_TOKEN=<your token>
 
 ```{r}
 library(spiderorchid)
-```
-
-## CRAN packages
-
-This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
-
-```{r}
-fetch_cran("Michael Lydeamore")
-```
-
-## ORCID publications
-
-This function retrieves research publications from ORCID.
-
-```{r}
-fetch_orcid("0000-0002-2140-5352")
-```
-
-## Google scholar publications
-
-```{r}
-fetch_scholar(scholar_id = "vamErfkAAAAJ")
+library(dplyr)
 ```
 
 ## Dataset
@@ -77,6 +56,37 @@ fetch_scholar(scholar_id = "vamErfkAAAAJ")
 This dataset contains mappings between researchers' names and their respective ORCID and Google Scholar IDs. It is useful for linking and identifying academic profiles across different platforms.
 
 ```{r}
-print(staff_ids)
+staff_ids
 ```
 
+## ORCID publications
+
+This function retrieves research publications from ORCID.
+
+```{r}
+staff_ids |>
+  filter(last_name %in% c("Negi", "Lydeamore")) |>
+  pull(orcid_id) |>
+  fetch_orcid()
+```
+
+## Google scholar publications
+
+```{r}
+staff_ids |>
+  filter(last_name %in% c("Negi", "Lydeamore")) |>
+  pull(scholar_id) |>
+  fetch_scholar()
+```
+
+## CRAN packages
+
+This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
+
+```{r}
+fetch_cran(c(
+  "Michael Lydeamore",
+  "Di Cook",
+  "Dianne Cook"
+))
+```

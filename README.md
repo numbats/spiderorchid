@@ -4,9 +4,10 @@
 # spiderorchid
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-# Research and CRAN Publications Retrieval Package
+# Download and wrangle publication data for Monash EBS academic staff
 
 ## Overview
 
@@ -17,167 +18,42 @@ department who wish to consolidate and analyze their research outputs,
 while also monitoring their contributions to CRAN, including publication
 updates and downloads.
 
-The main functions included are: - `find_cran_packages`: Searches for
-CRAN packages by an author’s first and last name and returns relevant
-package information such as the number of downloads and last update
-date. - `get_publications`: Retrieves publications from both Google
-Scholar and ORCID based on provided IDs. - `get_all_publications`:
-Retrieves publications from multiple authors. - `cran_all_pubs`:
-Combines CRAN package data for multiple authors.
+The main functions included are:
+
+- `find_cran_packages`: Searches for CRAN packages by an author’s first
+  and last name and returns relevant package information such as the
+  number of downloads and last update date.
+- `get_publications`: Retrieves publications from both Google Scholar
+  and ORCID based on provided IDs.
+- `get_all_publications`: Retrieves publications from multiple authors.
+- `cran_all_pubs`: Combines CRAN package data for multiple authors.
 
 ## Installation
 
-To install this package, you can clone the repository and load the
-package using:
-
 ``` r
-# Clone the repository
-git clone <https://github.com/numbats/achievement-scraper.git>
-
-# Install required packages
-install.packages(c("pkgsearch", "tibble", "dplyr", "stringr", "scholar", "rorcid"))
-
-# Load the package
-devtools::load_all()
+# Install the package
+pak::pak("numbats/spiderorchid")
 ```
 
-## Functions
+Authenticate for the ORCID API by following the instructions at
+<https://github.com/ropensci-archive/rorcid/blob/master/README-not.md#authentication>.
+We have found that the second option (a 2-legged OAuth) is necessary.
+Then store the token obtained from `orcid_auth()` in your `.Renviron`
+file by running `usethis::edit_r_environ()`. It should be of the form
 
-## 1. `find_cran_packages`
-
-This function retrieves information about CRAN packages authored by a
-specified individual. It returns a data frame containing the package
-name, number of downloads, the authors, and the last update date.
+    ORCID_TOKEN=<your token>
 
 ``` r
 library(spiderorchid)
-find_cran_packages("Michael", "Lydeamore")
-#> # A tibble: 4 × 4
-#>   name            downloads authors                             last_update_date
-#>   <chr>               <int> <chr>                               <chr>           
-#> 1 condensr              199 "Michael Lydeamore [aut, cre] (<ht… 2023-08-30T14:5…
-#> 2 HospitalNetwork       229 "Pascal Crépey [aut, cre, cph],\nT… 2023-02-27T07:2…
-#> 3 cardinalR             181 "Jayani P.G. Lakshika [aut, cre]\n… 2024-04-16T08:0…
-#> 4 quollr                166 "Jayani P.G. Lakshika [aut, cre]\n… 2024-03-05T10:0…
-```
-
-## 2. `get_publications`
-
-This function retrieves research publications from Google Scholar and
-ORCID, combining the results into a single data frame. It allows for
-flexibility in querying either platform based on the availability of
-IDs.
-
-``` r
-#Example 1: Retrieve publications from both ORCID and Google Scholar
-get_publications("0000-0002-2140-5352", "vamErfkAAAAJ")
-#> # A tibble: 685 × 5
-#>    title                             DOI   authors publication_year journal_name
-#>    <chr>                             <chr> <chr>   <lgl>            <chr>       
-#>  1 Forecasting: principles and prac… <NA>  RJ Hyn… NA               "OTexts"    
-#>  2 Forecasting methods and applicat… <NA>  S Makr… NA               "John Wiley…
-#>  3 Another look at measures of fore… <NA>  RJ Hyn… NA               "Internatio…
-#>  4 Automatic time series forecastin… <NA>  RJ Hyn… NA               "Journal of…
-#>  5 Forecasting with exponential smo… <NA>  RJ Hyn… NA               "Springer V…
-#>  6 Detecting trend and seasonal cha… <NA>  J Verb… NA               "Remote sen…
-#>  7 forecast: Forecasting functions … <NA>  RJ Hyn… NA               ""          
-#>  8 25 years of time series forecast… <NA>  JG De … NA               "Internatio…
-#>  9 Sample quantiles in statistical … <NA>  RJ Hyn… NA               "The Americ…
-#> 10 A state space framework for auto… <NA>  RJ Hyn… NA               "Internatio…
-#> # ℹ 675 more rows
-```
-
-``` r
-#Example 2: Retrieve publications only from Google Scholar
-get_publications(NA, "vamErfkAAAAJ")
-#> # A tibble: 353 × 5
-#>    title                             DOI   authors publication_year journal_name
-#>    <chr>                             <lgl> <chr>   <lgl>            <chr>       
-#>  1 Forecasting: principles and prac… NA    RJ Hyn… NA               "OTexts"    
-#>  2 Forecasting methods and applicat… NA    S Makr… NA               "John Wiley…
-#>  3 Another look at measures of fore… NA    RJ Hyn… NA               "Internatio…
-#>  4 Automatic time series forecastin… NA    RJ Hyn… NA               "Journal of…
-#>  5 Forecasting with exponential smo… NA    RJ Hyn… NA               "Springer V…
-#>  6 Detecting trend and seasonal cha… NA    J Verb… NA               "Remote sen…
-#>  7 forecast: Forecasting functions … NA    RJ Hyn… NA               ""          
-#>  8 25 years of time series forecast… NA    JG De … NA               "Internatio…
-#>  9 Sample quantiles in statistical … NA    RJ Hyn… NA               "The Americ…
-#> 10 A state space framework for auto… NA    RJ Hyn… NA               "Internatio…
-#> # ℹ 343 more rows
-```
-
-``` r
-#Example 3: Retrieve publications only from ORCID
-get_publications("0000-0002-2140-5352", NA)
-#> # A tibble: 332 × 5
-#>    title                             DOI   authors publication_year journal_name
-#>    <chr>                             <chr> <chr>   <lgl>            <chr>       
-#>  1 Cross-temporal probabilistic for… 10.1… <NA>    NA               Internation…
-#>  2 Forecast reconciliation: A review 10.1… <NA>    NA               Internation…
-#>  3 Forecasting system's accuracy: A… 10.1… <NA>    NA               Applied Sto…
-#>  4 Hierarchical Time Series Forecas… 10.1… <NA>    NA               Journal of …
-#>  5 Obituary: Everette S Gardner Jr   10.1… <NA>    NA               Internation…
-#>  6 Probabilistic forecast reconcili… 10.1… <NA>    NA               European Jo…
-#>  7 Probabilistic forecast reconcili… 10.1… <NA>    NA               European Jo…
-#>  8 Conditional normalization in tim… <NA>  <NA>    NA               ArXiv       
-#>  9 Cross-temporal Probabilistic For… <NA>  <NA>    NA               ArXiv       
-#> 10 Forecast combinations: An over 5… 10.1… <NA>    NA               Internation…
-#> # ℹ 322 more rows
-```
-
-## 3. `get_all_publications`
-
-This function takes a data frame of authors, each with an ORCID ID and a
-Google Scholar ID, and returns their combined publications.
-
-``` r
-authors_df <- tibble::tibble(
-orcid_id = c("0000-0002-2140-5352", "0000-0002-1825-0097", NA, "0000-0001-5109-3700"),
-scholar_id = c(NA, "vamErfkAAAAJ", "4bahYMkAAAAJ", NA)
-)
-get_all_publications(authors_df)
-#> # A tibble: 1,111 × 5
-#>    title                             DOI   authors publication_year journal_name
-#>    <chr>                             <chr> <chr>   <lgl>            <chr>       
-#>  1 Cross-temporal probabilistic for… 10.1… <NA>    NA               Internation…
-#>  2 Forecast reconciliation: A review 10.1… <NA>    NA               Internation…
-#>  3 Forecasting system's accuracy: A… 10.1… <NA>    NA               Applied Sto…
-#>  4 Hierarchical Time Series Forecas… 10.1… <NA>    NA               Journal of …
-#>  5 Obituary: Everette S Gardner Jr   10.1… <NA>    NA               Internation…
-#>  6 Probabilistic forecast reconcili… 10.1… <NA>    NA               European Jo…
-#>  7 Probabilistic forecast reconcili… 10.1… <NA>    NA               European Jo…
-#>  8 Conditional normalization in tim… <NA>  <NA>    NA               ArXiv       
-#>  9 Cross-temporal Probabilistic For… <NA>  <NA>    NA               ArXiv       
-#> 10 Forecast combinations: An over 5… 10.1… <NA>    NA               Internation…
-#> # ℹ 1,101 more rows
-```
-
-## 4. `cran_all_pubs
-
-This function retrieves CRAN package download statistics for multiple
-authors by their first and last names.
-
-``` r
-cran_authors <- tibble::tibble(
-  first_name = c("Michael", "Rob"),
-  last_name = c("Lydeamore", "Hyndman")
-)
-
-cran_all_pubs(cran_authors)
-#> # A tibble: 42 × 4
-#>    name            downloads authors                            last_update_date
-#>    <chr>               <int> <chr>                              <chr>           
-#>  1 condensr              199 "Michael Lydeamore [aut, cre] (<h… 2023-08-30T14:5…
-#>  2 HospitalNetwork       229 "Pascal Crépey [aut, cre, cph],\n… 2023-02-27T07:2…
-#>  3 cardinalR             181 "Jayani P.G. Lakshika [aut, cre]\… 2024-04-16T08:0…
-#>  4 quollr                166 "Jayani P.G. Lakshika [aut, cre]\… 2024-03-05T10:0…
-#>  5 forecast           207836 "Rob Hyndman [aut, cre, cph] (<ht… 2024-06-20T02:1…
-#>  6 rmarkdown         1023668 "JJ Allaire [aut],\nYihui Xie [au… 2024-08-17T03:5…
-#>  7 hdrcde               9320 "Rob Hyndman [aut, cre, cph] (<ht… 2021-01-18T05:2…
-#>  8 demography           1538 "Rob Hyndman [aut, cre, cph] (<ht… 2023-02-08T07:2…
-#>  9 tsfeatures          20102 "Rob Hyndman [aut, cre] (<https:/… 2023-08-28T13:0…
-#> 10 tsibble             29973 "Earo Wang [aut, cre] (<https://o… 2024-06-27T12:2…
-#> # ℹ 32 more rows
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ```
 
 ## Dataset
@@ -189,9 +65,9 @@ respective ORCID and Google Scholar IDs. It is useful for linking and
 identifying academic profiles across different platforms.
 
 ``` r
-print(staff_ids)
-#> # A tibble: 56 × 4
-#>    first_name last_name orcid_id            gsuser_id   
+staff_ids
+#> # A tibble: 57 × 4
+#>    first_name last_name orcid_id            scholar_id  
 #>    <chr>      <chr>     <chr>               <chr>       
 #>  1 Akanksha   Negi      0000-0003-2531-9408 Gcz8Ng0AAAAJ
 #>  2 Alan       Powell    <NA>                <NA>        
@@ -203,26 +79,84 @@ print(staff_ids)
 #>  8 Bonsoo     Koo       0000-0002-7247-9773 OmK08lAAAAAJ
 #>  9 Brett      Inder     <NA>                Wx6eeWgAAAAJ
 #> 10 Catherine  Forbes    0000-0003-3830-5865 jm73LccAAAAJ
-#> # ℹ 46 more rows
+#> # ℹ 47 more rows
 ```
 
-## Dependencies
+## ORCID publications
 
-This package relies on the following R packages:
-
-- pkgsearch
-- tibble
-- dplyr
-- stringr
-- scholar
-- rorcid
-
-You can install these dependencies using install.packages()
+This function retrieves research publications from ORCID.
 
 ``` r
-install.packages(c("pkgsearch", "tibble", "dplyr", "stringr", "scholar", "rorcid"))
+staff_ids |>
+  filter(last_name %in% c("Negi", "Lydeamore")) |>
+  pull(orcid_id) |>
+  fetch_orcid()
+#> # A tibble: 22 × 6
+#>    orcid_id            authors         title publication_year journal_name DOI  
+#>    <chr>               <chr>           <chr>            <dbl> <chr>        <chr>
+#>  1 0000-0001-6515-827X Michael Lydeam… Choi…             2016 Bulletin of… 10.1…
+#>  2 0000-0001-6515-827X <NA>            Choi…             2016 Bulletin of… 10.1…
+#>  3 0000-0001-6515-827X Michael Lydeam… Indi…             2017 PeerJ        10.7…
+#>  4 0000-0001-6515-827X <NA>            Indi…             2017 PeerJ        10.7…
+#>  5 0000-0001-6515-827X Michael Lydeam… A bi…             2018 Mathematica… 10.1…
+#>  6 0000-0001-6515-827X Michael Lydeam… Calc…             2018 Epidemiolog… 10.1…
+#>  7 0000-0001-6515-827X <NA>            Calc…             2018 Epidemiolog… 10.1…
+#>  8 0000-0001-6515-827X <NA>            A bi…             2019 Mathematica… 10.1…
+#>  9 0000-0001-6515-827X Michael Lydeam… High…             2019 Australian … 10.1…
+#> 10 0000-0001-6515-827X <NA>            Mech…             2019 Bulletin of… 10.1…
+#> # ℹ 12 more rows
 ```
 
-## License
-MIT License
+## Google scholar publications
 
+``` r
+staff_ids |>
+  filter(last_name %in% c("Negi", "Lydeamore")) |>
+  pull(scholar_id) |>
+  fetch_scholar()
+#> Warning in tidy_id(id): Only one ID at a time; retrieving Gcz8Ng0AAAAJ
+#> Warning in tidy_id(id): Only one ID at a time; retrieving Gcz8Ng0AAAAJ
+#> # A tibble: 24 × 6
+#>    scholar_id   authors                title publication_year journal_name DOI  
+#>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
+#>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
+#>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, … Dyna…             2017 IFPRI book … <NA> 
+#>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK… Unde…             2019 Journal of … <NA> 
+#>  4 Gcz8Ng0AAAAJ A Negi                 Robu…             2020 Michigan St… <NA> 
+#>  5 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… <NA> 
+#>  6 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… <NA> 
+#>  7 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
+#>  8 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
+#>  9 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
+#> 10 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Robu…             2024 Journal of … <NA> 
+#> # ℹ 14 more rows
+```
+
+## CRAN packages
+
+This function retrieves information about CRAN packages authored by a
+specified individual. It returns a data frame containing the package
+name, number of downloads, the authors, and the last update date.
+
+``` r
+fetch_cran(c(
+  "Michael Lydeamore",
+  "Di Cook",
+  "Dianne Cook"
+))
+#> # A tibble: 40 × 11
+#>    package         date       title   description version authors url   cran_url
+#>    <chr>           <date>     <chr>   <chr>       <chr>   <chr>   <chr> <chr>   
+#>  1 cardinalR       2024-04-16 "Colle… "A collect… 0.1.1   "Jayan… http… https:/…
+#>  2 condensr        2023-08-30 "Acade… "Helps aut… 1.0.0   "Micha… http… https:/…
+#>  3 HospitalNetwork 2024-12-22 "Build… "Set of to… 0.9.4   "Pasca… http… https:/…
+#>  4 quollr          2024-03-05 "Visua… "To constr… 0.1.1   "Jayan… http… https:/…
+#>  5 brolgar         2024-05-10 "Brows… "Provides … 1.0.1   "Nicho… http… https:/…
+#>  6 eechidna        2021-02-25 "Explo… "Data from… 1.4.1   "Jerem… http… https:/…
+#>  7 fabletools      2024-09-17 "Core … "Provides … 0.5.0   "Mitch… http… https:/…
+#>  8 feasts          2024-09-25 "Featu… "Provides … 0.4.1   "Mitch… http… https:/…
+#>  9 geozoo          2016-05-07 "Zoo o… "Geometric… 0.5.1   "Barre… http… https:/…
+#> 10 GGally          2024-02-13 "Exten… "\nThe R p… 2.2.1   "Barre… http… https:/…
+#> # ℹ 30 more rows
+#> # ℹ 3 more variables: github_url <chr>, first_download <date>, downloads <dbl>
+```

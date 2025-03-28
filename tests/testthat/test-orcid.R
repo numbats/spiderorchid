@@ -1,4 +1,5 @@
 test_that("fetch_orcid returns a valid data frame", {
+  # ORCID IDs for Rob Hyndman and Michael Lydeamore
   orcid_ids <- c("0000-0002-2140-5352", "0000-0001-6515-827X")
   result <- fetch_orcid(orcid_ids)
   expect_s3_class(result, "data.frame")

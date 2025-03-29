@@ -1,11 +1,12 @@
 ---
-title: "Vignettes"
+title: "Visualisations"
+author: Sherry Tee and Parnika Khattri
 output: 
   rmarkdown::html_vignette:
     toc: true     
     toc_depth: 1
 vignette: >
-  %\VignetteIndexEntry{visualisations}
+  %\VignetteIndexEntry{Visualisations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

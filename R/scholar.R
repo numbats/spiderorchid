@@ -31,7 +31,7 @@ fetch_scholar <- function(scholar_id) {
     if (file.exists(dest_file)) {
       all_pubs[[id]] <- readRDS(dest_file)
     } else {
-      publications <- scholar::get_publications(scholar_id)
+      publications <- suppressWarnings(scholar::get_publications(scholar_id))
       if (NROW(publications) == 0) {
         publications$doi <- character(0)
       } else {

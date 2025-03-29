@@ -4,44 +4,37 @@
 # spiderorchid
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 # Download and wrangle publication data for Monash EBS academic staff
 
 ## Overview
 
-The `spiderorchid` R package offers tools to retrieve research
-publications from Google Scholar and ORCID, along with CRAN package
-download statistics. It is tailored for academic researchers in the EBS
-department who wish to consolidate and analyze their research outputs,
-while also monitoring their contributions to CRAN, including publication
-updates and downloads.
+The `spiderorchid` R package provides tools to retrieve research
+publications from Google Scholar and ORCID, or from DOIs, along with
+CRAN package download statistics. It is tailored for academic
+researchers in the EBS department who wish to consolidate and analyze
+their research outputs, while also monitoring their contributions to
+CRAN.
 
 The main functions included are:
 
-- `find_cran_packages`: Searches for CRAN packages by an author’s first
-  and last name and returns relevant package information such as the
-  number of downloads and last update date.
-- `get_publications`: Retrieves publications from both Google Scholar
-  and ORCID based on provided IDs.
-- `get_all_publications`: Retrieves publications from multiple authors.
-- `cran_all_pubs`: Combines CRAN package data for multiple authors.
+- `fetch_scholar`: Retrieves publications from Google Scholar given IDs.
+- `fetch_orchid`: Retrieves publications from ORCID given IDs.
+- `fetch_doi`: Retrieves publications from CrossRef given DOIS.
+- `fetch_cran`: Searches for CRAN packages by an author’s name and
+  returns relevant package information such as the number of downloads
+  and last update date.
+
+The package caches results within each R session. So if you fetch the
+same data multiple times, it will only download it once.
 
 ## Installation
 
 ``` r
-# Install the package
-pak::pak("numbats/spiderorchid")
+# Install the packages needed
+pak::pak(c("robjhyndman/pkgmeta", "numbats/spiderorchid"))
 ```
-
-Authenticate for the ORCID API by following the instructions at
-<https://github.com/ropensci-archive/rorcid/blob/master/README-not.md#authentication>.
-We have found that the second option (a 2-legged OAuth) is necessary.
-Then store the token obtained from `orcid_auth()` in your `.Renviron`
-file by running `usethis::edit_r_environ()`. It should be of the form
-
-    ORCID_TOKEN=<your token>
 
 ``` r
 library(spiderorchid)
@@ -82,9 +75,41 @@ staff_ids
 #> # ℹ 47 more rows
 ```
 
+## Google scholar publications
+
+``` r
+staff_ids |>
+  filter(last_name %in% c("Negi", "Lydeamore")) |>
+  pull(scholar_id) |>
+  fetch_scholar()
+#> # A tibble: 24 × 6
+#>    scholar_id   authors                title publication_year journal_name DOI  
+#>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
+#>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
+#>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, … Dyna…             2017 IFPRI book … <NA> 
+#>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK… Unde…             2019 Journal of … <NA> 
+#>  4 Gcz8Ng0AAAAJ A Negi                 Robu…             2020 Michigan St… <NA> 
+#>  5 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… <NA> 
+#>  6 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… <NA> 
+#>  7 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
+#>  8 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
+#>  9 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
+#> 10 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Robu…             2024 Journal of … <NA> 
+#> # ℹ 14 more rows
+```
+
 ## ORCID publications
 
-This function retrieves research publications from ORCID.
+The `fetch_orcid()` function requires authentication on ORCID. If you
+have not previously authenticated, it will prompt you to do so when
+first run. If you just follow the prompts, you will be authenticated,
+but only for downloading your own papers. If you want to download papers
+from other ORCID IDs, you will need to authenticate with a 2-legged
+OAuth. Follow the instructions at
+<https://info.orcid.org/register-a-client-application-production-member-api/>.
+To avoid having to do this in each session, store the token obtained
+from `orcid_auth()` in your `.Renviron` file by running
+`usethis::edit_r_environ()`. It should be of the form .
 
 ``` r
 staff_ids |>
@@ -111,29 +136,15 @@ staff_ids |>
 #> 15 0000-0003-253… Akanks…             2020 Revi… Econometric… 40     5     10.1…
 ```
 
-## Google scholar publications
+## DOI publications
 
 ``` r
-staff_ids |>
-  filter(last_name %in% c("Negi", "Lydeamore")) |>
-  pull(scholar_id) |>
-  fetch_scholar()
-#> Warning in tidy_id(id): Only one ID at a time; retrieving Gcz8Ng0AAAAJ
-#> Warning in tidy_id(id): Only one ID at a time; retrieving Gcz8Ng0AAAAJ
-#> # A tibble: 24 × 6
-#>    scholar_id   authors                title publication_year journal_name DOI  
-#>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
-#>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
-#>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, … Dyna…             2017 IFPRI book … <NA> 
-#>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK… Unde…             2019 Journal of … <NA> 
-#>  4 Gcz8Ng0AAAAJ A Negi                 Robu…             2020 Michigan St… <NA> 
-#>  5 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… <NA> 
-#>  6 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… <NA> 
-#>  7 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
-#>  8 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
-#>  9 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
-#> 10 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Robu…             2024 Journal of … <NA> 
-#> # ℹ 14 more rows
+fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353"))
+#> # A tibble: 2 × 7
+#>   DOI                   authors publication_year title journal_name volume issue
+#>   <chr>                 <chr>              <dbl> <chr> <chr>        <chr>  <chr>
+#> 1 10.1016/j.ijforecast… Daniel…             2024 Cros… Internation… 40     3    
+#> 2 10.1080/10618600.202… Sevvan…             2020 Dime… Journal of … 30     1
 ```
 
 ## CRAN packages

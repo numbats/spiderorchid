@@ -22,26 +22,22 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The `spiderorchid` R package offers tools to retrieve research publications from Google Scholar and ORCID, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN, including publication updates and downloads.
+The `spiderorchid` R package provides tools to retrieve research publications from Google Scholar and ORCID, or from DOIs, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN.
 
 The main functions included are:
 
-* `find_cran_packages`: Searches for CRAN packages by an author's first and last name and returns relevant package information such as the number of downloads and last update date.
-* `get_publications`: Retrieves publications from both Google Scholar and ORCID based on provided IDs.
-* `get_all_publications`: Retrieves publications from multiple authors.
-* `cran_all_pubs`: Combines CRAN package data for multiple authors.
+* `fetch_scholar`: Retrieves publications from Google Scholar given IDs.
+* `fetch_orchid`: Retrieves publications from ORCID given IDs.
+* `fetch_doi`: Retrieves publications from CrossRef given DOIS.
+* `fetch_cran`: Searches for CRAN packages by an author’s name and returns relevant package information such as the number of downloads and last update date.
+
+The package caches results within each R session. So if you fetch the same data multiple times, it will only download it once.
 
 ## Installation
 
 ```r
-# Install the package
-pak::pak("numbats/spiderorchid")
-```
-
-Authenticate for the ORCID API by following the instructions at <https://github.com/ropensci-archive/rorcid/blob/master/README-not.md#authentication>. We have found that the second option (a 2-legged OAuth) is necessary. Then store the token obtained from `orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`. It should be of the form
-
-```
-ORCID_TOKEN=<your token>
+# Install the packages needed
+pak::pak(c("robjhyndman/pkgmeta", "numbats/spiderorchid"))
 ```
 
 ```{r}
@@ -59,9 +55,27 @@ This dataset contains mappings between researchers' names and their respective O
 staff_ids
 ```
 
+## Google scholar publications
+
+```{r}
+staff_ids |>
+  filter(last_name %in% c("Negi", "Lydeamore")) |>
+  pull(scholar_id) |>
+  fetch_scholar()
+```
+
 ## ORCID publications
 
-This function retrieves research publications from ORCID.
+The `fetch_orcid()` function requires authentication on ORCID. If you have not previously
+authenticated, it will prompt you to do so when first run. If you just
+follow the prompts, you will be authenticated, but only for downloading your
+own papers. If you want to download papers from other ORCID IDs, you will
+need to authenticate with a 2-legged OAuth. Follow the instructions at
+<https://info.orcid.org/register-a-client-application-production-member-api/>.
+To avoid having to do this in each session, store the token obtained from
+`orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`.
+It should be of the form \code{ORCID_TOKEN=<your token>}.
+
 
 ```{r}
 staff_ids |>
@@ -70,13 +84,10 @@ staff_ids |>
   fetch_orcid()
 ```
 
-## Google scholar publications
+## DOI publications
 
 ```{r}
-staff_ids |>
-  filter(last_name %in% c("Negi", "Lydeamore")) |>
-  pull(scholar_id) |>
-  fetch_scholar()
+fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353"))
 ```
 
 ## CRAN packages

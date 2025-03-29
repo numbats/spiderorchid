@@ -16,7 +16,5 @@ A tibble containing the article information.
 Retrieves publications for a given list of DOIs using the CrossRef API.
 }
 \examples{
-\dontrun{
 fetch_doi("10.1016/j.ijforecast.2023.10.010")
-}
 }

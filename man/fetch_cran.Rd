@@ -30,12 +30,9 @@ so it may be necessary to call the function
 with several variations.
 }
 \examples{
-\dontrun{
 cran2024 <- fetch_cran(
    author_names = c("Michael Lydeamore", "Di Cook", "Dianne Cook", "Hyndman"),
    downloads_from = "2024-01-01",
    downloads_to = "2024-12-31"
 )
-}
-
 }

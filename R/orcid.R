@@ -18,7 +18,6 @@
 #' \dontrun{
 #' fetch_orcid(c("0000-0003-2531-9408", "0000-0001-5738-1471"))
 #' }
-#'
 #' @export
 
 fetch_orcid <- function(orcid_ids) {

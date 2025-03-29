@@ -7,9 +7,7 @@
 #'
 #' @return A tibble containing the article information.
 #' @examples
-#' \dontrun{
 #' fetch_doi("10.1016/j.ijforecast.2023.10.010")
-#' }
 #' @export
 
 fetch_doi <- function(doi) {

@@ -17,8 +17,5 @@ Retrieves publications for given Google Scholar IDs,  and returns them as a tibb
 This function retrieves publications for a given Google Scholar ID and formats them into a structured tibble.
 }
 \examples{
-\dontrun{
 fetch_scholar("vamErfkAAAAJ")
-}
-
 }

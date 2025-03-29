@@ -9,10 +9,7 @@
 #'
 #' @return A tibble containing all publications for the specified Google Scholar IDs.
 #' @examples
-#' \dontrun{
 #' fetch_scholar("vamErfkAAAAJ")
-#' }
-#'
 #' @export
 fetch_scholar <- function(scholar_id) {
   if (length(scholar_id) == 0) {

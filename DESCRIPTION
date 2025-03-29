@@ -28,6 +28,7 @@ Depends:
 Remotes:
     robjhyndman/pkgmeta
 LazyData: true
+URL: https://github.com/numbats/spiderorchid/, https://numbats.github.io/spiderorchid/
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Config/testthat/edition: 3

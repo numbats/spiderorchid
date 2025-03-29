@@ -4,11 +4,15 @@
 #' Retrieves publications for given ORCID IDs, and returns them as a tibble.
 #'
 #' @details
-#' Before this function can be used, you need to authenticate with the ORCID API.
-#' Follow the instructions at <https://github.com/ropensci-archive/rorcid/blob/master/README-not.md#authentication>.
-#' We have found that the second option (a 2-legged OAuth) is necessary. Then store the token obtained
-#' from `orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`.
-#' It should be of the form `ORCID_TOKEN=<your token>`.
+#' This function requires authentication on ORCID. If you have not previously
+#' authenticated, it will prompt you to do so when first run. If you just
+#' follow the prompts, you will be authenticated, but only for downloading your
+#' own papers. If you want to download papers from other ORCID IDs, you will
+#' need to authenticate with a 2-legged OAuth. Follow the instructions at
+#' <https://info.orcid.org/register-a-client-application-production-member-api/>.
+#' To avoid having to do this in each session, store the token obtained from
+#' `orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`.
+#' It should be of the form \code{ORCID_TOKEN=<your token>}.
 #'
 #' @param orcid_ids A character vector of ORCID IDs.
 #'

@@ -1,0 +1,38 @@
+---
+title: "Annual Report 2024"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Annual Report 2024}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(spiderorchid)
+library(dplyr)
+```
+
+# Total output for 2024
+
+```{r}
+# Grab output from ORCID where possible
+orcid <- staff_ids |>
+  pull(orcid_id) |>
+  na.omit() |>
+  fetch_orcid() |>
+  filter(publication_year == 2024)
+# Otherwise grab output from Scholar
+scholar <- staff_ids |>
+  filter(is.na(orcid_id)) |>
+  pull(scholar_id) |>
+  na.omit() |>
+  fetch_scholar() |>
+  filter(publication_year == 2024)
+```  

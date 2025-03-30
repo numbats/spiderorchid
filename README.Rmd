@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-# Download and wrangle publication data for Monash EBS academic staff
+**Download and wrangle publication data for Monash EBS academic staff**
 
 ## Overview
 

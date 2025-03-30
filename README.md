@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-# Download and wrangle publication data for Monash EBS academic staff
+**Download and wrangle publication data for Monash EBS academic staff**
 
 ## Overview
 
@@ -82,7 +82,7 @@ staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(scholar_id) |>
   fetch_scholar()
-#> # A tibble: 24 × 6
+#> # A tibble: 49 × 6
 #>    scholar_id   authors                title publication_year journal_name DOI  
 #>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
 #>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
@@ -95,7 +95,7 @@ staff_ids |>
 #>  8 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
 #>  9 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
 #> 10 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Robu…             2024 Journal of … <NA> 
-#> # ℹ 14 more rows
+#> # ℹ 39 more rows
 ```
 
 ## ORCID publications

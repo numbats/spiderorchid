@@ -21,7 +21,7 @@ library(dplyr)
 
 # Total output for 2024
 
-```{r}
+```{r, eval=FALSE}
 # Grab output from ORCID where possible
 orcid <- staff_ids |>
   pull(orcid_id) |>

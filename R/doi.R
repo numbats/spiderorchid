@@ -23,42 +23,44 @@ fetch_doi <- function(doi) {
     } else {
       # Fetch the article
       article <- rcrossref::cr_works(doi = id)
-      article <- article$data[
-        colnames(article$data) %in%
-          c(
-            "title",
-            "author",
-            "issued",
-            "container.title",
-            "volume",
-            "issue"
+      if (!identical(dim(article$data), c(0L, 0L))) {
+        article <- article$data[
+          colnames(article$data) %in%
+            c(
+              "title",
+              "author",
+              "issued",
+              "container.title",
+              "volume",
+              "issue"
+            )
+        ]
+        if (suppressWarnings(!is.null(article$author[[1]]$given))) {
+          article$authors <- paste(
+            article$author[[1]]$given,
+            article$author[[1]]$family,
+            collapse = "; "
           )
-      ]
-      if (suppressWarnings(!is.null(article$author[[1]]$given))) {
-        article$authors <- paste(
-          article$author[[1]]$given,
-          article$author[[1]]$family,
-          collapse = "; "
-        )
-      } else {
-        article$authors <- NA
+        } else {
+          article$authors <- NA
+        }
+        cn <- colnames(article)
+        if ("container.title" %in% cn) {
+          colnames(article)[
+            colnames(article) == "container.title"
+          ] <- "journal_name"
+        }
+        if ("issued" %in% cn) {
+          colnames(article)[colnames(article) == "issued"] <- "publication_year"
+          article$publication_year <- as.numeric(
+            substr(article$publication_year, 1, 4)
+          )
+        }
+        article$DOI = id
+        article$author <- NULL
+        all_pubs[[id]] <- article
+        saveRDS(all_pubs[[id]], dest_file)
       }
-      cn <- colnames(article)
-      if ("container.title" %in% cn) {
-        colnames(article)[
-          colnames(article) == "container.title"
-        ] <- "journal_name"
-      }
-      if ("issued" %in% cn) {
-        colnames(article)[colnames(article) == "issued"] <- "publication_year"
-        article$publication_year <- as.numeric(
-          substr(article$publication_year, 1, 4)
-        )
-      }
-      article$DOI = id
-      article$author <- NULL
-      all_pubs[[id]] <- article
-      saveRDS(all_pubs[[id]], dest_file)
     }
   }
 

@@ -1,7 +1,8 @@
 #' Fetch article information given a DOI
 #'
 #' @description
-#' Retrieves publications for a given list of DOIs using the CrossRef API.
+#' Retrieves publications for a given list of DOIs using the DOI API and formats
+#' them into a structured tibble.
 #'
 #' @param doi A character vector of DOIs.
 #'
@@ -22,53 +23,47 @@ fetch_doi <- function(doi) {
       all_pubs[[id]] <- readRDS(dest_file)
     } else {
       # Fetch the article
-      article <- rcrossref::cr_works(doi = id)
-      if (!identical(dim(article$data), c(0L, 0L))) {
-        article <- article$data[
-          colnames(article$data) %in%
-            c(
-              "title",
-              "author",
-              "issued",
-              "container.title",
-              "volume",
-              "issue"
-            )
-        ]
-        if (suppressWarnings(!is.null(article$author[[1]]$given))) {
-          article$authors <- paste(
-            article$author[[1]]$given,
-            article$author[[1]]$family,
-            collapse = "; "
-          )
-        } else {
-          article$authors <- NA
-        }
-        cn <- colnames(article)
-        if ("container.title" %in% cn) {
-          colnames(article)[
-            colnames(article) == "container.title"
-          ] <- "journal_name"
-        }
-        if ("issued" %in% cn) {
-          colnames(article)[colnames(article) == "issued"] <- "publication_year"
-          article$publication_year <- as.numeric(
-            substr(article$publication_year, 1, 4)
-          )
-        }
-        article$DOI = id
-        article$author <- NULL
-        all_pubs[[id]] <- article
-        saveRDS(all_pubs[[id]], dest_file)
+      res <- httr::GET(
+        paste0("dx.doi.org/", id),
+        httr::accept("application/json")
+      )
+      a <- httr::content(res, as = "text", encoding = "UTF-8") |>
+        jsonlite::fromJSON()
+      all_pubs[[id]] <- data.frame(doi = id)
+      if (!is.null(a[["author"]])) {
+        all_pubs[[id]]$authors = paste(
+          a$author$given,
+          a$author$family,
+          collapse = "; "
+        )
       }
+      if (!is.null(a[["published"]])) {
+        all_pubs[[id]]$publication_year = a$published$`date-parts`[1, 1]
+      }
+      if (!is.null(a[["title"]])) {
+        all_pubs[[id]]$title = a$title
+      }
+      if (!is.null(a[["container-title"]])) {
+        all_pubs[[id]]$journal_name = a$container_title
+      }
+      if (!is.null(a[["volume"]])) {
+        all_pubs[[id]]$volume = a$volume
+      }
+      if (!is.null(a[["issue"]])) {
+        all_pubs[[id]]$issue = a$issue
+      }
+      if (!is.null(a[["page"]])) {
+        all_pubs[[id]]$page = a$page
+      }
+      saveRDS(all_pubs[[id]], dest_file)
     }
   }
-
+  # Combine all data frames into one
   output <- dplyr::bind_rows(all_pubs)
   # Order columns
   col_order <- intersect(
     c(
-      "DOI",
+      "doi",
       "authors",
       "publication_year",
       "title",
@@ -79,6 +74,6 @@ fetch_doi <- function(doi) {
     colnames(output)
   )
   output |>
-    dplyr::select(col_order, dplyr::everything()) |>
+    dplyr::select(dplyr::all_of(col_order), dplyr::everything()) |>
     tibble::as_tibble()
 }

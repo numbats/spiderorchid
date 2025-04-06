@@ -6,7 +6,15 @@
 \alias{spiderorchid-package}
 \title{spiderorchid: Download and wrangle publication data for Monash EBS academic staff}
 \description{
-A package to scrape and combine publication data from Google Scholar and ORCID.
+Fetch publication details from ORCID, Google Scholar, Pure and from DOIs.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/numbats/spiderorchid/}
+  \item \url{https://numbats.github.io/spiderorchid/}
+}
+
 }
 \author{
 \strong{Maintainer}: Rob Hyndman \email{Rob.Hyndman@monash.edu}

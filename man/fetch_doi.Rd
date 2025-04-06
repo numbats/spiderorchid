@@ -13,7 +13,8 @@ fetch_doi(doi)
 A tibble containing the article information.
 }
 \description{
-Retrieves publications for a given list of DOIs using the CrossRef API.
+Retrieves publications for a given list of DOIs using the DOI API and formats
+them into a structured tibble.
 }
 \examples{
 fetch_doi("10.1016/j.ijforecast.2023.10.010")

@@ -104,7 +104,7 @@ fetch_orcid <- function(orcid_ids) {
     ))
   } else {
     output |>
-      dplyr::select(col_order, dplyr::everything()) |>
+      dplyr::select(dplyr::all_of(col_order), dplyr::everything()) |>
       dplyr::arrange(orcid_id, publication_year, title, authors) |>
       tibble::as_tibble()
   }

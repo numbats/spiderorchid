@@ -70,7 +70,7 @@ fetch_scholar <- function(scholar_id) {
     colnames(output)
   )
   output |>
-    dplyr::select(col_order, dplyr::everything()) |>
+    dplyr::select(dplyr::all_of(col_order), dplyr::everything()) |>
     dplyr::arrange(scholar_id, publication_year, title, authors) |>
     tibble::as_tibble()
 }

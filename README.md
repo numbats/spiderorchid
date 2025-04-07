@@ -4,6 +4,8 @@
 # spiderorchid <img src="man/figures/spiderorchid-hex.png" align="right" width = 150 />
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/numbats/spiderorchid/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/numbats/spiderorchid/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **Download and wrangle publication data for Monash EBS academic staff**

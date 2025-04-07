@@ -27,9 +27,9 @@ The `spiderorchid` R package provides tools to retrieve research publications fr
 
 The main functions included are:
 
-* `fetch_scholar`: Retrieves publications from Google Scholar given IDs.
-* `fetch_orchid`: Retrieves publications from ORCID given IDs.
-* `fetch_doi`: Retrieves publications from CrossRef given DOIS.
+* `fetch_scholar`: Retrieves publication details from Google Scholar given IDs.
+* `fetch_orcid`: Retrieves publication details from ORCID given IDs.
+* `fetch_doi`: Retrieves publication details given DOIS.
 * `fetch_cran`: Searches for CRAN packages by an author’s name and returns relevant package information such as the number of downloads and last update date.
 
 The package caches results within each R session. So if you fetch the same data multiple times, it will only download it once.

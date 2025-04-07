@@ -5,13 +5,16 @@
 \title{Fetch packages from CRAN}
 \usage{
 fetch_cran(
-  author_names,
+  author_names = NULL,
+  package_names = NULL,
   downloads_from = "2000-01-01",
   downloads_to = Sys.Date()
 )
 }
 \arguments{
 \item{author_names}{A character vector containing the authors' names in the form used on CRAN.}
+
+\item{package_names}{A character vector of package names. Ignored if `author_names` is provided.}
 
 \item{downloads_from}{A date or character string in the format "YYYY-MM-DD" specifying the date
 from which to start counting downloads. Default is "2000-01-01".}

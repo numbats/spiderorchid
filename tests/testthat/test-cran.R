@@ -10,7 +10,7 @@ test_that("fetch_cran returns a dataframe for valid authors", {
 })
 
 test_that("fetch_cran returns empty dataframe for unknown authors", {
-  result <- fetch_cran("Harvey Spector")
+  expect_warning(result <- fetch_cran("Harvey Spector"))
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), 0)
 })

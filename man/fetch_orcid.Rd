@@ -14,6 +14,8 @@ A tibble containing all publications for the specified ORCID IDs.
 }
 \description{
 Retrieves publications for given ORCID IDs, and returns them as a tibble.
+Only publications with DOIs are returned. The function uses the ORCID API to fetch
+the DOIs, and then uses the DOI API to fetch the publication details for each DOI.
 }
 \details{
 This function requires authentication on ORCID. If you have not previously

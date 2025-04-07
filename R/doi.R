@@ -29,7 +29,16 @@ fetch_doi <- function(doi) {
       )
       a <- httr::content(res, as = "text", encoding = "UTF-8") |>
         jsonlite::fromJSON()
-      all_pubs[[id]] <- data.frame(doi = id)
+      all_pubs[[id]] <- data.frame(
+        doi = id,
+        authors = NA_character_,
+        title = NA_character_,
+        publication_year = NA_integer_,
+        journal_name = NA_character_,
+        volume = NA_character_,
+        issue = NA_character_,
+        page = NA_character_
+      )
       if (!is.null(a[["author"]])) {
         all_pubs[[id]]$authors = paste(
           a$author$given,
@@ -38,15 +47,13 @@ fetch_doi <- function(doi) {
         )
       }
       if (!is.null(a[["published"]])) {
-        all_pubs[[id]]$publication_year = a$published$`date-parts`[1, 1]
+        all_pubs[[id]]$publication_year = as.integer(a$published$`date-parts`[1,1])
       }
       if (!is.null(a[["title"]])) {
         all_pubs[[id]]$title = a$title
       }
-      if (!is.null(a[["container-title"]])) {
-        if(length(a$`container-title`) > 1) {
-           all_pubs[[id]]$journal_name = a$`container-title`
-        }
+      if (!is.null(a[["container-title"]]) & !is.list(a$`container-title`)) {
+        all_pubs[[id]]$journal_name = a$`container-title`
       }
       if (!is.null(a[["volume"]])) {
         all_pubs[[id]]$volume = a$volume

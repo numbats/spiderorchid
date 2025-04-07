@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# spiderorchid
+# spiderorchid <img src="man/figures/spiderorchid-hex.png" align="right" width = 150 />
 
 <!-- badges: start -->
 <!-- badges: end -->

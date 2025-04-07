@@ -5,7 +5,6 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/numbats/spiderorchid/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/numbats/spiderorchid/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **Download and wrangle publication data for Monash EBS academic staff**
@@ -112,7 +111,8 @@ OAuth. Follow the instructions at
 <https://info.orcid.org/register-a-client-application-production-member-api/>.
 To avoid having to do this in each session, store the token obtained
 from `orcid_auth()` in your `.Renviron` file by running
-`usethis::edit_r_environ()`. It should be of the form .
+`usethis::edit_r_environ()`. It should be of the form
+`ORCID_TOKEN=<your token>`.
 
 ``` r
 staff_ids |>

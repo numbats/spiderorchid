@@ -44,7 +44,9 @@ fetch_doi <- function(doi) {
         all_pubs[[id]]$title = a$title
       }
       if (!is.null(a[["container-title"]])) {
-        all_pubs[[id]]$journal_name = a$container_title
+        if(length(a$`container-title`) > 1) {
+           all_pubs[[id]]$journal_name = a$`container-title`
+        }
       }
       if (!is.null(a[["volume"]])) {
         all_pubs[[id]]$volume = a$volume

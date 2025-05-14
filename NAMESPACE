@@ -3,6 +3,7 @@
 export(fetch_cran)
 export(fetch_doi)
 export(fetch_orcid)
+export(fetch_pure)
 export(fetch_scholar)
 importFrom(dplyr,bind_rows)
 importFrom(dplyr,filter)

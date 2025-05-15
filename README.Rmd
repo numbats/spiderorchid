@@ -60,6 +60,10 @@ staff_ids
 
 This dataset contains publication data from the PURE system for EBS staff. It includes information such as titles, authors, publication years, and DOIs. The data includes publications from January 2018 to May 2025.
 
+```{r}
+ebs_pure
+```
+
 ## Google scholar publications
 
 ```{r}
@@ -100,7 +104,9 @@ fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353")
 The `fetch_pure()` function requires an API key to access the PURE system.
 The API key is stored in the environment variable `PURE_API_KEY`.
 This function is restricted to Monash IP addresses; so either use it on campus
-or invoke the VPN before using it off campus.
+or invoke the VPN before using it off campus. It will return publications in 
+the specified years, coauthored by members of the Department of 
+Econometrics & Business Statistics, Monash University.
 
 ```{r, eval = FALSE}
 fetch_pure(2024)

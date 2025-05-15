@@ -86,6 +86,24 @@ staff. It includes information such as titles, authors, publication
 years, and DOIs. The data includes publications from January 2018 to May
 2025.
 
+``` r
+ebs_pure
+#> # A tibble: 613 × 8
+#>    pure_id    year authors                     title journal subtype bib   doi  
+#>    <chr>     <int> <chr>                       <chr> <chr>   <chr>   <chr> <chr>
+#>  1 580119537  2024 Negi, A & Wooldridge, JM    Doub… Econom… Article Negi… 10.1…
+#>  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…
+#>  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…
+#>  4 576146015  2024 Rostami-Tabar, B & Hyndman… Hier… Journa… Article Rost… 10.1…
+#>  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…
+#>  6 574375066  2023 Pullin, JM, Gurrin, LC & V… Stat… The R … Article Pull… 10.3…
+#>  7 571851299  2024 Kim, HY & McLaren, KR       Inte… Resear… Article Kim,… 10.1…
+#>  8 571257919  2024 Gao, J, Peng, B, Wu, WB & … Time… Journa… Article Gao,… 10.1…
+#>  9 571257838  2024 Yan, Y, Gao, J & Peng, B    Asym… Econom… Article Yan,… 10.1…
+#> 10 567405205  2023 Zhou, J, Jiang, G, Pantelo… Onli… IEEE T… Article Zhou… 10.1…
+#> # ℹ 603 more rows
+```
+
 ## Google scholar publications
 
 ``` r
@@ -164,7 +182,10 @@ fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353")
 The `fetch_pure()` function requires an API key to access the PURE
 system. The API key is stored in the environment variable
 `PURE_API_KEY`. This function is restricted to Monash IP addresses; so
-either use it on campus or invoke the VPN before using it off campus.
+either use it on campus or invoke the VPN before using it off campus. It
+will return publications in the specified years, coauthored by members
+of the Department of Econometrics & Business Statistics, Monash
+University.
 
 ``` r
 fetch_pure(2024)

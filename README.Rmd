@@ -29,6 +29,7 @@ The main functions included are:
 * `fetch_scholar`: Retrieves publication details from Google Scholar given IDs.
 * `fetch_orcid`: Retrieves publication details from ORCID given IDs.
 * `fetch_doi`: Retrieves publication details given DOIS.
+* `fetch_pure`: Retrieves publication details from PURE for specific years.
 * `fetch_cran`: Searches for CRAN packages by an author’s name and returns relevant package information such as the number of downloads and last update date.
 
 The package caches results within each R session. So if you fetch the same data multiple times, it will only download it once.
@@ -45,7 +46,7 @@ library(spiderorchid)
 library(dplyr)
 ```
 
-## Dataset
+## Datasets
 
 `staff_ids.csv`
 
@@ -54,6 +55,10 @@ This dataset contains mappings between researchers' names and their respective O
 ```{r}
 staff_ids
 ```
+
+`ebs_pure`
+
+This dataset contains publication data from the PURE system for EBS staff. It includes information such as titles, authors, publication years, and DOIs. The data includes publications from January 2018 to May 2025.
 
 ## Google scholar publications
 
@@ -88,6 +93,21 @@ staff_ids |>
 
 ```{r}
 fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353"))
+```
+
+## PURE publications
+
+The `fetch_pure()` function requires an API key to access the PURE system.
+The API key is stored in the environment variable `PURE_API_KEY`.
+This function is restricted to Monash IP addresses; so either use it on campus
+or invoke the VPN before using it off campus.
+
+```{r, eval = FALSE}
+fetch_pure(2024)
+```
+
+```{r, echo = FALSE}
+ebs_pure |> dplyr::filter(year == 2024)
 ```
 
 ## CRAN packages

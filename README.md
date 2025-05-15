@@ -24,6 +24,8 @@ The main functions included are:
   given IDs.
 - `fetch_orcid`: Retrieves publication details from ORCID given IDs.
 - `fetch_doi`: Retrieves publication details given DOIS.
+- `fetch_pure`: Retrieves publication details from PURE for specific
+  years.
 - `fetch_cran`: Searches for CRAN packages by an author’s name and
   returns relevant package information such as the number of downloads
   and last update date.
@@ -51,7 +53,7 @@ library(dplyr)
 #>     intersect, setdiff, setequal, union
 ```
 
-## Dataset
+## Datasets
 
 `staff_ids.csv`
 
@@ -77,6 +79,13 @@ staff_ids
 #> # ℹ 47 more rows
 ```
 
+`ebs_pure`
+
+This dataset contains publication data from the PURE system for EBS
+staff. It includes information such as titles, authors, publication
+years, and DOIs. The data includes publications from January 2018 to May
+2025.
+
 ## Google scholar publications
 
 ``` r
@@ -84,7 +93,7 @@ staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(scholar_id) |>
   fetch_scholar()
-#> # A tibble: 49 × 6
+#> # A tibble: 51 × 6
 #>    scholar_id   authors                title publication_year journal_name DOI  
 #>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
 #>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
@@ -96,8 +105,8 @@ staff_ids |>
 #>  7 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
 #>  8 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
 #>  9 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
-#> 10 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Robu…             2024 Journal of … <NA> 
-#> # ℹ 39 more rows
+#> 10 Gcz8Ng0AAAAJ A Negi                 Jour…             2024 de Gruyter   <NA> 
+#> # ℹ 41 more rows
 ```
 
 ## ORCID publications
@@ -149,6 +158,32 @@ fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353")
 #> 1 10.1016/j.ijfo… Daniel…             2024 Cros… Internation… 40     3     1134…
 #> 2 10.1080/106186… Sevvan…             2020 Dime… Journal of … 30     1     204-…
 ```
+
+## PURE publications
+
+The `fetch_pure()` function requires an API key to access the PURE
+system. The API key is stored in the environment variable
+`PURE_API_KEY`. This function is restricted to Monash IP addresses; so
+either use it on campus or invoke the VPN before using it off campus.
+
+``` r
+fetch_pure(2024)
+```
+
+    #> # A tibble: 83 × 8
+    #>    pure_id    year authors                     title journal subtype bib   doi  
+    #>    <chr>     <int> <chr>                       <chr> <chr>   <chr>   <chr> <chr>
+    #>  1 580119537  2024 Negi, A & Wooldridge, JM    Doub… Econom… Article Negi… 10.1…
+    #>  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…
+    #>  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…
+    #>  4 576146015  2024 Rostami-Tabar, B & Hyndman… Hier… Journa… Article Rost… 10.1…
+    #>  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…
+    #>  6 571851299  2024 Kim, HY & McLaren, KR       Inte… Resear… Article Kim,… 10.1…
+    #>  7 571257919  2024 Gao, J, Peng, B, Wu, WB & … Time… Journa… Article Gao,… 10.1…
+    #>  8 571257838  2024 Yan, Y, Gao, J & Peng, B    Asym… Econom… Article Yan,… 10.1…
+    #>  9 565992428  2024 Athanasopoulos, G, Hyndman… Fore… Intern… Article Atha… 10.1…
+    #> 10 564353599  2024 Wang, G, Zhou, J, Pantelou… A de… Comput… Article Wang… 10.1…
+    #> # ℹ 73 more rows
 
 ## CRAN packages
 

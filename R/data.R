@@ -19,7 +19,7 @@
 #'
 #' @description
 #' This dataset contains publications between 2018 and May 2025 downloaded from PURE.
-#' It can be updated using the \code{\link{fetch_pure}()} function.
+#' Additional data can be updated using the \code{\link{fetch_pure}()} function.
 #'
 #' @format A data frame with 7 variables:
 #' \describe{

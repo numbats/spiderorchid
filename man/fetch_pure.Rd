@@ -4,10 +4,11 @@
 \alias{fetch_pure}
 \title{Fetch publications from PURE}
 \usage{
-fetch_pure(years = 2025:2026)
+fetch_pure(years)
 }
 \arguments{
-\item{years}{A numeric vector of publication years.}
+\item{years}{A numeric vector of publication years. All publications between
+the minimum year and the maximum year are returned.}
 }
 \value{
 A data frame containing the data fetched from the PURE API covering

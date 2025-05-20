@@ -39,7 +39,7 @@ fetch_pure <- function(years) {
 
   # Make the API call
   response <- httr::POST(
-    url = "https://6wlo3eknv3.execute-api.ap-southeast-2.amazonaws.com/qat/predict/org-map/external",
+    url = "https://zxtx3szp38.execute-api.ap-southeast-2.amazonaws.com/prod/predict/org-map/external",
     config = httr::add_headers(
       "x-api-key" = Sys.getenv("PURE_API_KEY"),
       "Content-Type" = "application/json"
@@ -70,7 +70,6 @@ fetch_pure <- function(years) {
 
 # Clean PURE json file and return a tibble
 clean_pure_json <- function(json_data) {
-  browser()
   ebs <- dplyr::as_tibble(json_data) |>
     dplyr::select(
       pure_id = output_id,

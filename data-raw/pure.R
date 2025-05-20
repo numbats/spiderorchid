@@ -1,11 +1,14 @@
 library(dplyr)
-library(stringr)
 
 # Read downloaded json data from PURE
-ebs_pure <- jsonlite::fromJSON(here::here("data-raw/ebs.json"))[[2]] |>
-  spiderorchid:::clean_pure_json()
-# Should be equivalent to the following
-# ebs_pure <- fetch_pure(2018:2025)
+#ebs_pure <- jsonlite::fromJSON(here::here("data-raw/ebs.json"))[[2]] |>
+#  spiderorchid:::clean_pure_json()
+
+# Update existing ebs_pure data
+new_ebs_pure <- fetch_pure(2025)
+ebs_pure <- ebs_pure |>
+  filter(year < 2025) |>
+  bind_rows(new_ebs_pure)
 
 # Check missing DOIs
 ebs_pure |>

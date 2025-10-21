@@ -21,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Michael Lydeamore \email{Michael.Lydeamore@monash.edu}
   \item Sherry Tee \email{stee0006@student.monash.edu}
   \item Parnika Khattri \email{pkha0009@student.monash.edu}
 }

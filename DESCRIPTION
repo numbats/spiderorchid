@@ -2,10 +2,12 @@ Package: spiderorchid
 Title: Download and wrangle publication data for Monash EBS academic staff
 Version: 0.0.0.9000
 Authors@R: 
-   c(
+  c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut", "cre")),
-    person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = c("aut")),
-    person("Parnika", "Khattri", email = "pkha0009@student.monash.edu", role = "aut"))
+    person("Michael", "Lydeamore", email = "Michael.Lydeamore@monash.edu", role = "aut"),
+    person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = "aut"),
+    person("Parnika", "Khattri", email = "pkha0009@student.monash.edu", role = "aut")
+  )
 Description: Fetch publication details from ORCID, Google Scholar, Pure and from DOIs.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -30,6 +32,6 @@ Remotes:
     robjhyndman/pkgmeta
 LazyData: true
 URL: https://github.com/numbats/spiderorchid/, https://numbats.github.io/spiderorchid/
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Config/testthat/edition: 3

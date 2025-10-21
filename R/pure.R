@@ -93,3 +93,16 @@ clean_pure_json <- function(json_data) {
       doi = dplyr::if_else(pure_id == "617686492", "10.1016/j.jeconom.2022.08.006", doi)
     )
 }
+
+utils::globalVariables(c(
+  "output_id",
+  "output_year",
+  "output_subtype",
+  "output_title",
+  "journal_title",
+  "output_bibliographic_text_harvard",
+  "pure_id",
+  "bib",
+  "year",
+  "subtype"
+))

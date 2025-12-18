@@ -10,7 +10,10 @@ abdc <- here("data-raw","ABDC-JQL-2022-v3-100523.xlsx") |>
     field_of_research = fo_r,
     rank = x2022_rating
   ) |>
-  mutate(rank = factor(rank, levels=c("A*","A","B","C"), ordered=TRUE)) |>
+  mutate(
+    rank = factor(rank, levels=c("A*","A","B","C"), ordered=TRUE),
+    field_of_research = as.character(field_of_research)
+  ) |>
   arrange(rank, title)
 
 # save into rcademy

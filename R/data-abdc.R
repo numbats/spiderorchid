@@ -24,6 +24,6 @@
 #' @examples
 #' library(dplyr)
 #' abdc |>
-#'   filter(field_of_research == "0104") |>
+#'   filter(field_of_research == "4905") |>
 #'   arrange(rank)
 "abdc"

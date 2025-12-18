@@ -8,7 +8,7 @@ Authors@R:
     person("Sherry", "Tee", email = "stee0006@student.monash.edu", role = "aut"),
     person("Parnika", "Khattri", email = "pkha0009@student.monash.edu", role = "aut")
   )
-Description: Fetch publication details from ORCID, Google Scholar, Pure and from DOIs.
+Description: Provide journal rankings from Monash Business School, ABDC, CORE, Scimago and ERA 2010. Fetch publication details from ORCID, Google Scholar, PURE and from DOIs. Find CRAN packages and download statistics for specified authors.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: 

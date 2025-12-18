@@ -6,7 +6,7 @@
 \alias{spiderorchid-package}
 \title{spiderorchid: Download and wrangle publication data for Monash EBS academic staff}
 \description{
-Fetch publication details from ORCID, Google Scholar, Pure and from DOIs.
+Provide journal rankings from Monash Business School, ABDC, CORE, Scimago and ERA 2010. Fetch publication details from ORCID, Google Scholar, PURE and from DOIs. Find CRAN packages and download statistics for specified authors.
 }
 \seealso{
 Useful links:

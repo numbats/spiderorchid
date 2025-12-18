@@ -14,3 +14,28 @@ template:
 
 navbar:
   type: light
+
+reference:
+  - title: "Package"
+    contents:
+      - spiderorchid
+  - title: Data
+    desc: Data sets included in the package
+    contents:
+      - staff_ids
+      - ebs_pure
+      - monash
+      - abdc
+      - core
+      - era2010
+      - scimago
+  - title: Functions to download data
+    contents:
+      - fetch_cran
+      - fetch_doi
+      - fetch_orcid
+      - fetch_pure
+      - fetch_scholar
+  - title: Journal rankings
+    contents:
+      - journal_ranking

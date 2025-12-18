@@ -1,6 +1,6 @@
-#' Find rankings of journals on the ABDC, ERA2010, CORE, SCImago or Monash lists.
+#' Find rankings of journals from the Monash Business School, ABDC, CORE, SCImago or ERA2010.
 #'
-#' Data sets used are:
+#' Given a list of journal titles, this function will return their ranking from various lists. Data sets used are:
 #'   \describe{
 #'   \item{\cite{\link{monash}}: }{Monash Business School}
 #'   \item{\cite{\link{abdc}}: }{Australian Business Deans' Council}
@@ -8,7 +8,7 @@
 #'   \item{\cite{\link{core}}: }{CORE}
 #'   \item{\cite{\link{scimago}}: }{SCImago}
 #'   }
-#'
+#' This function is used in the [Journal rankings shiny app](https://ebsmonash.shinyapps.io/Journal_Rankings/).
 #' @param title A character vector containing (partial) journal names.
 #' @param source A character string indicating which ranking data base to use. Default \code{"monash"}.
 #' @param fuzzy Should fuzzy matching be used. If \code{FALSE}, partial exact matching is used.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ranking.R
 \name{journal_ranking}
 \alias{journal_ranking}
-\title{Find rankings of journals on the ABDC, ERA2010, CORE, SCImago or Monash lists.}
+\title{Find rankings of journals from the Monash Business School, ABDC, CORE, SCImago or ERA2010.}
 \usage{
 journal_ranking(
   title,
@@ -28,7 +28,7 @@ Otherwise, full fuzzy matching is used.}
 A data frame containing the journal title, rank and source for each matching journal.
 }
 \description{
-Data sets used are:
+Given a list of journal titles, this function will return their ranking from various lists. Data sets used are:
 \describe{
 \item{\cite{\link{monash}}: }{Monash Business School}
 \item{\cite{\link{abdc}}: }{Australian Business Deans' Council}
@@ -36,6 +36,7 @@ Data sets used are:
 \item{\cite{\link{core}}: }{CORE}
 \item{\cite{\link{scimago}}: }{SCImago}
 }
+This function is used in the \href{https://ebsmonash.shinyapps.io/Journal_Rankings/}{Journal rankings shiny app}.
 }
 \examples{
 # Return ranking for individual journals or conferences

@@ -22,7 +22,9 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The `spiderorchid` R package provides tools to retrieve research publications from Google Scholar and ORCID, or from DOIs, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN.
+The `spiderorchid` R package provides tools to retrieve research publications from Google Scholar, ORCID and PURE, or from DOIs, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN.
+
+It also provides journal ranking information from various sources, including the Monash Business School, the Australian Business Deans' Council, CORE, SCImago and ERA2010.
 
 The main functions included are:
 
@@ -47,7 +49,7 @@ library(spiderorchid)
 library(dplyr)
 ```
 
-## Datasets
+## Staff IDs
 
 `staff_ids.csv`
 
@@ -57,15 +59,9 @@ This dataset contains mappings between researchers' names and their respective O
 staff_ids
 ```
 
-`ebs_pure`
-
-This dataset contains publication data from the PURE system for EBS staff. It includes information such as titles, authors, publication years, and DOIs. The data includes publications from January 2018 to May 2025.
-
-```{r}
-ebs_pure
-```
-
 ## Google scholar publications
+
+Given a vector of Google Scholar IDs, the `fetch_scholar()` function retrieves publication details and returns them in the form of a data frame, with one row per publication.
 
 ```{r}
 staff_ids |>
@@ -76,16 +72,7 @@ staff_ids |>
 
 ## ORCID publications
 
-The `fetch_orcid()` function requires authentication on ORCID. If you have not previously
-authenticated, it will prompt you to do so when first run. If you just
-follow the prompts, you will be authenticated, but only for downloading your
-own papers. If you want to download papers from other ORCID IDs, you will
-need to authenticate with a 2-legged OAuth. Follow the instructions at
-<https://info.orcid.org/register-a-client-application-production-member-api/>.
-To avoid having to do this in each session, store the token obtained from
-`orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`.
-It should be of the form `ORCID_TOKEN=<your token>`.
-
+Given a vector of ORCID IDs, the `fetch_orcid()` function retrieves publication details and returns them in the form of a data frame, with one row per publication.
 
 ```{r}
 staff_ids |>
@@ -94,39 +81,52 @@ staff_ids |>
   fetch_orcid()
 ```
 
+The `fetch_orcid()` function requires authentication on ORCID. If you have not previously authenticated, it will prompt you to do so when first run. If you just follow the prompts, you will be authenticated, but only for downloading your own papers. If you want to download papers from other ORCID IDs, you will need to authenticate with a 2-legged OAuth. Follow the instructions at <https://info.orcid.org/register-a-client-application-production-member-api/>. To avoid having to do this in each session, store the token obtained from `orcid_auth()` in your `.Renviron` file by running `usethis::edit_r_environ()`. It should be of the form `ORCID_TOKEN=<your token>`.
+
 ## DOI publications
 
+Given a vector of DOIs, the `fetch_doi()` function retrieves publication details and returns them in the form of a data frame, with one row per DOI.
+
 ```{r}
-fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353"))
+c(
+  "10.1016/j.ijforecast.2023.10.003",
+  "10.1080/10618600.2020.1807353"
+) |>
+  fetch_doi()
 ```
 
 ## PURE publications
 
-The `fetch_pure()` function requires an API key to access the PURE system.
-The API key is stored in the environment variable `PURE_API_KEY`.
-This function is restricted to Monash IP addresses; so either use it on campus
-or invoke the VPN before using it off campus. It will return publications in 
-the specified years, coauthored by members of the Department of 
-Econometrics & Business Statistics, Monash University.
+Given a vector of years, the `fetch_pure()` function retrieves publication details from the PURE system for academic staff in the Department of Econometrics & Business Statistics, Monash University.
 
 ```{r, eval = FALSE}
 fetch_pure(2024)
 ```
 
 ```{r, echo = FALSE}
-ebs_pure |> dplyr::filter(year == 2024)
+ebs_pure |> filter(year == 2024)
+```
+
+The `fetch_pure()` function requires an API key to access the PURE system. The API key is stored in the environment variable `PURE_API_KEY`. This function is restricted to Monash IP addresses; so either use it on campus or invoke the VPN before using it off campus. It will return publications in the specified years, coauthored by members of the Department of 
+Econometrics & Business Statistics, Monash University. 
+
+The function is run periodically, and the data stored as `ebs_pure`. Currently, the stored data includes publications from January 2018 to May 2025.
+
+```{r}
+ebs_pure
 ```
 
 ## CRAN packages
 
-This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
+This function retrieves information about CRAN packages authored by specified individuals. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.
 
 ```{r}
-fetch_cran(c(
+c(
   "Michael Lydeamore",
   "Di Cook",
   "Dianne Cook"
-))
+) |>
+  fetch_cran()
 ```
 
 ## Journal rankings
@@ -134,12 +134,14 @@ fetch_cran(c(
 This function retrieves journal ranking information for a list of journals. The rankings are from the Monash Business School (default), the Australian Business Deans' Council, the Computing Research and Education Association of Australasia, SCImago or ERA2010. It returns a data frame containing journal names, and their rankings. Fuzzy matching is used, but it works best if you use the correct journal name. Multiple matches can be returned if the journal name is ambiguous. 
 
 ```{r}
-journal_ranking(
-  c("Annals of Statistics",
-    "Journal of the American Statistical Association",
-    "Journal of Computational and Graphical Statistics",
-    "International Journal of Forecasting"
-  )
-)
+c(
+  "Annals of Statistics",
+  "Journal of the American Statistical Association",
+  "Journal of Computational and Graphical Statistics",
+  "International Journal of Forecasting"
+) |>
+  journal_ranking()
 journal_ranking("Forecasting")
 ```
+
+There is a [shiny app](https://ebsmonash.shinyapps.io/Journal_Rankings/) that allows you to explore the journal rankings interactively.

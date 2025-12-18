@@ -15,8 +15,8 @@ An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with
 
 ## Source
 
-SCImago, (n.d.). SJR — SCImago Journal & Country Rank. Retrieved
-2021-11-28, from <https://www.scimagojr.com/journalrank.php>
+SCImago Journal & Country Rank. Retrieved from
+<https://www.scimagojr.com/journalrank.php>
 
 ## Value
 

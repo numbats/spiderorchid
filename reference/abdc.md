@@ -66,19 +66,20 @@ library(dplyr)
 #>     intersect, setdiff, setequal, union
 abdc |>
   filter(field_of_research == "4905") |>
-  arrange(rank)
-#> # A tibble: 85 × 7
-#>    title      publisher issn  issn_online year_inception field_of_research rank 
-#>    <chr>      <chr>     <chr> <chr>       <chr>          <chr>             <ord>
-#>  1 Annals of… Institut… 0091… 2168-894X   1973           4905              A*   
-#>  2 Annals of… Institut… 0090… NA          1973           4905              A*   
-#>  3 Biometrika Oxford U… 0006… 1464-3510   1901           4905              A*   
-#>  4 Journal o… Taylor &… 1061… 1537-2715   1992           4905              A*   
-#>  5 Journal o… Taylor &… 0162… 1537-274X   1888           4905              A*   
-#>  6 Journal o… Wiley-Bl… NA    1467-9868   1934           4905              A*   
-#>  7 Probabili… Springer… 0178… 1432-2064   1962           4905              A*   
-#>  8 Advances … Applied … 0001… 1475-6064   1964           4905              A    
-#>  9 Annals of… Institut… 1050… 2168-8737   1991           4905              A    
-#> 10 Annals of… Institut… 1932… 1941-7330   2007           4905              A    
+  arrange(rank) |>
+  select(title, rank)
+#> # A tibble: 85 × 2
+#>    title                                                                   rank 
+#>    <chr>                                                                   <ord>
+#>  1 Annals of Probability                                                   A*   
+#>  2 Annals of Statistics                                                    A*   
+#>  3 Biometrika                                                              A*   
+#>  4 Journal of Computational and Graphical Statistics                       A*   
+#>  5 Journal of the American Statistical Association                         A*   
+#>  6 Journal of the Royal Statistical Society, Series B (Statistical Method… A*   
+#>  7 Probability Theory and Related Fields                                   A*   
+#>  8 Advances in Applied Probability                                         A    
+#>  9 Annals of Applied Probability                                           A    
+#> 10 Annals of Applied Statistics                                            A    
 #> # ℹ 75 more rows
 ```

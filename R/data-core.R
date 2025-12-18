@@ -2,8 +2,7 @@
 #'
 #' Two datasets are provided: `core` and `core_journals`, which contains lists of
 #' conference and journal rankings respectively, according to the CORE executive committee.
-#' These are used in [rank_core()]. The details of the CORE organisation,
-#'   and its procedure for ranking is provided below.
+#' The details of the CORE organisation, and its procedure for ranking are provided below.
 #'
 #' CORE is an association of university departments of computer science in
 #'   Australia and New Zealand. Prior to 2004 it was known as the Computer
@@ -20,7 +19,7 @@
 #'   technical program. A more detailed statement categorizing the ranks A*, A,
 #'   B, and C can be found [here](http://bit.ly/core-rankings).
 #'
-#' Format of `core`: A data frame with `NROW(core)` observations and two variables:
+#' @return `core` is a data frame with `r NROW(core)` observations and two variables:
 #' \describe{
 #'   \item{`title:`}{Title of the conference}
 #'   \item{`rank:`}{Conferences are assigned to one of the following categories:
@@ -32,7 +31,7 @@
 #'     }
 #'   }
 #' }
-#' Format of `core_journals`: A data frame with `NROW(core_journals)` observations and five variables:
+#' `core_journals` is a data frame with `r NROW(core_journals)` observations and 4 variables:
 #' \describe{
 #'   \item{`title:`}{Title of the journal}
 #'   \item{`field_of_research`: }{Field of Research Code as provided by the
@@ -43,7 +42,6 @@
 #' @name core
 #' @docType data
 #' @source \url{https://www.core.edu.au/conference-portal}
-#' \url{}
 #' @keywords datasets
 #' @examples
 #' core

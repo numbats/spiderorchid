@@ -4,7 +4,7 @@
 #'   Australian Business Deans Council (ABDC). You can read more about this list
 #'   [here](https://abdc.edu.au/abdc-journal-quality-list/).
 #'
-#' Format: a data frame with `r NROW(abdc)` observations on the following 7 variables:
+#' @return A data frame with `r NROW(abdc)` observations on the following 7 variables:
 #' \describe{
 #'   \item{`title`: }{Title of the journal}
 #'   \item{`publisher`: }{Publishing house}

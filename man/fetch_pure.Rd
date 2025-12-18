@@ -17,7 +17,7 @@ the specified publication years.
 \description{
 To download data from PURE, it is necessary to have access to the
 API via Simon Angus and the Astro team \url{https://astro.monash.edu/}.
-The API key is stored in the environment variable `PURE_API_KEY`.
+The API key is stored in the environment variable \code{PURE_API_KEY}.
 You can add it to your environment using \code{\link[usethis]{edit_r_environ}()}.
 This is end-point restricted to Monash IP addresses. So either use it on campus
 or invoke the VPN before using it off campus.

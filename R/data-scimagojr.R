@@ -4,8 +4,7 @@
 #'
 #' @author Rob Hyndman
 #'
-#' @format
-#'   A tibble with `NROW(scimagojr)` rows and `NCOL(scimagojr)` variables:
+#' @return A tibble with `r NROW(scimago)` rows and `r NCOL(scimago)` variables:
 #'   \describe{
 #'     \item{year}{Year of SCImago Journal Ranking calculation.}
 #'     \item{rank}{Rank of the journal among all journals.}

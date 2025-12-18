@@ -13,18 +13,18 @@ Monash Business School
 \usage{
 data(monash)
 }
+\value{
+A data frame with 4617 observations on the following 2 variables:
+\describe{
+\item{\code{title}: }{Title of the journal}
+\item{\code{rank}: }{In order of best to lowest rank: Group 1+, Group 1, Group 2}
+}
+}
 \description{
 This is a dataset that contains the list of quality journal rankings from the
-  Monash Business School. In most cases, it follows
-  ABDC with A* equal to Group 1 and A equal to Group 2.
-  The "Group 1+" category contains a small set of the highest rank journals.
-}
-\details{
-Format: a data frame with `NROW(monash)` observations on the following 2 variables:
-\describe{
-  \item{`title`: }{Title of the journal}
-  \item{`rank`: }{In order of best to lowest rank: Group 1+, Group 1, Group 2}
- }
+Monash Business School. In most cases, it follows
+ABDC with A* equal to Group 1 and A equal to Group 2.
+The "Group 1+" category contains a small set of the highest rank journals.
 }
 \examples{
 library(dplyr)

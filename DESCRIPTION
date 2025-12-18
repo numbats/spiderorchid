@@ -33,5 +33,6 @@ Remotes:
 LazyData: true
 URL: https://github.com/numbats/spiderorchid/, https://numbats.github.io/spiderorchid/
 RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Config/testthat/edition: 3

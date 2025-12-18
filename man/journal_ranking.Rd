@@ -29,13 +29,13 @@ A data frame containing the journal title, rank and source for each matching jou
 }
 \description{
 Data sets used are:
-  \describe{
-  \item{\cite{\link{monash}}: }{Monash Business School}
-  \item{\cite{\link{abdc}}: }{Australian Business Deans' Council}
-  \item{\cite{\link{era2010}}: }{ERA 2010}
-  \item{\cite{\link{core}}: }{CORE}
-  \item{\cite{\link{scimago}}: }{SCImago}
-  }
+\describe{
+\item{\cite{\link{monash}}: }{Monash Business School}
+\item{\cite{\link{abdc}}: }{Australian Business Deans' Council}
+\item{\cite{\link{era2010}}: }{ERA 2010}
+\item{\cite{\link{core}}: }{CORE}
+\item{\cite{\link{scimago}}: }{SCImago}
+}
 }
 \examples{
 # Return ranking for individual journals or conferences

@@ -7,10 +7,10 @@
 \format{
 A data frame with 4 variables:
 \describe{
- \item{first_name}{\code{character}. The first name of the individual.}
- \item{last_name}{\code{character}. The last name of the individual.}
- \item{orcid_id}{\code{character}. The ORCID identifier.}
- \item{scholar_id}{\code{character}. The Google Scholar user ID.}
+\item{first_name}{\code{character}. The first name of the individual.}
+\item{last_name}{\code{character}. The last name of the individual.}
+\item{orcid_id}{\code{character}. The ORCID identifier.}
+\item{scholar_id}{\code{character}. The Google Scholar user ID.}
 }
 }
 \source{

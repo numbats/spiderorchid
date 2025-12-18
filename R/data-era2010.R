@@ -3,7 +3,7 @@
 #' This is a dataset that contains the list of journal rankings from
 #' the ARC Excellence in Research for Australia 2010 round.
 #'
-#' Format: a data frame with `NROW(era2010)` rows and the following 4 variables:
+#' @return A data frame with `r NROW(era2010)` rows and the following 5 variables:
 #' \describe{
 #'   \item{`eraid`: }{ERA ID of the journal}
 #'   \item{`title`: }{Title of the journal}

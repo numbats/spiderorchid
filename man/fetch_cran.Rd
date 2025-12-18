@@ -14,7 +14,7 @@ fetch_cran(
 \arguments{
 \item{author_names}{A character vector containing the authors' names in the form used on CRAN.}
 
-\item{package_names}{A character vector of package names. Ignored if `author_names` is provided.}
+\item{package_names}{A character vector of package names. Ignored if \code{author_names} is provided.}
 
 \item{downloads_from}{A date or character string in the format "YYYY-MM-DD" specifying the date
 from which to start counting downloads. Default is "2000-01-01".}
@@ -24,7 +24,7 @@ for counting downloads. Default is current date.}
 }
 \value{
 A data frame returning meta data about a package including total downloads
-between `downloads_from` and `downloads_to`.
+between \code{downloads_from} and \code{downloads_to}.
 }
 \description{
 This function searches for CRAN packages by author names. Note that some authors

@@ -31,6 +31,7 @@ The main functions included are:
 * `fetch_doi`: Retrieves publication details given DOIS.
 * `fetch_pure`: Retrieves publication details from PURE for specific years.
 * `fetch_cran`: Searches for CRAN packages by an author’s name and returns relevant package information such as the number of downloads and last update date.
+* `journal_ranking`: Return journal ranking information from the Monash Business School, the Australian Business Deans' Council and other lists.
 
 The package caches results within each R session. So if you fetch the same data multiple times, it will only download it once.
 
@@ -126,4 +127,19 @@ fetch_cran(c(
   "Di Cook",
   "Dianne Cook"
 ))
+```
+
+## Journal rankings
+
+This function retrieves journal ranking information for a list of journals. The rankings are from the Monash Business School (default), the Australian Business Deans' Council, the Computing Research and Education Association of Australasia, SCImago or ERA2010. It returns a data frame containing journal names, and their rankings. Fuzzy matching is used, but it works best if you use the correct journal name. Multiple matches can be returned if the journal name is ambiguous. 
+
+```{r}
+journal_ranking(
+  c("Annals of Statistics",
+    "Journal of the American Statistical Association",
+    "Journal of Computational and Graphical Statistics",
+    "International Journal of Forecasting"
+  )
+)
+journal_ranking("Forecasting")
 ```

@@ -20,7 +20,7 @@ A data frame with 20712 rows and the following 5 variables:
 \item{\code{title}: }{Title of the journal}
 \item{\code{issn}: }{International Standard Serial Number}
 \item{\code{field_of_research}: }{Field of Research Code as provided by the
-Australian Bureau of Statistics}
+Australian Bureau of Statistics at the time. Note that the codes have since changed.}
 \item{\code{rank}: }{In order of best to lowest rank: A*, A, B, or C}
 }
 }

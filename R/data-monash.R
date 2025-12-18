@@ -4,6 +4,8 @@
 #'   Monash Business School. In most cases, it follows
 #'   ABDC with A* equal to Group 1 and A equal to Group 2.
 #'   The "Group 1+" category contains a small set of the highest rank journals.
+#' The data set is updated from time to time when journals not on the ABDC list are
+#' classified. See <https://www.intranet.monash/business/research-services/research-standards> for the latest information.
 #'
 #' @return A data frame with `r NROW(monash)` observations on the following 2 variables:
 #' \describe{

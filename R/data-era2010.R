@@ -9,7 +9,7 @@
 #'   \item{`title`: }{Title of the journal}
 #'   \item{`issn`: }{International Standard Serial Number}
 #'   \item{`field_of_research`: }{Field of Research Code as provided by the
-#'         Australian Bureau of Statistics}
+#'         Australian Bureau of Statistics at the time. Note that the codes have since changed.}
 #'   \item{`rank`: }{In order of best to lowest rank: A*, A, B, or C}
 #'  }
 #' @name era2010

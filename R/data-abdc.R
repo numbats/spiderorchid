@@ -25,5 +25,6 @@
 #' library(dplyr)
 #' abdc |>
 #'   filter(field_of_research == "4905") |>
-#'   arrange(rank)
+#'   arrange(rank) |>
+#'   select(title, rank)
 "abdc"

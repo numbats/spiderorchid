@@ -8,7 +8,7 @@
 An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 31136 rows and 27 columns.
 }
 \source{
-SCImago, (n.d.). SJR — SCImago Journal & Country Rank. Retrieved 2021-11-28, from
+SCImago Journal & Country Rank. Retrieved from
 \url{https://www.scimagojr.com/journalrank.php}
 }
 \usage{

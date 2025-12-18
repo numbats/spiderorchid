@@ -31,7 +31,7 @@
 #'   }
 #'
 #' @source
-#'   SCImago, (n.d.). SJR — SCImago Journal & Country Rank. Retrieved 2021-11-28, from
+#'   SCImago Journal & Country Rank. Retrieved from
 #'   \url{https://www.scimagojr.com/journalrank.php}
 #' @name scimago
 #' @docType data

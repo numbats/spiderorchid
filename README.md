@@ -29,6 +29,9 @@ The main functions included are:
 - `fetch_cran`: Searches for CRAN packages by an author’s name and
   returns relevant package information such as the number of downloads
   and last update date.
+- `journal_ranking`: Return journal ranking information from the Monash
+  Business School, the Australian Business Deans’ Council and other
+  lists.
 
 The package caches results within each R session. So if you fetch the
 same data multiple times, it will only download it once.
@@ -67,7 +70,7 @@ staff_ids
 #>    first_name last_name orcid_id            scholar_id  
 #>    <chr>      <chr>     <chr>               <chr>       
 #>  1 Akanksha   Negi      0000-0003-2531-9408 Gcz8Ng0AAAAJ
-#>  2 Alan       Powell    <NA>                <NA>        
+#>  2 Alyssa     Hu        0000-0002-9013-8374 IIDTKgsAAAAJ
 #>  3 Andrew     Matthews  <NA>                <NA>        
 #>  4 Ann        Maharaj   0000-0002-5513-962X BZ07eocAAAAJ
 #>  5 Athanasios Pantelous 0000-0001-5738-1471 ZMaiiQwAAAAJ
@@ -111,20 +114,20 @@ staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(scholar_id) |>
   fetch_scholar()
-#> # A tibble: 51 × 6
+#> # A tibble: 50 × 6
 #>    scholar_id   authors                title publication_year journal_name DOI  
 #>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
 #>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
 #>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, … Dyna…             2017 IFPRI book … <NA> 
 #>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK… Unde…             2019 Journal of … <NA> 
-#>  4 Gcz8Ng0AAAAJ A Negi                 Robu…             2020 Michigan St… <NA> 
-#>  5 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… <NA> 
-#>  6 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… <NA> 
-#>  7 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
-#>  8 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
-#>  9 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
-#> 10 Gcz8Ng0AAAAJ A Negi                 Jour…             2024 de Gruyter   <NA> 
-#> # ℹ 41 more rows
+#>  4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… <NA> 
+#>  5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… <NA> 
+#>  6 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
+#>  7 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
+#>  8 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
+#>  9 Gcz8Ng0AAAAJ A Negi, DS Negi        Diff…             2025 Journal of … <NA> 
+#> 10 Gcz8Ng0AAAAJ A Negi, D Nibbering    Iden…             2025 arXiv prepr… <NA> 
+#> # ℹ 40 more rows
 ```
 
 ## ORCID publications
@@ -146,7 +149,7 @@ staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(orcid_id) |>
   fetch_orcid()
-#> # A tibble: 15 × 9
+#> # A tibble: 17 × 9
 #>    orcid_id authors publication_year title journal_name volume issue doi   page 
 #>    <chr>    <chr>              <int> <chr> <chr>        <chr>  <chr> <chr> <chr>
 #>  1 0000-00… "Micha…             2016 Choi… Bulletin of… 78     2     10.1… 293-…
@@ -164,6 +167,8 @@ staff_ids |>
 #> 13 0000-00… "Camer…             2022 COVI… Science Adv… 8      14    10.1… <NA> 
 #> 14 0000-00… "Prata…             2019 Unde… Journal of … 9      3     10.1… 255-…
 #> 15 0000-00… "Akank…             2020 Revi… Econometric… 40     5     10.1… 504-…
+#> 16 0000-00… "Akank…             2024 Robu… Journal of … 43     2     10.1… 454-…
+#> 17 0000-00… "Akank…             2025 Diff… Journal of … 40     4     10.1… 411-…
 ```
 
 ## DOI publications
@@ -218,19 +223,53 @@ fetch_cran(c(
   "Di Cook",
   "Dianne Cook"
 ))
-#> # A tibble: 40 × 11
+#> # A tibble: 43 × 11
 #>    package         date       title   description version authors url   cran_url
 #>    <chr>           <date>     <chr>   <chr>       <chr>   <chr>   <chr> <chr>   
-#>  1 cardinalR       2024-04-16 "Colle… "A collect… 0.1.1   "Jayan… http… https:/…
+#>  1 cardinalR       2025-12-15 "Colle… "A collect… 1.0.4   "Jayan… http… https:/…
 #>  2 condensr        2023-08-30 "Acade… "Helps aut… 1.0.0   "Micha… http… https:/…
 #>  3 HospitalNetwork 2024-12-22 "Build… "Set of to… 0.9.4   "Pasca… http… https:/…
-#>  4 quollr          2024-03-05 "Visua… "To constr… 0.1.1   "Jayan… http… https:/…
-#>  5 brolgar         2024-05-10 "Brows… "Provides … 1.0.1   "Nicho… http… https:/…
+#>  4 quollr          2025-12-15 "Visua… "To constr… 1.0.4   "Jayan… http… https:/…
+#>  5 brolgar         2025-09-03 "Brows… "Provides … 1.0.2   "Nicho… http… https:/…
 #>  6 eechidna        2021-02-25 "Explo… "Data from… 1.4.1   "Jerem… http… https:/…
-#>  7 fabletools      2024-09-17 "Core … "Provides … 0.5.0   "Mitch… http… https:/…
-#>  8 feasts          2024-09-25 "Featu… "Provides … 0.4.1   "Mitch… http… https:/…
+#>  7 fabletools      2025-09-01 "Core … "Provides … 0.5.1   "Mitch… http… https:/…
+#>  8 feasts          2025-08-27 "Featu… "Provides … 0.4.2   "Mitch… http… https:/…
 #>  9 geozoo          2016-05-07 "Zoo o… "Geometric… 0.5.1   "Barre… http… https:/…
-#> 10 GGally          2024-02-13 "Exten… "\nThe R p… 2.2.1   "Barre… http… https:/…
-#> # ℹ 30 more rows
+#> 10 GGally          2025-08-23 "Exten… "The R pac… 2.4.0   "Barre… http… https:/…
+#> # ℹ 33 more rows
 #> # ℹ 3 more variables: github_url <chr>, first_download <date>, downloads <dbl>
+```
+
+## Journal rankings
+
+This function retrieves journal ranking information for a list of
+journals. The rankings are from the Monash Business School (default),
+the Australian Business Deans’ Council, the Computing Research and
+Education Association of Australasia, SCImago or ERA2010. It returns a
+data frame containing journal names, and their rankings. Fuzzy matching
+is used, but it works best if you use the correct journal name. Multiple
+matches can be returned if the journal name is ambiguous.
+
+``` r
+journal_ranking(
+  c("Annals of Statistics",
+    "Journal of the American Statistical Association",
+    "Journal of Computational and Graphical Statistics",
+    "International Journal of Forecasting"
+  )
+)
+#> # A tibble: 4 × 2
+#>   title                                             rank    
+#>   <chr>                                             <fct>   
+#> 1 Annals of Statistics                              Group 1+
+#> 2 Journal of the American Statistical Association   Group 1+
+#> 3 Journal of Computational and Graphical Statistics Group 1 
+#> 4 International Journal of Forecasting              Group 2
+journal_ranking("Forecasting")
+#> # A tibble: 3 × 2
+#>   title                                       rank   
+#>   <chr>                                       <fct>  
+#> 1 International Journal of Forecasting        Group 2
+#> 2 Journal of Forecasting                      Group 2
+#> 3 Technological Forecasting and Social Change Group 2
 ```

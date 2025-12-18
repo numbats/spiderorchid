@@ -5,11 +5,15 @@
 ## Overview
 
 The `spiderorchid` R package provides tools to retrieve research
-publications from Google Scholar and ORCID, or from DOIs, along with
-CRAN package download statistics. It is tailored for academic
+publications from Google Scholar, ORCID and PURE, or from DOIs, along
+with CRAN package download statistics. It is tailored for academic
 researchers in the EBS department who wish to consolidate and analyze
 their research outputs, while also monitoring their contributions to
 CRAN.
+
+It also provides journal ranking information from various sources,
+including the Monash Business School, the Australian Business Deans’
+Council, CORE, SCImago and ERA2010.
 
 The main functions included are:
 
@@ -49,7 +53,7 @@ library(dplyr)
 #>     intersect, setdiff, setequal, union
 ```
 
-## Datasets
+## Staff IDs
 
 `staff_ids.csv`
 
@@ -75,32 +79,12 @@ staff_ids
 #> # ℹ 47 more rows
 ```
 
-`ebs_pure`
-
-This dataset contains publication data from the PURE system for EBS
-staff. It includes information such as titles, authors, publication
-years, and DOIs. The data includes publications from January 2018 to May
-2025.
-
-``` r
-ebs_pure
-#> # A tibble: 613 × 8
-#>    pure_id    year authors                     title journal subtype bib   doi  
-#>    <chr>     <int> <chr>                       <chr> <chr>   <chr>   <chr> <chr>
-#>  1 580119537  2024 Negi, A & Wooldridge, JM    Doub… Econom… Article Negi… 10.1…
-#>  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…
-#>  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…
-#>  4 576146015  2024 Rostami-Tabar, B & Hyndman… Hier… Journa… Article Rost… 10.1…
-#>  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…
-#>  6 574375066  2023 Pullin, JM, Gurrin, LC & V… Stat… The R … Article Pull… 10.3…
-#>  7 571851299  2024 Kim, HY & McLaren, KR       Inte… Resear… Article Kim,… 10.1…
-#>  8 571257919  2024 Gao, J, Peng, B, Wu, WB & … Time… Journa… Article Gao,… 10.1…
-#>  9 571257838  2024 Yan, Y, Gao, J & Peng, B    Asym… Econom… Article Yan,… 10.1…
-#> 10 567405205  2023 Zhou, J, Jiang, G, Pantelo… Onli… IEEE T… Article Zhou… 10.1…
-#> # ℹ 603 more rows
-```
-
 ## Google scholar publications
+
+Given a vector of Google Scholar IDs, the
+[`fetch_scholar()`](https://numbats.github.io/spiderorchid/reference/fetch_scholar.md)
+function retrieves publication details and returns them in the form of a
+data frame, with one row per publication.
 
 ``` r
 staff_ids |>
@@ -125,19 +109,10 @@ staff_ids |>
 
 ## ORCID publications
 
-The
+Given a vector of ORCID IDs, the
 [`fetch_orcid()`](https://numbats.github.io/spiderorchid/reference/fetch_orcid.md)
-function requires authentication on ORCID. If you have not previously
-authenticated, it will prompt you to do so when first run. If you just
-follow the prompts, you will be authenticated, but only for downloading
-your own papers. If you want to download papers from other ORCID IDs,
-you will need to authenticate with a 2-legged OAuth. Follow the
-instructions at
-<https://info.orcid.org/register-a-client-application-production-member-api/>.
-To avoid having to do this in each session, store the token obtained
-from `orcid_auth()` in your `.Renviron` file by running
-`usethis::edit_r_environ()`. It should be of the form
-`ORCID_TOKEN=<your token>`.
+function retrieves publication details and returns them in the form of a
+data frame, with one row per publication.
 
 ``` r
 staff_ids |>
@@ -166,10 +141,33 @@ staff_ids |>
 #> 17 0000-00… "Akank…             2025 Diff… Journal of … 40     4     10.1… 411-…
 ```
 
+The
+[`fetch_orcid()`](https://numbats.github.io/spiderorchid/reference/fetch_orcid.md)
+function requires authentication on ORCID. If you have not previously
+authenticated, it will prompt you to do so when first run. If you just
+follow the prompts, you will be authenticated, but only for downloading
+your own papers. If you want to download papers from other ORCID IDs,
+you will need to authenticate with a 2-legged OAuth. Follow the
+instructions at
+<https://info.orcid.org/register-a-client-application-production-member-api/>.
+To avoid having to do this in each session, store the token obtained
+from `orcid_auth()` in your `.Renviron` file by running
+`usethis::edit_r_environ()`. It should be of the form
+`ORCID_TOKEN=<your token>`.
+
 ## DOI publications
 
+Given a vector of DOIs, the
+[`fetch_doi()`](https://numbats.github.io/spiderorchid/reference/fetch_doi.md)
+function retrieves publication details and returns them in the form of a
+data frame, with one row per DOI.
+
 ``` r
-fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353"))
+c(
+  "10.1016/j.ijforecast.2023.10.003",
+  "10.1080/10618600.2020.1807353"
+) |>
+  fetch_doi()
 #> # A tibble: 2 × 8
 #>   doi             authors publication_year title journal_name volume issue page 
 #>   <chr>           <chr>              <int> <chr> <chr>        <chr>  <chr> <chr>
@@ -179,14 +177,11 @@ fetch_doi(c("10.1016/j.ijforecast.2023.10.003", "10.1080/10618600.2020.1807353")
 
 ## PURE publications
 
-The
+Given a vector of years, the
 [`fetch_pure()`](https://numbats.github.io/spiderorchid/reference/fetch_pure.md)
-function requires an API key to access the PURE system. The API key is
-stored in the environment variable `PURE_API_KEY`. This function is
-restricted to Monash IP addresses; so either use it on campus or invoke
-the VPN before using it off campus. It will return publications in the
-specified years, coauthored by members of the Department of Econometrics
-& Business Statistics, Monash University.
+function retrieves publication details from the PURE system for academic
+staff in the Department of Econometrics & Business Statistics, Monash
+University.
 
 ``` r
 fetch_pure(2024)
@@ -209,25 +204,57 @@ fetch_pure(2024)
 #> # ℹ 73 more rows
 ```
 
+The
+[`fetch_pure()`](https://numbats.github.io/spiderorchid/reference/fetch_pure.md)
+function requires an API key to access the PURE system. The API key is
+stored in the environment variable `PURE_API_KEY`. This function is
+restricted to Monash IP addresses; so either use it on campus or invoke
+the VPN before using it off campus. It will return publications in the
+specified years, coauthored by members of the Department of Econometrics
+& Business Statistics, Monash University.
+
+The function is run periodically, and the data stored as `ebs_pure`.
+Currently, the stored data includes publications from January 2018 to
+May 2025.
+
+``` r
+ebs_pure
+#> # A tibble: 613 × 8
+#>    pure_id    year authors                     title journal subtype bib   doi  
+#>    <chr>     <int> <chr>                       <chr> <chr>   <chr>   <chr> <chr>
+#>  1 580119537  2024 Negi, A & Wooldridge, JM    Doub… Econom… Article Negi… 10.1…
+#>  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…
+#>  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…
+#>  4 576146015  2024 Rostami-Tabar, B & Hyndman… Hier… Journa… Article Rost… 10.1…
+#>  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…
+#>  6 574375066  2023 Pullin, JM, Gurrin, LC & V… Stat… The R … Article Pull… 10.3…
+#>  7 571851299  2024 Kim, HY & McLaren, KR       Inte… Resear… Article Kim,… 10.1…
+#>  8 571257919  2024 Gao, J, Peng, B, Wu, WB & … Time… Journa… Article Gao,… 10.1…
+#>  9 571257838  2024 Yan, Y, Gao, J & Peng, B    Asym… Econom… Article Yan,… 10.1…
+#> 10 567405205  2023 Zhou, J, Jiang, G, Pantelo… Onli… IEEE T… Article Zhou… 10.1…
+#> # ℹ 603 more rows
+```
+
 ## CRAN packages
 
-This function retrieves information about CRAN packages authored by a
-specified individual. It returns a data frame containing the package
+This function retrieves information about CRAN packages authored by
+specified individuals. It returns a data frame containing the package
 name, number of downloads, the authors, and the last update date.
 
 ``` r
-fetch_cran(c(
+c(
   "Michael Lydeamore",
   "Di Cook",
   "Dianne Cook"
-))
+) |>
+  fetch_cran()
 #> # A tibble: 43 × 11
 #>    package         date       title   description version authors url   cran_url
 #>    <chr>           <date>     <chr>   <chr>       <chr>   <chr>   <chr> <chr>   
-#>  1 cardinalR       2025-12-15 "Colle… "A collect… 1.0.4   "Jayan… http… https:/…
+#>  1 cardinalR       2025-12-18 "Colle… "A collect… 1.0.6   "Jayan… http… https:/…
 #>  2 condensr        2023-08-30 "Acade… "Helps aut… 1.0.0   "Micha… http… https:/…
 #>  3 HospitalNetwork 2024-12-22 "Build… "Set of to… 0.9.4   "Pasca… http… https:/…
-#>  4 quollr          2025-12-15 "Visua… "To constr… 1.0.4   "Jayan… http… https:/…
+#>  4 quollr          2025-12-18 "Visua… "To constr… 1.0.6   "Jayan… http… https:/…
 #>  5 brolgar         2025-09-03 "Brows… "Provides … 1.0.2   "Nicho… http… https:/…
 #>  6 eechidna        2021-02-25 "Explo… "Data from… 1.4.1   "Jerem… http… https:/…
 #>  7 fabletools      2025-09-01 "Core … "Provides … 0.5.1   "Mitch… http… https:/…
@@ -249,13 +276,13 @@ is used, but it works best if you use the correct journal name. Multiple
 matches can be returned if the journal name is ambiguous.
 
 ``` r
-journal_ranking(
-  c("Annals of Statistics",
-    "Journal of the American Statistical Association",
-    "Journal of Computational and Graphical Statistics",
-    "International Journal of Forecasting"
-  )
-)
+c(
+  "Annals of Statistics",
+  "Journal of the American Statistical Association",
+  "Journal of Computational and Graphical Statistics",
+  "International Journal of Forecasting"
+) |>
+  journal_ranking()
 #> # A tibble: 4 × 2
 #>   title                                             rank    
 #>   <chr>                                             <fct>   
@@ -272,20 +299,41 @@ journal_ranking("Forecasting")
 #> 3 Technological Forecasting and Social Change Group 2
 ```
 
+There is a [shiny app](https://ebsmonash.shinyapps.io/Journal_Rankings/)
+that allows you to explore the journal rankings interactively.
+
 # Package index
 
-## All functions
+## Package
 
+- [`spiderorchid`](https://numbats.github.io/spiderorchid/reference/spiderorchid-package.md)
+  [`spiderorchid-package`](https://numbats.github.io/spiderorchid/reference/spiderorchid-package.md)
+  : spiderorchid: Download and wrangle publication data for Monash EBS
+  academic staff
+
+## Data
+
+Data sets included in the package
+
+- [`staff_ids`](https://numbats.github.io/spiderorchid/reference/staff_ids.md)
+  : staff_ids
+- [`ebs_pure`](https://numbats.github.io/spiderorchid/reference/ebs_pure.md)
+  : ebs_pure
+- [`monash`](https://numbats.github.io/spiderorchid/reference/monash.md)
+  : Monash Business School Journal Quality List
 - [`abdc`](https://numbats.github.io/spiderorchid/reference/abdc.md) :
   ABDC Journal Quality List
 - [`core`](https://numbats.github.io/spiderorchid/reference/core.md)
   [`core_journals`](https://numbats.github.io/spiderorchid/reference/core.md)
   : CORE (Computing Research and Education) lists of conference and
   journal rankings
-- [`ebs_pure`](https://numbats.github.io/spiderorchid/reference/ebs_pure.md)
-  : ebs_pure
 - [`era2010`](https://numbats.github.io/spiderorchid/reference/era2010.md)
   : ERA2010 Journal List
+- [`scimago`](https://numbats.github.io/spiderorchid/reference/scimago.md)
+  : SCImago Journal Rank for all journals indexed by Scopus
+
+## Functions to download data
+
 - [`fetch_cran()`](https://numbats.github.io/spiderorchid/reference/fetch_cran.md)
   : Fetch packages from CRAN
 - [`fetch_doi()`](https://numbats.github.io/spiderorchid/reference/fetch_doi.md)
@@ -296,15 +344,12 @@ journal_ranking("Forecasting")
   : Fetch publications from PURE
 - [`fetch_scholar()`](https://numbats.github.io/spiderorchid/reference/fetch_scholar.md)
   : Fetch publications from Google Scholar
+
+## Journal rankings
+
 - [`journal_ranking()`](https://numbats.github.io/spiderorchid/reference/journal_ranking.md)
-  : Find rankings of journals on the ABDC, ERA2010, CORE, SCImago or
-  Monash lists.
-- [`monash`](https://numbats.github.io/spiderorchid/reference/monash.md)
-  : Monash Business School Journal Quality List
-- [`scimago`](https://numbats.github.io/spiderorchid/reference/scimago.md)
-  : SCImago Journal Rank for all journals indexed by Scopus
-- [`staff_ids`](https://numbats.github.io/spiderorchid/reference/staff_ids.md)
-  : staff_ids
+  : Find rankings of journals from the Monash Business School, ABDC,
+  CORE, SCImago or ERA2010.
 
 # Articles
 

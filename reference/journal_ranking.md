@@ -1,6 +1,7 @@
-# Find rankings of journals on the ABDC, ERA2010, CORE, SCImago or Monash lists.
+# Find rankings of journals from the Monash Business School, ABDC, CORE, SCImago or ERA2010.
 
-Data sets used are:
+Given a list of journal titles, this function will return their ranking
+from various lists. Data sets used are:
 
 - [monash](https://numbats.github.io/spiderorchid/reference/monash.md):
   :
@@ -24,6 +25,9 @@ Data sets used are:
   :
 
   SCImago
+
+This function is used in the [Journal rankings shiny
+app](https://ebsmonash.shinyapps.io/Journal_Rankings/).
 
 ## Usage
 

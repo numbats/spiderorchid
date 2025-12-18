@@ -13,8 +13,8 @@
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Download and wrangle publication data for Monash EBS academic staff">
-<meta name="description" content="Fetch publication details from ORCID, Google Scholar, Pure and from DOIs.">
-<meta property="og:description" content="Fetch publication details from ORCID, Google Scholar, Pure and from DOIs.">
+<meta name="description" content="Provide journal rankings from Monash Business School, ABDC, CORE, Scimago and ERA 2010. Fetch publication details from ORCID, Google Scholar, PURE and from DOIs. Find CRAN packages and download statistics for specified authors.">
+<meta property="og:description" content="Provide journal rankings from Monash Business School, ABDC, CORE, Scimago and ERA 2010. Fetch publication details from ORCID, Google Scholar, PURE and from DOIs. Find CRAN packages and download statistics for specified authors.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
 </head>
 <body>
@@ -63,7 +63,8 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The <code>spiderorchid</code> R package provides tools to retrieve research publications from Google Scholar and ORCID, or from DOIs, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN.</p>
+<p>The <code>spiderorchid</code> R package provides tools to retrieve research publications from Google Scholar, ORCID and PURE, or from DOIs, along with CRAN package download statistics. It is tailored for academic researchers in the EBS department who wish to consolidate and analyze their research outputs, while also monitoring their contributions to CRAN.</p>
+<p>It also provides journal ranking information from various sources, including the Monash Business School, the Australian Business Deans’ Council, CORE, SCImago and ERA2010.</p>
 <p>The main functions included are:</p>
 <ul>
 <li>
@@ -100,7 +101,7 @@
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
+<h2 id="staff-ids">Staff IDs<a class="anchor" aria-label="anchor" href="#staff-ids"></a>
 </h2>
 <p><code>staff_ids.csv</code></p>
 <p>This dataset contains mappings between researchers’ names and their respective ORCID and Google Scholar IDs. It is useful for linking and identifying academic profiles across different platforms.</p>
@@ -120,29 +121,12 @@
 <span><span class="co">#&gt;  9 Brett      Inder     &lt;NA&gt;                Wx6eeWgAAAAJ</span></span>
 <span><span class="co">#&gt; 10 Catherine  Forbes    0000-0003-3830-5865 jm73LccAAAAJ</span></span>
 <span><span class="co">#&gt; # ℹ 47 more rows</span></span></code></pre></div>
-<p><code>ebs_pure</code></p>
-<p>This dataset contains publication data from the PURE system for EBS staff. It includes information such as titles, authors, publication years, and DOIs. The data includes publications from January 2018 to May 2025.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ebs_pure</span></span>
-<span><span class="co">#&gt; # A tibble: 613 × 8</span></span>
-<span><span class="co">#&gt;    pure_id    year authors                     title journal subtype bib   doi  </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt;  1 580119537  2024 Negi, A &amp; Wooldridge, JM    Doub… Econom… Article Negi… 10.1…</span></span>
-<span><span class="co">#&gt;  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…</span></span>
-<span><span class="co">#&gt;  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…</span></span>
-<span><span class="co">#&gt;  4 576146015  2024 Rostami-Tabar, B &amp; Hyndman… Hier… Journa… Article Rost… 10.1…</span></span>
-<span><span class="co">#&gt;  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…</span></span>
-<span><span class="co">#&gt;  6 574375066  2023 Pullin, JM, Gurrin, LC &amp; V… Stat… The R … Article Pull… 10.3…</span></span>
-<span><span class="co">#&gt;  7 571851299  2024 Kim, HY &amp; McLaren, KR       Inte… Resear… Article Kim,… 10.1…</span></span>
-<span><span class="co">#&gt;  8 571257919  2024 Gao, J, Peng, B, Wu, WB &amp; … Time… Journa… Article Gao,… 10.1…</span></span>
-<span><span class="co">#&gt;  9 571257838  2024 Yan, Y, Gao, J &amp; Peng, B    Asym… Econom… Article Yan,… 10.1…</span></span>
-<span><span class="co">#&gt; 10 567405205  2023 Zhou, J, Jiang, G, Pantelo… Onli… IEEE T… Article Zhou… 10.1…</span></span>
-<span><span class="co">#&gt; # ℹ 603 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="google-scholar-publications">Google scholar publications<a class="anchor" aria-label="anchor" href="#google-scholar-publications"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Given a vector of Google Scholar IDs, the <code><a href="reference/fetch_scholar.html">fetch_scholar()</a></code> function retrieves publication details and returns them in the form of a data frame, with one row per publication.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">staff_ids</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">last_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Negi"</span>, <span class="st">"Lydeamore"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">scholar_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -165,8 +149,8 @@
 <div class="section level2">
 <h2 id="orcid-publications">ORCID publications<a class="anchor" aria-label="anchor" href="#orcid-publications"></a>
 </h2>
-<p>The <code><a href="reference/fetch_orcid.html">fetch_orcid()</a></code> function requires authentication on ORCID. If you have not previously authenticated, it will prompt you to do so when first run. If you just follow the prompts, you will be authenticated, but only for downloading your own papers. If you want to download papers from other ORCID IDs, you will need to authenticate with a 2-legged OAuth. Follow the instructions at <a href="https://info.orcid.org/register-a-client-application-production-member-api/" class="external-link uri">https://info.orcid.org/register-a-client-application-production-member-api/</a>. To avoid having to do this in each session, store the token obtained from <code>orcid_auth()</code> in your <code>.Renviron</code> file by running <code>usethis::edit_r_environ()</code>. It should be of the form <code>ORCID_TOKEN=&lt;your token&gt;</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>Given a vector of ORCID IDs, the <code><a href="reference/fetch_orcid.html">fetch_orcid()</a></code> function retrieves publication details and returns them in the form of a data frame, with one row per publication.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">staff_ids</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">last_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Negi"</span>, <span class="st">"Lydeamore"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">orcid_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -191,12 +175,18 @@
 <span><span class="co">#&gt; 15 0000-00… "Akank…             2020 Revi… Econometric… 40     5     10.1… 504-…</span></span>
 <span><span class="co">#&gt; 16 0000-00… "Akank…             2024 Robu… Journal of … 43     2     10.1… 454-…</span></span>
 <span><span class="co">#&gt; 17 0000-00… "Akank…             2025 Diff… Journal of … 40     4     10.1… 411-…</span></span></code></pre></div>
+<p>The <code><a href="reference/fetch_orcid.html">fetch_orcid()</a></code> function requires authentication on ORCID. If you have not previously authenticated, it will prompt you to do so when first run. If you just follow the prompts, you will be authenticated, but only for downloading your own papers. If you want to download papers from other ORCID IDs, you will need to authenticate with a 2-legged OAuth. Follow the instructions at <a href="https://info.orcid.org/register-a-client-application-production-member-api/" class="external-link uri">https://info.orcid.org/register-a-client-application-production-member-api/</a>. To avoid having to do this in each session, store the token obtained from <code>orcid_auth()</code> in your <code>.Renviron</code> file by running <code>usethis::edit_r_environ()</code>. It should be of the form <code>ORCID_TOKEN=&lt;your token&gt;</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="doi-publications">DOI publications<a class="anchor" aria-label="anchor" href="#doi-publications"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/fetch_doi.html">fetch_doi</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"10.1016/j.ijforecast.2023.10.003"</span>, <span class="st">"10.1080/10618600.2020.1807353"</span><span class="op">)</span><span class="op">)</span></span>
+<p>Given a vector of DOIs, the <code><a href="reference/fetch_doi.html">fetch_doi()</a></code> function retrieves publication details and returns them in the form of a data frame, with one row per DOI.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"10.1016/j.ijforecast.2023.10.003"</span>,</span>
+<span>  <span class="st">"10.1080/10618600.2020.1807353"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/fetch_doi.html">fetch_doi</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 8</span></span>
 <span><span class="co">#&gt;   doi             authors publication_year title journal_name volume issue page </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;              &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span></span>
@@ -206,41 +196,60 @@
 <div class="section level2">
 <h2 id="pure-publications">PURE publications<a class="anchor" aria-label="anchor" href="#pure-publications"></a>
 </h2>
-<p>The <code><a href="reference/fetch_pure.html">fetch_pure()</a></code> function requires an API key to access the PURE system. The API key is stored in the environment variable <code>PURE_API_KEY</code>. This function is restricted to Monash IP addresses; so either use it on campus or invoke the VPN before using it off campus. It will return publications in the specified years, coauthored by members of the Department of Econometrics &amp; Business Statistics, Monash University.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>Given a vector of years, the <code><a href="reference/fetch_pure.html">fetch_pure()</a></code> function retrieves publication details from the PURE system for academic staff in the Department of Econometrics &amp; Business Statistics, Monash University.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fetch_pure.html">fetch_pure</a></span><span class="op">(</span><span class="fl">2024</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#&gt; # A tibble: 83 × 8</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt;    pure_id    year authors                     title journal subtype bib   doi  </span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt;  1 580119537  2024 Negi, A &amp; Wooldridge, JM    Doub… Econom… Article Negi… 10.1…</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt;  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt;  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt;  4 576146015  2024 Rostami-Tabar, B &amp; Hyndman… Hier… Journa… Article Rost… 10.1…</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt;  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt;  6 571851299  2024 Kim, HY &amp; McLaren, KR       Inte… Resear… Article Kim,… 10.1…</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt;  7 571257919  2024 Gao, J, Peng, B, Wu, WB &amp; … Time… Journa… Article Gao,… 10.1…</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt;  8 571257838  2024 Yan, Y, Gao, J &amp; Peng, B    Asym… Econom… Article Yan,… 10.1…</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt;  9 565992428  2024 Athanasopoulos, G, Hyndman… Fore… Intern… Article Atha… 10.1…</span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; 10 564353599  2024 Wang, G, Zhou, J, Pantelou… A de… Comput… Article Wang… 10.1…</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 73 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#&gt; # A tibble: 83 × 8</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt;    pure_id    year authors                     title journal subtype bib   doi  </span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;  1 580119537  2024 Negi, A &amp; Wooldridge, JM    Doub… Econom… Article Negi… 10.1…</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt;  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt;  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt;  4 576146015  2024 Rostami-Tabar, B &amp; Hyndman… Hier… Journa… Article Rost… 10.1…</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt;  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt;  6 571851299  2024 Kim, HY &amp; McLaren, KR       Inte… Resear… Article Kim,… 10.1…</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt;  7 571257919  2024 Gao, J, Peng, B, Wu, WB &amp; … Time… Journa… Article Gao,… 10.1…</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt;  8 571257838  2024 Yan, Y, Gao, J &amp; Peng, B    Asym… Econom… Article Yan,… 10.1…</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt;  9 565992428  2024 Athanasopoulos, G, Hyndman… Fore… Intern… Article Atha… 10.1…</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; 10 564353599  2024 Wang, G, Zhou, J, Pantelou… A de… Comput… Article Wang… 10.1…</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; # ℹ 73 more rows</span></span></code></pre></div>
+<p>The <code><a href="reference/fetch_pure.html">fetch_pure()</a></code> function requires an API key to access the PURE system. The API key is stored in the environment variable <code>PURE_API_KEY</code>. This function is restricted to Monash IP addresses; so either use it on campus or invoke the VPN before using it off campus. It will return publications in the specified years, coauthored by members of the Department of Econometrics &amp; Business Statistics, Monash University.</p>
+<p>The function is run periodically, and the data stored as <code>ebs_pure</code>. Currently, the stored data includes publications from January 2018 to May 2025.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ebs_pure</span></span>
+<span><span class="co">#&gt; # A tibble: 613 × 8</span></span>
+<span><span class="co">#&gt;    pure_id    year authors                     title journal subtype bib   doi  </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                       &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 580119537  2024 Negi, A &amp; Wooldridge, JM    Doub… Econom… Article Negi… 10.1…</span></span>
+<span><span class="co">#&gt;  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…</span></span>
+<span><span class="co">#&gt;  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…</span></span>
+<span><span class="co">#&gt;  4 576146015  2024 Rostami-Tabar, B &amp; Hyndman… Hier… Journa… Article Rost… 10.1…</span></span>
+<span><span class="co">#&gt;  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…</span></span>
+<span><span class="co">#&gt;  6 574375066  2023 Pullin, JM, Gurrin, LC &amp; V… Stat… The R … Article Pull… 10.3…</span></span>
+<span><span class="co">#&gt;  7 571851299  2024 Kim, HY &amp; McLaren, KR       Inte… Resear… Article Kim,… 10.1…</span></span>
+<span><span class="co">#&gt;  8 571257919  2024 Gao, J, Peng, B, Wu, WB &amp; … Time… Journa… Article Gao,… 10.1…</span></span>
+<span><span class="co">#&gt;  9 571257838  2024 Yan, Y, Gao, J &amp; Peng, B    Asym… Econom… Article Yan,… 10.1…</span></span>
+<span><span class="co">#&gt; 10 567405205  2023 Zhou, J, Jiang, G, Pantelo… Onli… IEEE T… Article Zhou… 10.1…</span></span>
+<span><span class="co">#&gt; # ℹ 603 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="cran-packages">CRAN packages<a class="anchor" aria-label="anchor" href="#cran-packages"></a>
 </h2>
-<p>This function retrieves information about CRAN packages authored by a specified individual. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.</p>
+<p>This function retrieves information about CRAN packages authored by specified individuals. It returns a data frame containing the package name, number of downloads, the authors, and the last update date.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/fetch_cran.html">fetch_cran</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Michael Lydeamore"</span>,</span>
 <span>  <span class="st">"Di Cook"</span>,</span>
 <span>  <span class="st">"Dianne Cook"</span></span>
-<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/fetch_cran.html">fetch_cran</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 43 × 11</span></span>
 <span><span class="co">#&gt;    package         date       title   description version authors url   cran_url</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;           &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   </span></span>
-<span><span class="co">#&gt;  1 cardinalR       2025-12-15 "Colle… "A collect… 1.0.4   "Jayan… http… https:/…</span></span>
+<span><span class="co">#&gt;  1 cardinalR       2025-12-18 "Colle… "A collect… 1.0.6   "Jayan… http… https:/…</span></span>
 <span><span class="co">#&gt;  2 condensr        2023-08-30 "Acade… "Helps aut… 1.0.0   "Micha… http… https:/…</span></span>
 <span><span class="co">#&gt;  3 HospitalNetwork 2024-12-22 "Build… "Set of to… 0.9.4   "Pasca… http… https:/…</span></span>
-<span><span class="co">#&gt;  4 quollr          2025-12-15 "Visua… "To constr… 1.0.4   "Jayan… http… https:/…</span></span>
+<span><span class="co">#&gt;  4 quollr          2025-12-18 "Visua… "To constr… 1.0.6   "Jayan… http… https:/…</span></span>
 <span><span class="co">#&gt;  5 brolgar         2025-09-03 "Brows… "Provides … 1.0.2   "Nicho… http… https:/…</span></span>
 <span><span class="co">#&gt;  6 eechidna        2021-02-25 "Explo… "Data from… 1.4.1   "Jerem… http… https:/…</span></span>
 <span><span class="co">#&gt;  7 fabletools      2025-09-01 "Core … "Provides … 0.5.1   "Mitch… http… https:/…</span></span>
@@ -255,13 +264,13 @@
 </h2>
 <p>This function retrieves journal ranking information for a list of journals. The rankings are from the Monash Business School (default), the Australian Business Deans’ Council, the Computing Research and Education Association of Australasia, SCImago or ERA2010. It returns a data frame containing journal names, and their rankings. Fuzzy matching is used, but it works best if you use the correct journal name. Multiple matches can be returned if the journal name is ambiguous.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/journal_ranking.html">journal_ranking</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Annals of Statistics"</span>,</span>
-<span>    <span class="st">"Journal of the American Statistical Association"</span>,</span>
-<span>    <span class="st">"Journal of Computational and Graphical Statistics"</span>,</span>
-<span>    <span class="st">"International Journal of Forecasting"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Annals of Statistics"</span>,</span>
+<span>  <span class="st">"Journal of the American Statistical Association"</span>,</span>
+<span>  <span class="st">"Journal of Computational and Graphical Statistics"</span>,</span>
+<span>  <span class="st">"International Journal of Forecasting"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/journal_ranking.html">journal_ranking</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 2</span></span>
 <span><span class="co">#&gt;   title                                             rank    </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;                                             &lt;fct&gt;   </span></span>
@@ -276,6 +285,7 @@
 <span><span class="co">#&gt; 1 International Journal of Forecasting        Group 2</span></span>
 <span><span class="co">#&gt; 2 Journal of Forecasting                      Group 2</span></span>
 <span><span class="co">#&gt; 3 Technological Forecasting and Social Change Group 2</span></span></code></pre></div>
+<p>There is a <a href="https://ebsmonash.shinyapps.io/Journal_Rankings/" class="external-link">shiny app</a> that allows you to explore the journal rankings interactively.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

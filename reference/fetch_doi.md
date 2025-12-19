@@ -24,7 +24,7 @@ A tibble containing the article information.
 ``` r
 fetch_doi("10.1016/j.ijforecast.2023.10.010")
 #> # A tibble: 1 × 8
-#>   doi             authors publication_year title journal_name volume issue page 
-#>   <chr>           <chr>              <int> <chr> <chr>        <chr>  <chr> <chr>
-#> 1 10.1016/j.ijfo… George…             2024 Fore… Internation… 40     2     430-…
+#>   doi                             authors  year title journal volume issue page 
+#>   <chr>                           <chr>   <int> <chr> <chr>   <chr>  <chr> <chr>
+#> 1 10.1016/j.ijforecast.2023.10.0… George…  2024 Fore… Intern… 40     2     430-…
 ```

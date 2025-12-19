@@ -1,4 +1,4 @@
-# ebs_pure
+# Monash EBS PURE publications data
 
 This dataset contains publications between 2018 and May 2025 downloaded
 from PURE. Additional data can be updated using the

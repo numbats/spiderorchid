@@ -1,4 +1,4 @@
-# staff_ids
+# Monash EBS academic research staff IDs
 
 This dataset contains the mappings between researcher names and their
 respective ORCID and Google Scholar IDs. It is useful for identifying

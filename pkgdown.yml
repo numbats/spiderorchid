@@ -3,7 +3,8 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   Annual_Report_2024: Annual_Report_2024.html
-last_built: 2025-12-18T23:57Z
+  Promotion: Promotion.html
+last_built: 2025-12-19T05:57Z
 urls:
   reference: https://numbats.github.io/spiderorchid/reference
   article: https://numbats.github.io/spiderorchid/articles

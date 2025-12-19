@@ -91,19 +91,19 @@ staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(scholar_id) |>
   fetch_scholar()
-#> # A tibble: 50 × 6
-#>    scholar_id   authors                title publication_year journal_name DOI  
-#>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
-#>  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… <NA> 
-#>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, … Dyna…             2017 IFPRI book … <NA> 
-#>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK… Unde…             2019 Journal of … <NA> 
-#>  4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… <NA> 
-#>  5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… <NA> 
-#>  6 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… <NA> 
-#>  7 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… <NA> 
-#>  8 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … <NA> 
-#>  9 Gcz8Ng0AAAAJ A Negi, DS Negi        Diff…             2025 Journal of … <NA> 
-#> 10 Gcz8Ng0AAAAJ A Negi, D Nibbering    Iden…             2025 arXiv prepr… <NA> 
+#> # A tibble: 50 × 7
+#>    scholar_id   authors                    title  year journal details citations
+#>    <chr>        <chr>                      <chr> <int> <chr>   <chr>       <dbl>
+#>  1 Gcz8Ng0AAAAJ A Negi, D Roy              The …  2015 IFPRI … 1439           16
+#>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, A Ne… Dyna…  2017 IFPRI … 179-220        10
+#>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK Jos… Unde…  2019 Journa… 9 (3),…        38
+#>  4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge      Revi…  2021 Econom… 40 (5)…       114
+#>  5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi      Risk…  2023 Availa… 4555847         0
+#>  6 Gcz8Ng0AAAAJ G Rathnayake, A Negi, O B… Diff…  2024 arXiv … :2411.…         5
+#>  7 Gcz8Ng0AAAAJ A Negi, W Jeffrey M        Doub…  2024 Econom… 43 (2-…         4
+#>  8 Gcz8Ng0AAAAJ A Negi                     Doub…  2024 Journa… 12 (1)…        12
+#>  9 Gcz8Ng0AAAAJ A Negi, DS Negi            Diff…  2025 Journa… 40 (4)…         8
+#> 10 Gcz8Ng0AAAAJ A Negi, D Nibbering        Iden…  2025 arXiv … :2501.…         0
 #> # ℹ 40 more rows
 ```
 
@@ -120,25 +120,25 @@ staff_ids |>
   pull(orcid_id) |>
   fetch_orcid()
 #> # A tibble: 17 × 9
-#>    orcid_id authors publication_year title journal_name volume issue doi   page 
-#>    <chr>    <chr>              <int> <chr> <chr>        <chr>  <chr> <chr> <chr>
-#>  1 0000-00… "Micha…             2016 Choi… Bulletin of… 78     2     10.1… 293-…
-#>  2 0000-00… "Thiri…             2017 Indi… PeerJ        5      <NA>  10.7… e3958
-#>  3 0000-00… "M. J.…             2018 Calc… Epidemiolog… 146    9     10.1… 1194…
-#>  4 0000-00… "M.J. …             2019 A bi… Mathematica… 309    <NA>  10.1… 163-…
-#>  5 0000-00… "Will …             2019 High… Australian … 43     2     10.1… 149-…
-#>  6 0000-00… "MICHA…             2019 MECH… Bulletin of… 101    1     10.1… 174-…
-#>  7 0000-00… "James…             2020 Brin… Journal of … 76     3     10.1… 547-…
-#>  8 0000-00… "Micha…             2020 Esti… PLOS Comput… 16     10    10.1… e100…
-#>  9 0000-00… "  "                2021 Popu… The Lancet … 17     <NA>  10.1… 1002…
-#> 10 0000-00… "Camer…             2021 Risk… Journal of … 18     174   10.1… 2020…
-#> 11 0000-00… "James…             2021 Unde… Nature Comm… 12     1     10.1… <NA> 
-#> 12 0000-00… "M. J.…             2022 Burd… Antimicrobi… 11     1     10.1… <NA> 
-#> 13 0000-00… "Camer…             2022 COVI… Science Adv… 8      14    10.1… <NA> 
-#> 14 0000-00… "Prata…             2019 Unde… Journal of … 9      3     10.1… 255-…
-#> 15 0000-00… "Akank…             2020 Revi… Econometric… 40     5     10.1… 504-…
-#> 16 0000-00… "Akank…             2024 Robu… Journal of … 43     2     10.1… 454-…
-#> 17 0000-00… "Akank…             2025 Diff… Journal of … 40     4     10.1… 411-…
+#>    orcid_id            authors       year title journal volume issue doi   page 
+#>    <chr>               <chr>        <int> <chr> <chr>   <chr>  <chr> <chr> <chr>
+#>  1 0000-0001-6515-827X "Michael Ly…  2016 Choi… Bullet… 78     2     10.1… 293-…
+#>  2 0000-0001-6515-827X "Thiripura …  2017 Indi… PeerJ   5      2017… 10.7… e3958
+#>  3 0000-0001-6515-827X "M. J. Lyde…  2018 Calc… Epidem… 146    9     10.1… 1194…
+#>  4 0000-0001-6515-827X "M.J. Lydea…  2019 A bi… Mathem… 309    2019… 10.1… 163-…
+#>  5 0000-0001-6515-827X "Will Cunin…  2019 High… Austra… 43     2     10.1… 149-…
+#>  6 0000-0001-6515-827X "MICHAEL J.…  2019 MECH… Bullet… 101    1     10.1… 174-…
+#>  7 0000-0001-6515-827X "James H Mc…  2020 Brin… Journa… 76     3     10.1… 547-…
+#>  8 0000-0001-6515-827X "Michael J.…  2020 Esti… PLOS C… 16     10    10.1… e100…
+#>  9 0000-0001-6515-827X ""            2021 Popu… The La… 17     2021… 10.1… 1002…
+#> 10 0000-0001-6515-827X "Cameron Za…  2021 Risk… Journa… 18     174   10.1… 2020…
+#> 11 0000-0001-6515-827X "James M. T…  2021 Unde… Nature… 12     1     10.1… <NA> 
+#> 12 0000-0001-6515-827X "M. J. Lyde…  2022 Burd… Antimi… 11     1     10.1… <NA> 
+#> 13 0000-0001-6515-827X "Cameron Za…  2022 COVI… Scienc… 8      14    10.1… <NA> 
+#> 14 0000-0003-2531-9408 "Pratap Bir…  2019 Unde… Journa… 9      3     10.1… 255-…
+#> 15 0000-0003-2531-9408 "Akanksha N…  2020 Revi… Econom… 40     5     10.1… 504-…
+#> 16 0000-0003-2531-9408 "Akanksha N…  2024 Robu… Journa… 43     2     10.1… 454-…
+#> 17 0000-0003-2531-9408 "Akanksha N…  2025 Diff… Journa… 40     4     10.1… 411-…
 ```
 
 The
@@ -169,10 +169,10 @@ c(
 ) |>
   fetch_doi()
 #> # A tibble: 2 × 8
-#>   doi             authors publication_year title journal_name volume issue page 
-#>   <chr>           <chr>              <int> <chr> <chr>        <chr>  <chr> <chr>
-#> 1 10.1016/j.ijfo… Daniel…             2024 Cros… Internation… 40     3     1134…
-#> 2 10.1080/106186… Sevvan…             2020 Dime… Journal of … 30     1     204-…
+#>   doi                             authors  year title journal volume issue page 
+#>   <chr>                           <chr>   <int> <chr> <chr>   <chr>  <chr> <chr>
+#> 1 10.1016/j.ijforecast.2023.10.0… Daniel…  2024 Cros… Intern… 40     3     1134…
+#> 2 10.1080/10618600.2020.1807353   Sevvan…  2020 Dime… Journa… 30     1     204-…
 ```
 
 ## PURE publications
@@ -316,9 +316,9 @@ that allows you to explore the journal rankings interactively.
 Data sets included in the package
 
 - [`staff_ids`](https://numbats.github.io/spiderorchid/reference/staff_ids.md)
-  : staff_ids
+  : Monash EBS academic research staff IDs
 - [`ebs_pure`](https://numbats.github.io/spiderorchid/reference/ebs_pure.md)
-  : ebs_pure
+  : Monash EBS PURE publications data
 - [`monash`](https://numbats.github.io/spiderorchid/reference/monash.md)
   : Monash Business School Journal Quality List
 - [`abdc`](https://numbats.github.io/spiderorchid/reference/abdc.md) :
@@ -357,3 +357,5 @@ Data sets included in the package
 
 - [Annual Report
   2024](https://numbats.github.io/spiderorchid/articles/Annual_Report_2024.md):
+- [Promotion
+  applications](https://numbats.github.io/spiderorchid/articles/Promotion.md):

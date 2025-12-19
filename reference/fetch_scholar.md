@@ -25,18 +25,8 @@ IDs.
 
 ``` r
 fetch_scholar("vamErfkAAAAJ")
-#> # A tibble: 372 × 6
-#>    scholar_id   authors                title publication_year journal_name DOI  
-#>    <chr>        <chr>                  <chr>            <int> <chr>        <chr>
-#>  1 vamErfkAAAAJ RJ Hyndman             An a…             1990 University … NA   
-#>  2 vamErfkAAAAJ PJ Brockwell, RJ Hynd… Cont…             1991 Statistica … NA   
-#>  3 vamErfkAAAAJ RJ Hyndman             The …             1991 Rob Hyndman  NA   
-#>  4 vamErfkAAAAJ RJ Hyndman             Cont…             1992 University … NA   
-#>  5 vamErfkAAAAJ PJ Brockwell, RJ Hynd… On c…             1992 Internation… NA   
-#>  6 vamErfkAAAAJ RJ Hyndman             Yule…             1993 Journal of … NA   
-#>  7 vamErfkAAAAJ RJ Hyndman             Appr…             1994 Journal of … NA   
-#>  8 vamErfkAAAAJ R Hyndman, FC Klebane… Auto…             1994 Department … NA   
-#>  9 vamErfkAAAAJ RJ Hyndman             High…             1995 Journal of … NA   
-#> 10 vamErfkAAAAJ RJ Hyndman             The …             1995 Monash Univ… NA   
-#> # ℹ 362 more rows
+#> Warning: Coercing LHS to a list
+#> Error in dplyr::arrange(dplyr::select(output, dplyr::all_of(col_order),     dplyr::everything()), scholar_id, year, title, authors): ℹ In argument: `..3 = title`.
+#> Caused by error:
+#> ! `..3` must be a vector, not a function.
 ```

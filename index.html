@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="index.html">spiderorchid</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/Annual_Report_2024.html">Annual Report 2024</a></li>
+    <li><a class="dropdown-item" href="articles/Promotion.html">Promotion applications</a></li>
   </ul>
 </li>
       </ul>
@@ -131,19 +132,19 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">last_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Negi"</span>, <span class="st">"Lydeamore"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">scholar_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/fetch_scholar.html">fetch_scholar</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 50 × 6</span></span>
-<span><span class="co">#&gt;    scholar_id   authors                title publication_year journal_name DOI  </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;</span></span>
-<span><span class="co">#&gt;  1 Gcz8Ng0AAAAJ A Negi, D Roy          The …             2015 IFPRI Discu… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, … Dyna…             2017 IFPRI book … &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK… Unde…             2019 Journal of … &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge  Revi…             2021 Econometric… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi  Risk…             2023 Available a… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  6 Gcz8Ng0AAAAJ G Rathnayake, A Negi,… Diff…             2024 arXiv prepr… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  7 Gcz8Ng0AAAAJ A Negi, W Jeffrey M    Doub…             2024 Econometric… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  8 Gcz8Ng0AAAAJ A Negi                 Doub…             2024 Journal of … &lt;NA&gt; </span></span>
-<span><span class="co">#&gt;  9 Gcz8Ng0AAAAJ A Negi, DS Negi        Diff…             2025 Journal of … &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 10 Gcz8Ng0AAAAJ A Negi, D Nibbering    Iden…             2025 arXiv prepr… &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; # A tibble: 50 × 7</span></span>
+<span><span class="co">#&gt;    scholar_id   authors                    title  year journal details citations</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;                      &lt;chr&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 Gcz8Ng0AAAAJ A Negi, D Roy              The …  2015 IFPRI … 1439           16</span></span>
+<span><span class="co">#&gt;  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, A Ne… Dyna…  2017 IFPRI … 179-220        10</span></span>
+<span><span class="co">#&gt;  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK Jos… Unde…  2019 Journa… 9 (3),…        38</span></span>
+<span><span class="co">#&gt;  4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge      Revi…  2021 Econom… 40 (5)…       114</span></span>
+<span><span class="co">#&gt;  5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi      Risk…  2023 Availa… 4555847         0</span></span>
+<span><span class="co">#&gt;  6 Gcz8Ng0AAAAJ G Rathnayake, A Negi, O B… Diff…  2024 arXiv … :2411.…         5</span></span>
+<span><span class="co">#&gt;  7 Gcz8Ng0AAAAJ A Negi, W Jeffrey M        Doub…  2024 Econom… 43 (2-…         4</span></span>
+<span><span class="co">#&gt;  8 Gcz8Ng0AAAAJ A Negi                     Doub…  2024 Journa… 12 (1)…        12</span></span>
+<span><span class="co">#&gt;  9 Gcz8Ng0AAAAJ A Negi, DS Negi            Diff…  2025 Journa… 40 (4)…         8</span></span>
+<span><span class="co">#&gt; 10 Gcz8Ng0AAAAJ A Negi, D Nibbering        Iden…  2025 arXiv … :2501.…         0</span></span>
 <span><span class="co">#&gt; # ℹ 40 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -156,25 +157,25 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">orcid_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/fetch_orcid.html">fetch_orcid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 17 × 9</span></span>
-<span><span class="co">#&gt;    orcid_id authors publication_year title journal_name volume issue doi   page </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt;  1 0000-00… "Micha…             2016 Choi… Bulletin of… 78     2     10.1… 293-…</span></span>
-<span><span class="co">#&gt;  2 0000-00… "Thiri…             2017 Indi… PeerJ        5      &lt;NA&gt;  10.7… e3958</span></span>
-<span><span class="co">#&gt;  3 0000-00… "M. J.…             2018 Calc… Epidemiolog… 146    9     10.1… 1194…</span></span>
-<span><span class="co">#&gt;  4 0000-00… "M.J. …             2019 A bi… Mathematica… 309    &lt;NA&gt;  10.1… 163-…</span></span>
-<span><span class="co">#&gt;  5 0000-00… "Will …             2019 High… Australian … 43     2     10.1… 149-…</span></span>
-<span><span class="co">#&gt;  6 0000-00… "MICHA…             2019 MECH… Bulletin of… 101    1     10.1… 174-…</span></span>
-<span><span class="co">#&gt;  7 0000-00… "James…             2020 Brin… Journal of … 76     3     10.1… 547-…</span></span>
-<span><span class="co">#&gt;  8 0000-00… "Micha…             2020 Esti… PLOS Comput… 16     10    10.1… e100…</span></span>
-<span><span class="co">#&gt;  9 0000-00… "  "                2021 Popu… The Lancet … 17     &lt;NA&gt;  10.1… 1002…</span></span>
-<span><span class="co">#&gt; 10 0000-00… "Camer…             2021 Risk… Journal of … 18     174   10.1… 2020…</span></span>
-<span><span class="co">#&gt; 11 0000-00… "James…             2021 Unde… Nature Comm… 12     1     10.1… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 12 0000-00… "M. J.…             2022 Burd… Antimicrobi… 11     1     10.1… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 13 0000-00… "Camer…             2022 COVI… Science Adv… 8      14    10.1… &lt;NA&gt; </span></span>
-<span><span class="co">#&gt; 14 0000-00… "Prata…             2019 Unde… Journal of … 9      3     10.1… 255-…</span></span>
-<span><span class="co">#&gt; 15 0000-00… "Akank…             2020 Revi… Econometric… 40     5     10.1… 504-…</span></span>
-<span><span class="co">#&gt; 16 0000-00… "Akank…             2024 Robu… Journal of … 43     2     10.1… 454-…</span></span>
-<span><span class="co">#&gt; 17 0000-00… "Akank…             2025 Diff… Journal of … 40     4     10.1… 411-…</span></span></code></pre></div>
+<span><span class="co">#&gt;    orcid_id            authors       year title journal volume issue doi   page </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;               &lt;chr&gt;        &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt;  1 0000-0001-6515-827X "Michael Ly…  2016 Choi… Bullet… 78     2     10.1… 293-…</span></span>
+<span><span class="co">#&gt;  2 0000-0001-6515-827X "Thiripura …  2017 Indi… PeerJ   5      2017… 10.7… e3958</span></span>
+<span><span class="co">#&gt;  3 0000-0001-6515-827X "M. J. Lyde…  2018 Calc… Epidem… 146    9     10.1… 1194…</span></span>
+<span><span class="co">#&gt;  4 0000-0001-6515-827X "M.J. Lydea…  2019 A bi… Mathem… 309    2019… 10.1… 163-…</span></span>
+<span><span class="co">#&gt;  5 0000-0001-6515-827X "Will Cunin…  2019 High… Austra… 43     2     10.1… 149-…</span></span>
+<span><span class="co">#&gt;  6 0000-0001-6515-827X "MICHAEL J.…  2019 MECH… Bullet… 101    1     10.1… 174-…</span></span>
+<span><span class="co">#&gt;  7 0000-0001-6515-827X "James H Mc…  2020 Brin… Journa… 76     3     10.1… 547-…</span></span>
+<span><span class="co">#&gt;  8 0000-0001-6515-827X "Michael J.…  2020 Esti… PLOS C… 16     10    10.1… e100…</span></span>
+<span><span class="co">#&gt;  9 0000-0001-6515-827X ""            2021 Popu… The La… 17     2021… 10.1… 1002…</span></span>
+<span><span class="co">#&gt; 10 0000-0001-6515-827X "Cameron Za…  2021 Risk… Journa… 18     174   10.1… 2020…</span></span>
+<span><span class="co">#&gt; 11 0000-0001-6515-827X "James M. T…  2021 Unde… Nature… 12     1     10.1… &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 12 0000-0001-6515-827X "M. J. Lyde…  2022 Burd… Antimi… 11     1     10.1… &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 13 0000-0001-6515-827X "Cameron Za…  2022 COVI… Scienc… 8      14    10.1… &lt;NA&gt; </span></span>
+<span><span class="co">#&gt; 14 0000-0003-2531-9408 "Pratap Bir…  2019 Unde… Journa… 9      3     10.1… 255-…</span></span>
+<span><span class="co">#&gt; 15 0000-0003-2531-9408 "Akanksha N…  2020 Revi… Econom… 40     5     10.1… 504-…</span></span>
+<span><span class="co">#&gt; 16 0000-0003-2531-9408 "Akanksha N…  2024 Robu… Journa… 43     2     10.1… 454-…</span></span>
+<span><span class="co">#&gt; 17 0000-0003-2531-9408 "Akanksha N…  2025 Diff… Journa… 40     4     10.1… 411-…</span></span></code></pre></div>
 <p>The <code><a href="reference/fetch_orcid.html">fetch_orcid()</a></code> function requires authentication on ORCID. If you have not previously authenticated, it will prompt you to do so when first run. If you just follow the prompts, you will be authenticated, but only for downloading your own papers. If you want to download papers from other ORCID IDs, you will need to authenticate with a 2-legged OAuth. Follow the instructions at <a href="https://info.orcid.org/register-a-client-application-production-member-api/" class="external-link uri">https://info.orcid.org/register-a-client-application-production-member-api/</a>. To avoid having to do this in each session, store the token obtained from <code>orcid_auth()</code> in your <code>.Renviron</code> file by running <code>usethis::edit_r_environ()</code>. It should be of the form <code>ORCID_TOKEN=&lt;your token&gt;</code>.</p>
 </div>
 <div class="section level2">
@@ -188,10 +189,10 @@
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/fetch_doi.html">fetch_doi</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 8</span></span>
-<span><span class="co">#&gt;   doi             authors publication_year title journal_name volume issue page </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;              &lt;int&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 10.1016/j.ijfo… Daniel…             2024 Cros… Internation… 40     3     1134…</span></span>
-<span><span class="co">#&gt; 2 10.1080/106186… Sevvan…             2020 Dime… Journal of … 30     1     204-…</span></span></code></pre></div>
+<span><span class="co">#&gt;   doi                             authors  year title journal volume issue page </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                           &lt;chr&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 10.1016/j.ijforecast.2023.10.0… Daniel…  2024 Cros… Intern… 40     3     1134…</span></span>
+<span><span class="co">#&gt; 2 10.1080/10618600.2020.1807353   Sevvan…  2020 Dime… Journa… 30     1     204-…</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="pure-publications">PURE publications<a class="anchor" aria-label="anchor" href="#pure-publications"></a>

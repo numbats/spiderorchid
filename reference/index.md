@@ -12,9 +12,9 @@
 Data sets included in the package
 
 - [`staff_ids`](https://numbats.github.io/spiderorchid/reference/staff_ids.md)
-  : staff_ids
+  : Monash EBS academic research staff IDs
 - [`ebs_pure`](https://numbats.github.io/spiderorchid/reference/ebs_pure.md)
-  : ebs_pure
+  : Monash EBS PURE publications data
 - [`monash`](https://numbats.github.io/spiderorchid/reference/monash.md)
   : Monash Business School Journal Quality List
 - [`abdc`](https://numbats.github.io/spiderorchid/reference/abdc.md) :

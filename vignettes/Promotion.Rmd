@@ -29,6 +29,14 @@ mypubs_scholar <- fetch_scholar("miNl6rMAAAAJ")
 mypubs_orcid <- fetch_orcid("0000-0001-6515-827X")
 ```
 
+```{r, eval = FALSE, echo = FALSE}
+# Save data for vignette
+mypubs_scholar <- fetch_scholar("miNl6rMAAAAJ")
+mypubs_orcid <- fetch_orcid("0000-0001-6515-827X")
+saveRDS(mypubs_scholar, "mjlscholar.rds")
+saveRDS(mypubs_orcid, "mjlorcid.rds")
+```
+
 ```{r, echo = FALSE}
 mypubs_scholar <- readRDS("mjlscholar.rds")
 mypubs_orcid <- readRDS("mjlorcid.rds")

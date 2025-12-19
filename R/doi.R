@@ -44,24 +44,25 @@ fetch_doi <- function(doi) {
           a$author$given,
           a$author$family,
           collapse = "; "
-        )
+        ) |>
+          trimws(whitespace = "[\\h\\v]")
       }
-      if (!is.null(a[["published"]])) {
+      if (!is.null(a$published)) {
         all_pubs[[id]]$year = as.integer(a$published$`date-parts`[1,1])
       }
-      if (!is.null(a[["title"]])) {
+      if (!is.null(a$title)) {
         all_pubs[[id]]$title = a$title
       }
-      if (!is.null(a[["container-title"]]) & !is.list(a$`container-title`)) {
+      if (!is.null(a$`container-title`) & !is.list(a$`container-title`)) {
         all_pubs[[id]]$journal = a$`container-title`
       }
-      if (!is.null(a[["volume"]])) {
+      if (!is.null(a$volume)) {
         all_pubs[[id]]$volume = a$volume
       }
-      if (!is.null(a[["issue"]])) {
-        all_pubs[[id]]$issue = a$issue
+      if (!is.null(a$issue)) {
+        all_pubs[[id]]$issue =  paste(unlist(a$issue), collapse="-")
       }
-      if (!is.null(a[["page"]])) {
+      if (!is.null(a$page)) {
         all_pubs[[id]]$page = a$page
       }
       saveRDS(all_pubs[[id]], dest_file)

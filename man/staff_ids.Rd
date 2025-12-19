@@ -3,7 +3,7 @@
 \docType{data}
 \name{staff_ids}
 \alias{staff_ids}
-\title{staff_ids}
+\title{Monash EBS academic research staff IDs}
 \format{
 A data frame with 4 variables:
 \describe{

@@ -1,4 +1,4 @@
-#' staff_ids
+#' Monash EBS academic research staff IDs
 #'
 #' @description
 #' This dataset contains the mappings between researcher names and their respective ORCID
@@ -15,7 +15,7 @@
 #' @source \url{https://www.monash.edu/business/ebs/our-people/staff-directory}
 "staff_ids"
 
-#' ebs_pure
+#' Monash EBS PURE publications data
 #'
 #' @description
 #' This dataset contains publications between 2018 and May 2025 downloaded from PURE.

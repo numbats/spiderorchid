@@ -33,8 +33,8 @@ fetch_doi <- function(doi) {
         doi = id,
         authors = NA_character_,
         title = NA_character_,
-        publication_year = NA_integer_,
-        journal_name = NA_character_,
+        year = NA_integer_,
+        journal = NA_character_,
         volume = NA_character_,
         issue = NA_character_,
         page = NA_character_
@@ -47,13 +47,13 @@ fetch_doi <- function(doi) {
         )
       }
       if (!is.null(a[["published"]])) {
-        all_pubs[[id]]$publication_year = as.integer(a$published$`date-parts`[1,1])
+        all_pubs[[id]]$year = as.integer(a$published$`date-parts`[1,1])
       }
       if (!is.null(a[["title"]])) {
         all_pubs[[id]]$title = a$title
       }
       if (!is.null(a[["container-title"]]) & !is.list(a$`container-title`)) {
-        all_pubs[[id]]$journal_name = a$`container-title`
+        all_pubs[[id]]$journal = a$`container-title`
       }
       if (!is.null(a[["volume"]])) {
         all_pubs[[id]]$volume = a$volume
@@ -74,9 +74,9 @@ fetch_doi <- function(doi) {
     c(
       "doi",
       "authors",
-      "publication_year",
+      "year",
       "title",
-      "journal_name",
+      "journal",
       "volume",
       "issue"
     ),

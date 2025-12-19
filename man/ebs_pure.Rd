@@ -3,7 +3,7 @@
 \docType{data}
 \name{ebs_pure}
 \alias{ebs_pure}
-\title{ebs_pure}
+\title{Monash EBS PURE publications data}
 \format{
 A data frame with 7 variables:
 \describe{

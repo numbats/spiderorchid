@@ -15,10 +15,10 @@ fetch_scholar <- function(scholar_id) {
   if (length(scholar_id) == 0) {
     return(tibble::tibble(
       title = character(0),
-      DOI = character(0),
+      doi = character(0),
       authors = character(0),
-      publication_year = integer(0),
-      journal_name = character(0)
+      year = integer(0),
+      journal = character(0)
     ))
   }
 
@@ -32,12 +32,7 @@ fetch_scholar <- function(scholar_id) {
       all_pubs[[id]] <- readRDS(dest_file)
     } else {
       publications <- suppressWarnings(scholar::get_publications(id))
-      if (NROW(publications) == 0) {
-        publications$doi <- character(0)
-      } else {
-        if (!"doi" %in% colnames(publications)) {
-          publications$doi <- NA_character_
-        }
+      if (NROW(publications) > 0) {
         if (!"journal" %in% colnames(publications)) {
           publications$journal <- NA_character_
         }
@@ -48,10 +43,11 @@ fetch_scholar <- function(scholar_id) {
       all_pubs[[id]] <- tibble::tibble(
         scholar_id = id,
         title = publications$title,
-        DOI = publications$doi,
         authors = publications$author,
-        publication_year = as.integer(publications$year),
-        journal_name = publications$journal
+        year = as.integer(publications$year),
+        journal = publications$journal,
+        details = publications$number,
+        citations = publications$cites
       )
       saveRDS(all_pubs[[id]], dest_file)
     }
@@ -63,14 +59,15 @@ fetch_scholar <- function(scholar_id) {
       "scholar_id",
       "authors",
       "title",
-      "publication_year",
-      "journal_name",
-      "DOI"
+      "year",
+      "journal",
+      "details",
+      "citations"
     ),
     colnames(output)
   )
   output |>
     dplyr::select(dplyr::all_of(col_order), dplyr::everything()) |>
-    dplyr::arrange(scholar_id, publication_year, title, authors) |>
+    dplyr::arrange(scholar_id, year, title, authors) |>
     tibble::as_tibble()
 }

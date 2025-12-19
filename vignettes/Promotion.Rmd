@@ -19,7 +19,7 @@ For research, you will need a list of publications, the number of citations, and
 
 You can obtain a list of your publication from various sources, such as PURE, Google Scholar or ORCID. Normally you would only need to use one of these.
 
-```{r}
+```{r, message = FALSE}
 library(spiderorchid)
 library(dplyr)
 ```

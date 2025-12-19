@@ -42,7 +42,7 @@ journal_ranking <- function(
       core,
       core_journals
     ),
-    "scimago" = scimago |> mutate(rank = sjr_best_quartile)
+    "scimago" = scimago |> dplyr::mutate(rank = sjr_best_quartile)
   )
   purrr::map_dfr(title, \(x) match_journal_title(jrankings, x, fuzzy, only_best, ...))
 }
@@ -63,10 +63,10 @@ match_journal_title <- function(jrankings, title, fuzzy, only_best, ...) {
   jrankings <- jrankings[idx, ]
   if (only_best & nrow(jrankings) > 1) {
     dist <- c(utils::adist(title, jrankings$title, ignore.case = TRUE, ...))
-    jrankings <- jrankings |> mutate(dist = dist)
+    jrankings <- jrankings |> dplyr::mutate(dist = dist)
     jrankings <- jrankings[dist == min(dist), ]
   }
-  jrankings |> select(title, rank)
+  jrankings |> dplyr::select(title, rank)
 }
 
 clean_journal_names <- function(journals) {

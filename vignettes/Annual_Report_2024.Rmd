@@ -27,12 +27,12 @@ orcid <- staff_ids |>
   pull(orcid_id) |>
   na.omit() |>
   fetch_orcid() |>
-  filter(publication_year == 2024)
+  filter(year == 2024)
 # Otherwise grab output from Scholar
 scholar <- staff_ids |>
   filter(is.na(orcid_id)) |>
   pull(scholar_id) |>
   na.omit() |>
   fetch_scholar() |>
-  filter(publication_year == 2024)
+  filter(year == 2024)
 ```  

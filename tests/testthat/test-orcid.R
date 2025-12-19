@@ -3,8 +3,8 @@ test_that("fetch_orcid returns a valid data frame", {
   orcid_ids <- c("0000-0002-2140-5352", "0000-0001-6515-827X")
   result <- fetch_orcid(orcid_ids)
   expect_s3_class(result, "data.frame")
-  expect_true(all(c("title", "doi", "authors", "publication_year", "journal_name", "orcid_id") %in% colnames(result)))
-  expect_false(any(is.na(result$publication_year)))
+  expect_true(all(c("title", "doi", "authors", "year", "journal", "orcid_id") %in% colnames(result)))
+  expect_false(any(is.na(result$year)))
   expect_true(nrow(result) > 0)
 })
 
@@ -18,7 +18,7 @@ test_that("fetch_orcid handles empty input", {
 test_that("fetch_orcid works even when certain columns don't exist", {
   result <- fetch_orcid("0000-0001-9379-0010")
   expect_true(nrow(result) > 0)
-  expect_true(all(c("title", "doi", "authors", "publication_year", "journal_name", "orcid_id") %in% colnames(result)))
+  expect_true(all(c("title", "doi", "authors", "year", "journal", "orcid_id") %in% colnames(result)))
 })
 
 test_that("fetch_orcid returns empty data frame for ORCID with no works", {

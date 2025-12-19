@@ -1,20 +1,22 @@
 utils::globalVariables(
   c(
-    "title",
-    "DOI",
-    "doi",
+    ":=",
     "authors",
-    "pub_date",
-    "publication_date",
-    "journal",
-    "journal_name",
-    "software_name",
-    "num_downloads",
-    "last_update_date",
-    "original_publish_date",
-    "publication_year",
+    "details",
+    "doi",
     "external-id-type",
     "external-id-value",
-    ":="
+    "journal",
+    "last_update_date",
+    "num_downloads",
+    "original_publish_date",
+    "pub_date",
+    "publication_date",
+    "sjr_best_quartile",
+    "software_name",
+    "title",
+    "year"
   )
 )
+
+utils::globalVariables(c("monash","abdc","era2010","core","core_journals","scimago"))

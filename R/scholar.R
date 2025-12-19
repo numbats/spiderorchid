@@ -71,7 +71,7 @@ fetch_scholar <- function(scholar_id) {
     dplyr::arrange(scholar_id, year, title, authors) |>
     tibble::as_tibble() |>
     dplyr::mutate(
-      journal = if_else(journal == "", NA_character_, journal),
-      details = if_else(details == "", NA_character_, details)
+      journal = dplyr::if_else(journal == "", NA_character_, journal),
+      details = dplyr::if_else(details == "", NA_character_, details)
     )
 }

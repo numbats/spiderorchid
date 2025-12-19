@@ -22,6 +22,7 @@ Imports:
     stringr,
     tibble
 Suggests: 
+    fuzzyjoin,
     ggplot2,
     knitr,
     rmarkdown,

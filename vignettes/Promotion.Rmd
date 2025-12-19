@@ -1,0 +1,178 @@
+---
+title: "Promotion applications"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Promotion applications}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Typically, an application for academic promotion will require you to provide evidence of your performance in Research, Teaching, Engagement and (for senior appointments) Leadership. The rest of this document summarises what sort of things you could include in each of these sections.
+
+## Research
+
+For research, you will need a list of publications, the number of citations, and the ranking of the journals in which you have published
+
+You can obtain a list of your publication from various sources, such as PURE, Google Scholar or ORCID. Normally you would only need to use one of these.
+
+```{r}
+library(spiderorchid)
+library(dplyr)
+```
+
+```r
+mypubs_scholar <- fetch_scholar("miNl6rMAAAAJ")
+mypubs_orcid <- fetch_orcid("0000-0001-6515-827X")
+```
+
+Each of these functions will return a tibble, with one row per publication and the columns providing information such as title, authors, year of publication, etc. The different sources provide some different information, and it is often useful to combine them. We will combine the publications from Google Scholar and ORCID in the following examples.
+
+```{r mypubs, echo=FALSE, eval=FALSE}
+mypubs_orcid <- fetch_orcid("0000-0001-6515-827X")
+readr::write_rds(mypubs_orcid, here::here("data-raw/mjlorcid.rds"), compress = "bz2")
+mypubs_scholar <- fetch_scholar("miNl6rMAAAAJ")
+readr::write_rds(mypubs_scholar, here::here("data-raw/mjlscholar.rds"), compress = "bz2")
+```
+
+```{r readmypubs, echo=FALSE}
+mypubs_orcid <- readr::read_rds(here::here("data-raw/mjlorcid.rds"))
+mypubs_scholar <- readr::read_rds(here::here("data-raw/mjlscholar.rds"))
+```
+
+```{r showpubs}
+mypubs_orcid
+mypubs_scholar
+```
+
+In general, ORCID will provide higher quality data, along with DOIs, bit covers fewer publications than Google Scholar, and does not provide citations. Some papers may have two DOIs --- for example, when they appear on both JSTOR and a journal website -- so it may be necessary to remove duplicates. In this example, there are no duplicates.
+
+Next, we will try to combine the two tibbles using fuzzy joining on the title and year fields. The idea here is to add the details from ORCID to the more complete data set from Google Scholar.
+
+```{r join}
+mypubs <- mypubs_scholar |>
+  # First remove any publications missing details. 
+  # These are usually talks and pre-prints
+  filter(!is.na(year) & !is.na(journal)) |>
+  # Now find matching entries
+  fuzzyjoin::stringdist_left_join(
+    mypubs_orcid,
+    by = c(title = "title", year = "year"),
+    max_dist = 2,
+    ignore_case = TRUE
+  ) |>
+  # Keep any columns where ORCID missing
+  mutate(
+    authors.y = if_else(is.na(authors.y), authors.x, authors.y),
+    title.y = if_else(is.na(title.y), title.x, title.y),
+    journal.y = if_else(is.na(journal.y), journal.x, journal.y),
+    year.y = if_else(is.na(year.y), year.x, year.y)
+  ) |>
+  # Keep the ORCID columns
+  select(!ends_with(".x")) |>
+  rename_all(~ stringr::str_remove_all(.x, ".y")) |>
+  select(-scholar_id, -orcid_id) |>
+  select(authors, year, title, journal, volume, issue, page, details, doi, citations)
+```
+
+The tibble contains Google scholar citations for all papers, so we can find the most cited papers.
+
+```{r scholarcites}
+mypubs |>
+  arrange(desc(citations))
+```
+
+The `scholar` package provides tools for obtaining your profile information, such as total citations, h-index, and lists of co-authors.
+
+```{r scholarprofile}
+scholar::get_profile("miNl6rMAAAAJ")
+```
+
+## Teaching
+
+The teaching section will usually involve collecting data on your teaching performance and teaching innovations.
+
+#### Teaching performance
+
+ - Student evaluations
+ - Emails from grateful students
+ - Peer review reports
+
+#### Teaching innovations
+
+  - Development of new subjects or degrees
+  - New teaching methods or materials
+
+#### Supervision
+
+  - Honours students supervised
+  - Masters students supervised
+  - PhD students supervised
+
+Note that a list of PhD students may go in the Research section rather than the Teaching section.
+
+## Engagement
+
+This section includes suggestions for engagement activities that could be included in academic promotion applications. These examples are indicative only and do not provide a list of expectations. Engagement is interpreted in a broad sense to include discipline, industry, government and community engagement.
+
+#### Engagement with Industry
+
+- Partnerships with organisations: for profit, not-for-profit, volunteering
+- Consulting projects -> could list value of projects, reports completed
+- Participation in project development programs e.g. CSIRO On Prime
+- Patents
+- Service on industry boards and/or committees at the local, state or national level
+
+#### Engagement with Government
+
+- Policy development, such as changes resulting from your work
+- Advocacy programs e.g. Science Meets Parliament
+- Service with government bodies
+
+#### Engagement with Public
+
+- Public presentations - list of locations
+- Blogging (own blog or collaborative), with stats available from blog backend e.g. views, visitors, followers.
+- Twitter. Such as number of followers from profile, [Twitter analytics](https://analytics.twitter.com)  shows impressions, engagement rate, likes, retweets, replies (only allows viewing of the last 90 days of data).
+- Community programs e.g. National Science Week, etc.
+- Media appearances e.g. appearances on TV, radio, web.
+- Writing for general audience e.g. The Conversation, university news platforms (e.g. The Lighthouse).
+- Public works e.g. art installations, consulting on museum exhibit.
+- Service on community boards and/or committees at the local, state or national level.
+
+#### Engagement with Professional Community
+
+- Contributions to community support websites e.g. Stack Overflow
+- Data science competitions e.g. Kaggle
+- Community engagement projects e.g. citizen science
+- Community development e.g. meetup groups, RLadies, rOpenSci, hackathons
+- Creation of software packages/tools for open use
+
+#### Engagement with Schools
+
+- Curriculum development e.g. STEM at School.
+- Interactions with school students e.g. Skype a Scientist (discussing science with students).
+- University events e.g. Open Day.
+
+#### Contributions to enhancing the employability of graduates
+
+- Establishing student links with industry/professional societies.
+- Participating in professional practice teaching e.g. teamwork, communication, problem solving, grant writing.
+
+#### Engagement/leadership within one’s profession or discipline
+
+- Professional society membership & activity.
+- Membership of professional or foundation boards/councils
+- Peer review _(It should go into the research section)_. This can include: journal article review, ARC college of experts, grant review panels.
+
+## Leadership
+
+This section includes examples of leadership activities in academic promotion applications.
+
+- University committee (e.g. department, faculty, university-level). List how many events/meetings you have in a year.
+- Board membership, and list position, length of service.
+- Conference organisation. List your role (e.g. scientific committee, symposium chair), scale of conference (e.g number of attendees, funding, international/local).
+- Leading projects and initiatives (e.g. sustainability, diversity inclusion initiatives).
+- Event organisation (e.g. writing retreat).
+- Training events (e.g. university management course). List the course, completion date.
+- Leadership roles in external professional or industry associations
+- Mentoring. List how many mentees you have, length of relationship, where they are working now.

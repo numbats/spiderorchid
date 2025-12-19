@@ -69,5 +69,9 @@ fetch_scholar <- function(scholar_id) {
   output |>
     dplyr::select(dplyr::all_of(col_order), dplyr::everything()) |>
     dplyr::arrange(scholar_id, year, title, authors) |>
-    tibble::as_tibble()
+    tibble::as_tibble() |>
+    dplyr::mutate(
+      journal = if_else(journal == "", NA_character_, journal),
+      details = if_else(details == "", NA_character_, details)
+    )
 }

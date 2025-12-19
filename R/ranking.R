@@ -48,6 +48,9 @@ journal_ranking <- function(
 }
 
 match_journal_title <- function(jrankings, title, fuzzy, only_best, ...) {
+  if(is.na(title) || title == "") {
+    return(dplyr::tibble(title = character(0), rank = character()))
+  }
   jrankings <- jrankings |>
     dplyr::select(title, rank) |>
     dplyr::mutate(title = clean_journal_names(title)) |>

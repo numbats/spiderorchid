@@ -30,8 +30,8 @@ mypubs_orcid <- fetch_orcid("0000-0001-6515-827X")
 ```
 
 ```{r, echo = FALSE}
-mypubs_scholar <- readRDS("data-raw/mjlscholar.rds")
-mypubs_orcid <- readRDS("data-raw/mjlorcid.rds")
+mypubs_scholar <- readRDS("mjlscholar.rds")
+mypubs_orcid <- readRDS("mjlorcid.rds")
 ```
 
 Each of these functions will return a tibble, with one row per publication and the columns providing information such as title, authors, year of publication, etc. The different sources provide some different information, and it is often useful to combine them. We will combine the publications from Google Scholar and ORCID in the following examples.

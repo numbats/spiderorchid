@@ -1,11 +1,15 @@
 ---
 title: "Promotion applications"
+author: "Chris Brown, Belinda Fabian, Rob Hyndman, Maria Prokofiave, Nick Tierney, Huong Ly Tong, and Melina Vidoni"
+date: "19 December 2025"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Promotion applications}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+This document was developed during *ozunconf19* and *numbat hackathon 2020*, to provide tools and ideas that will help gather the information required to apply for *academic promotion*. It was updated by Rob Hyndman in December 2025 to work with the `spiderorchid` package.
 
 Typically, an application for academic promotion will require you to provide evidence of your performance in Research, Teaching, Engagement and (for senior appointments) Leadership. The rest of this document summarises what sort of things you could include in each of these sections.
 
@@ -38,7 +42,7 @@ Next, we will try to combine the two tibbles using fuzzy joining on the title an
 
 ```{r join}
 mypubs <- mypubs_scholar |>
-  # First remove any publications missing details. 
+  # First remove any publications missing details.
   # These are usually talks and pre-prints
   filter(!is.na(year) & !is.na(journal)) |>
   # Now find matching entries
@@ -59,7 +63,18 @@ mypubs <- mypubs_scholar |>
   select(!ends_with(".x")) |>
   rename_all(~ stringr::str_remove_all(.x, ".y")) |>
   select(-scholar_id, -orcid_id) |>
-  select(authors, year, title, journal, volume, issue, page, details, doi, citations)
+  select(
+    authors,
+    year,
+    title,
+    journal,
+    volume,
+    issue,
+    page,
+    details,
+    doi,
+    citations
+  )
 ```
 
 The tibble contains Google scholar citations for all papers, so we can find the most cited papers.

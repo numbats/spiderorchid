@@ -99,8 +99,8 @@ journal_ranking("International Conference on Machine Learning", "core")
 #>   title                                                         rank 
 #>   <chr>                                                         <ord>
 #> 1 International Conference on Machine Learning                  A*   
-#> 2 International Conference on Machine Learning and Applications C    
-#> 3 International Conference on Machine Learning and Cybernetics  NA   
+#> 2 International Conference on Machine Learning and Cybernetics  NA   
+#> 3 International Conference on Machine Learning and Applications C    
 journal_ranking("R Journal", "scimago", only_best = TRUE)
 #> # A tibble: 1 × 2
 #>   title     rank 

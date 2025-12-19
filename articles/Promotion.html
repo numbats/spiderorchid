@@ -74,8 +74,8 @@ Tong, and Melina Vidoni</h4>
     
 <p>This document was developed during <em>ozunconf19</em> and <em>numbat
 hackathon 2020</em>, to provide tools and ideas that will help gather
-the information required to apply for <em>academic promotion</em>. It
-was updated by Rob Hyndman in December 2025 to work with the
+the information required to apply for academic promotion. It was updated
+by Rob Hyndman in December 2025 to work with the
 <code>spiderorchid</code> package.</p>
 <p>Typically, an application for academic promotion will require you to
 provide evidence of your performance in Research, Teaching, Engagement
@@ -199,14 +199,14 @@ can find the most cited papers.</p>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> FM Shearer, J…  <span style="text-decoration: underline;">2</span>024 Esti… Epidem… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    47, 10… <span style="color: #BB0000;">NA</span>           17</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> Will Cuningha…  <span style="text-decoration: underline;">2</span>019 High… Austra… 43     2     149-… 43 (2)… 10.1…        16</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 24 more rows</span></span></span></code></pre>
+<p>Journal rankings can be obtained using the
+<code><a href="../reference/journal_ranking.html">journal_ranking()</a></code> function, or via the <a href="https://ebsmonash.shinyapps.io/Journal_Rankings/" class="external-link">Journal Ranking
+Shiny App</a>.</p>
 <p>The <code>scholar</code> package provides tools for obtaining your
 profile information, such as total citations, h-index, and lists of
 co-authors.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">scholar</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scholar/man/get_profile.html" class="external-link">get_profile</a></span><span class="op">(</span><span class="st">"miNl6rMAAAAJ"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in get_scholar_resp(url, attempts_left - 1): Cannot connect to Google</span></span>
-<span><span class="co">## Scholar. Is the ID you provided correct?</span></span></code></pre>
-<pre><code><span><span class="co">## [1] NA</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="teaching">Teaching<a class="anchor" aria-label="anchor" href="#teaching"></a>

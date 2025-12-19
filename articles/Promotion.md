@@ -2,8 +2,8 @@
 
 This document was developed during *ozunconf19* and *numbat hackathon
 2020*, to provide tools and ideas that will help gather the information
-required to apply for *academic promotion*. It was updated by Rob
-Hyndman in December 2025 to work with the `spiderorchid` package.
+required to apply for academic promotion. It was updated by Rob Hyndman
+in December 2025 to work with the `spiderorchid` package.
 
 Typically, an application for academic promotion will require you to
 provide evidence of your performance in Research, Teaching, Engagement
@@ -147,17 +147,17 @@ mypubs |>
     ## 10 Will Cuningha…  2019 High… Austra… 43     2     149-… 43 (2)… 10.1…        16
     ## # ℹ 24 more rows
 
+Journal rankings can be obtained using the
+[`journal_ranking()`](https://numbats.github.io/spiderorchid/reference/journal_ranking.md)
+function, or via the [Journal Ranking Shiny
+App](https://ebsmonash.shinyapps.io/Journal_Rankings/).
+
 The `scholar` package provides tools for obtaining your profile
 information, such as total citations, h-index, and lists of co-authors.
 
 ``` r
 scholar::get_profile("miNl6rMAAAAJ")
 ```
-
-    ## Warning in get_scholar_resp(url, attempts_left - 1): Cannot connect to Google
-    ## Scholar. Is the ID you provided correct?
-
-    ## [1] NA
 
 ## Teaching
 

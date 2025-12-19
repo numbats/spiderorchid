@@ -55,18 +55,21 @@ match_journal_title <- function(jrankings, title, fuzzy, only_best, ...) {
     dplyr::select(title, rank) |>
     dplyr::mutate(title = clean_journal_names(title)) |>
     dplyr::arrange(title)
+  # Find matches
   if (fuzzy) {
     idx <- agrepl(title, jrankings$title, ignore.case = TRUE, ...)
   } else {
     idx <- grepl(title, jrankings$title, ignore.case = TRUE, ...)
   }
   jrankings <- jrankings[idx, ]
+  # Sort by distance
+  dist <- c(utils::adist(title, jrankings$title, ignore.case = TRUE, ...))
+  jrankings <- jrankings[order(dist),]
   if (only_best & nrow(jrankings) > 1) {
-    dist <- c(utils::adist(title, jrankings$title, ignore.case = TRUE, ...))
-    jrankings <- jrankings |> dplyr::mutate(dist = dist)
-    jrankings <- jrankings[dist == min(dist), ]
+    jrankings[1,]
+  } else {
+    jrankings
   }
-  jrankings |> dplyr::select(title, rank)
 }
 
 clean_journal_names <- function(journals) {

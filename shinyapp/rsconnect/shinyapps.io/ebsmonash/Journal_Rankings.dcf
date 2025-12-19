@@ -5,7 +5,7 @@ account: ebsmonash
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12376589
-bundleId: 11340204
+bundleId: 11348261
 url: https://ebsmonash.shinyapps.io/Journal_Rankings/
 version: 1
 asMultiple: FALSE

@@ -1,6 +1,6 @@
 Package: spiderorchid
 Title: Download and wrangle publication data for Monash EBS academic staff
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
   c(
     person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = c("aut", "cre")),

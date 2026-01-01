@@ -15,14 +15,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/numbats/spiderorchid/blob/main/DESCRIPTION)
 
-Hyndman R, Lydeamore M, Tee S, Khattri P (2025). *spiderorchid: Download
+Hyndman R, Lydeamore M, Tee S, Khattri P (2026). *spiderorchid: Download
 and wrangle publication data for Monash EBS academic staff*. R package
 version 0.1.0, <https://github.com/numbats/spiderorchid/>.
 
     @Manual{,
       title = {spiderorchid: Download and wrangle publication data for Monash EBS academic staff},
       author = {Rob Hyndman and Michael Lydeamore and Sherry Tee and Parnika Khattri},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.0},
       url = {https://github.com/numbats/spiderorchid/},
     }

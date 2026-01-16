@@ -18,7 +18,7 @@
 #' Monash EBS PURE publications data
 #'
 #' @description
-#' This dataset contains publications between 2018 and May 2025 downloaded from PURE.
+#' This dataset contains publications since 2018, downloaded from PURE on 16 January 2025.
 #' Additional data can be updated using the \code{\link{fetch_pure}()} function.
 #'
 #' @format A data frame with 7 variables:

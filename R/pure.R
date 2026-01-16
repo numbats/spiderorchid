@@ -7,8 +7,6 @@
 #' This is end-point restricted to Monash IP addresses. So either use it on campus
 #' or invoke the VPN before using it off campus.
 #'
-#' Publications up to 2024 are available in the \code{\link{ebs_pure}} dataset.
-#'
 #' @param years A numeric vector of publication years. All publications between
 #' the minimum year and the maximum year are returned.
 #' @return A data frame containing the data fetched from the PURE API covering

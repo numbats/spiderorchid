@@ -19,6 +19,8 @@ Useful links:
 
 Authors:
 
+- Rob Hyndman <Rob.Hyndman@monash.edu>
+
 - Michael Lydeamore <Michael.Lydeamore@monash.edu>
 
 - Sherry Tee <stee0006@student.monash.edu>

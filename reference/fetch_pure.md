@@ -25,12 +25,6 @@ fetch_pure(years)
 A data frame containing the data fetched from the PURE API covering the
 specified publication years.
 
-## Details
-
-Publications up to 2024 are available in the
-[`ebs_pure`](https://numbats.github.io/spiderorchid/reference/ebs_pure.md)
-dataset.
-
 ## See also
 
 [`ebs_pure`](https://numbats.github.io/spiderorchid/reference/ebs_pure.md)

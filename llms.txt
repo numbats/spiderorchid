@@ -36,11 +36,13 @@ same data multiple times, it will only download it once.
 ## Installation
 
 ``` r
+
 # Install the packages needed
 pak::pak(c("robjhyndman/pkgmeta", "numbats/spiderorchid"))
 ```
 
 ``` r
+
 library(spiderorchid)
 library(dplyr)
 #> 
@@ -62,6 +64,7 @@ respective ORCID and Google Scholar IDs. It is useful for linking and
 identifying academic profiles across different platforms.
 
 ``` r
+
 staff_ids
 #> # A tibble: 57 × 4
 #>    first_name last_name orcid_id            scholar_id  
@@ -87,6 +90,7 @@ function retrieves publication details and returns them in the form of a
 data frame, with one row per publication.
 
 ``` r
+
 staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(scholar_id) |>
@@ -115,6 +119,7 @@ function retrieves publication details and returns them in the form of a
 data frame, with one row per publication.
 
 ``` r
+
 staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(orcid_id) |>
@@ -163,6 +168,7 @@ function retrieves publication details and returns them in the form of a
 data frame, with one row per DOI.
 
 ``` r
+
 c(
   "10.1016/j.ijforecast.2023.10.003",
   "10.1080/10618600.2020.1807353"
@@ -184,6 +190,7 @@ staff in the Department of Econometrics & Business Statistics, Monash
 University.
 
 ``` r
+
 fetch_pure(2024)
 ```
 
@@ -218,6 +225,7 @@ Currently, the stored data includes publications from January 2018 to
 May 2025.
 
 ``` r
+
 ebs_pure
 #> # A tibble: 613 × 8
 #>    pure_id    year authors                     title journal subtype bib   doi  
@@ -242,6 +250,7 @@ specified individuals. It returns a data frame containing the package
 name, number of downloads, the authors, and the last update date.
 
 ``` r
+
 c(
   "Michael Lydeamore",
   "Di Cook",
@@ -276,6 +285,7 @@ is used, but it works best if you use the correct journal name. Multiple
 matches can be returned if the journal name is ambiguous.
 
 ``` r
+
 c(
   "Annals of Statistics",
   "Journal of the American Statistical Association",

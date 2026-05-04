@@ -1,6 +1,7 @@
 # Annual Report 2024
 
 ``` r
+
 library(spiderorchid)
 library(dplyr)
 #> 
@@ -16,6 +17,7 @@ library(dplyr)
 ## Total output for 2024
 
 ``` r
+
 # Grab output from ORCID where possible
 orcid <- staff_ids |>
   pull(orcid_id) |>

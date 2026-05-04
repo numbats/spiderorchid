@@ -21,11 +21,13 @@ PURE, Google Scholar or ORCID. Normally you would only need to use one
 of these.
 
 ``` r
+
 library(spiderorchid)
 library(dplyr)
 ```
 
 ``` r
+
 mypubs_scholar <- fetch_scholar("miNl6rMAAAAJ")
 mypubs_orcid <- fetch_orcid("0000-0001-6515-827X")
 ```
@@ -38,6 +40,7 @@ combine the publications from Google Scholar and ORCID in the following
 examples.
 
 ``` r
+
 mypubs_orcid
 ```
 
@@ -59,6 +62,7 @@ mypubs_orcid
     ## 13 0000-0001-6515-827X "Cameron Za…  2022 COVI… Scienc… 8      14    10.1… NA
 
 ``` r
+
 mypubs_scholar
 ```
 
@@ -88,6 +92,7 @@ title and year fields. The idea here is to add the details from ORCID to
 the more complete data set from Google Scholar.
 
 ``` r
+
 mypubs <- mypubs_scholar |>
   # First remove any publications missing details.
   # These are usually talks and pre-prints
@@ -128,6 +133,7 @@ The tibble contains Google scholar citations for all papers, so we can
 find the most cited papers.
 
 ``` r
+
 mypubs |>
   arrange(desc(citations))
 ```
@@ -156,6 +162,7 @@ The `scholar` package provides tools for obtaining your profile
 information, such as total citations, h-index, and lists of co-authors.
 
 ``` r
+
 scholar::get_profile("miNl6rMAAAAJ")
 ```
 

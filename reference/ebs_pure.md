@@ -1,7 +1,7 @@
 # Monash EBS PURE publications data
 
-This dataset contains publications between 2018 and May 2025 downloaded
-from PURE. Additional data can be updated using the
+This dataset contains publications since 2018, downloaded from PURE on
+16 January 2025. Additional data can be updated using the
 [`fetch_pure()`](https://numbats.github.io/spiderorchid/reference/fetch_pure.md)
 function.
 

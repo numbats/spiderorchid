@@ -24,9 +24,7 @@ IDs.
 ## Examples
 
 ``` r
+if (FALSE) { # \dontrun{
 fetch_scholar("vamErfkAAAAJ")
-#> Warning: Coercing LHS to a list
-#> Error in dplyr::arrange(dplyr::select(output, dplyr::all_of(col_order),     dplyr::everything()), scholar_id, year, title, authors): ℹ In argument: `..3 = title`.
-#> Caused by error:
-#> ! `..3` must be a vector, not a function.
+} # }
 ```

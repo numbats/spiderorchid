@@ -90,10 +90,8 @@ journal_ranking("Annals of Statistics", "abdc")
 #>   <chr>                <ord>
 #> 1 Annals of Statistics A*   
 journal_ranking("International Conference on Machine Learning")
-#> # A tibble: 1 × 2
-#>   title                                        rank   
-#>   <chr>                                        <fct>  
-#> 1 International Conference on Machine Learning Group 1
+#> # A tibble: 0 × 2
+#> # ℹ 2 variables: title <chr>, rank <fct>
 journal_ranking("International Conference on Machine Learning", "core")
 #> # A tibble: 3 × 2
 #>   title                                                         rank 
@@ -105,5 +103,5 @@ journal_ranking("R Journal", "scimago", only_best = TRUE)
 #> # A tibble: 1 × 2
 #>   title     rank 
 #>   <chr>     <chr>
-#> 1 R Journal Q1   
+#> 1 R Journal Q2   
 ```

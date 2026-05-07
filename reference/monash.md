@@ -18,7 +18,7 @@ data(monash)
 ## Format
 
 An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with
-4617 rows and 2 columns.
+4489 rows and 2 columns.
 
 ## Source
 
@@ -26,7 +26,7 @@ Monash Business School
 
 ## Value
 
-A data frame with 4617 observations on the following 2 variables:
+A data frame with 4489 observations on the following 2 variables:
 
 - `title`: :
 
@@ -44,7 +44,7 @@ library(stringr)
 monash |>
   filter(str_detect(title, "Statist")) |>
   arrange(rank)
-#> # A tibble: 35 × 2
+#> # A tibble: 34 × 2
 #>    title                                              rank    
 #>    <chr>                                              <fct>   
 #>  1 Annals of Statistics                               Group 1+
@@ -57,5 +57,5 @@ monash |>
 #>  8 Journal of Business and Economic Statistics        Group 1 
 #>  9 Annals of Applied Statistics                       Group 2 
 #> 10 Annals of the Institute of Statistical Mathematics Group 2 
-#> # ℹ 25 more rows
+#> # ℹ 24 more rows
 ```

@@ -11,7 +11,7 @@ data(scimago)
 ## Format
 
 An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with
-31136 rows and 27 columns.
+32193 rows and 29 columns.
 
 ## Source
 
@@ -20,7 +20,7 @@ SCImago Journal & Country Rank. Retrieved from
 
 ## Value
 
-A tibble with 31136 rows and 27 variables:
+A tibble with 32193 rows and 29 variables:
 
 - year:
 

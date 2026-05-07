@@ -1,8 +1,8 @@
 # ABDC Journal Quality List
 
 This is a dataset that contains the quality list of rankings of the
-Australian Business Deans Council (ABDC). You can read more about this
-list [here](https://abdc.edu.au/abdc-journal-quality-list/).
+Australian Business Deans Council (ABDC) from 2025. You can read more
+about this list [here](https://abdc.edu.au/abdc-journal-quality-list/).
 
 ## Usage
 
@@ -13,7 +13,7 @@ data(abdc)
 ## Format
 
 An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with
-2680 rows and 7 columns.
+2651 rows and 7 columns.
 
 ## Source
 
@@ -21,7 +21,7 @@ An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with
 
 ## Value
 
-A data frame with 2680 observations on the following 7 variables:
+A data frame with 2651 observations on the following 7 variables:
 
 - `title`: :
 

@@ -71,19 +71,14 @@ identifying academic profiles across different platforms.
 ``` r
 staff_ids
 #> # A tibble: 57 × 4
-#>    first_name last_name orcid_id            scholar_id  
-#>    <chr>      <chr>     <chr>               <chr>       
-#>  1 Akanksha   Negi      0000-0003-2531-9408 Gcz8Ng0AAAAJ
-#>  2 Alyssa     Hu        0000-0002-9013-8374 IIDTKgsAAAAJ
-#>  3 Andrew     Matthews  <NA>                <NA>        
-#>  4 Ann        Maharaj   0000-0002-5513-962X BZ07eocAAAAJ
-#>  5 Athanasios Pantelous 0000-0001-5738-1471 ZMaiiQwAAAAJ
-#>  6 Benjamin   Wong      0000-0002-1665-6165 Nneg6GAAAAAJ
-#>  7 Bin        Peng      0000-0003-4231-4713 5d3ZOm4AAAAJ
-#>  8 Bonsoo     Koo       0000-0002-7247-9773 OmK08lAAAAAJ
-#>  9 Brett      Inder     <NA>                Wx6eeWgAAAAJ
-#> 10 Catherine  Forbes    0000-0003-3830-5865 jm73LccAAAAJ
-#> # ℹ 47 more rows
+#>   first_name last_name orcid_id            scholar_id  
+#>   <chr>      <chr>     <chr>               <chr>       
+#> 1 Akanksha   Negi      0000-0003-2531-9408 Gcz8Ng0AAAAJ
+#> 2 Alyssa     Hu        0000-0002-9013-8374 IIDTKgsAAAAJ
+#> 3 Andrew     Matthews  <NA>                <NA>        
+#> 4 Ann        Maharaj   0000-0002-5513-962X BZ07eocAAAAJ
+#> 5 Athanasios Pantelous 0000-0001-5738-1471 ZMaiiQwAAAAJ
+#> # ℹ 52 more rows
 ```
 
 ## Google scholar publications
@@ -97,20 +92,15 @@ staff_ids |>
   filter(last_name %in% c("Negi", "Lydeamore")) |>
   pull(scholar_id) |>
   fetch_scholar()
-#> # A tibble: 50 × 7
-#>    scholar_id   authors                    title  year journal details citations
-#>    <chr>        <chr>                      <chr> <int> <chr>   <chr>       <dbl>
-#>  1 Gcz8Ng0AAAAJ A Negi, D Roy              The …  2015 IFPRI … 1439           16
-#>  2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, A Ne… Dyna…  2017 IFPRI … 179-220        10
-#>  3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK Jos… Unde…  2019 Journa… 9 (3),…        38
-#>  4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge      Revi…  2021 Econom… 40 (5)…       114
-#>  5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi      Risk…  2023 Availa… 4555847         0
-#>  6 Gcz8Ng0AAAAJ G Rathnayake, A Negi, O B… Diff…  2024 arXiv … :2411.…         5
-#>  7 Gcz8Ng0AAAAJ A Negi, W Jeffrey M        Doub…  2024 Econom… 43 (2-…         4
-#>  8 Gcz8Ng0AAAAJ A Negi                     Doub…  2024 Journa… 12 (1)…        12
-#>  9 Gcz8Ng0AAAAJ A Negi, DS Negi            Diff…  2025 Journa… 40 (4)…         8
-#> 10 Gcz8Ng0AAAAJ A Negi, D Nibbering        Iden…  2025 arXiv … :2501.…         0
-#> # ℹ 40 more rows
+#> # A tibble: 58 × 7
+#>   scholar_id   authors                            title            year journal details citations
+#>   <chr>        <chr>                              <chr>           <int> <chr>   <chr>       <dbl>
+#> 1 Gcz8Ng0AAAAJ A Negi, D Roy                      The cooling ef…  2015 IFPRI … 1439           16
+#> 2 Gcz8Ng0AAAAJ R Chandra, PK Joshi, A Negi, D Roy Dynamics of pu…  2017 IFPRI … 179-220        10
+#> 3 Gcz8Ng0AAAAJ P Birthal, A Negi, PK Joshi        Understanding …  2019 Journa… 9 (3),…        38
+#> 4 Gcz8Ng0AAAAJ A Negi, JM Wooldridge              Revisiting reg…  2021 Econom… 40 (5)…       131
+#> 5 Gcz8Ng0AAAAJ C Cox, A Negi, D Negi              Risk-Sharing w…  2023 Availa… 4555847         0
+#> # ℹ 53 more rows
 ```
 
 ## ORCID publications
@@ -125,38 +115,15 @@ staff_ids |>
   pull(orcid_id) |>
   fetch_orcid()
 #> # A tibble: 17 × 9
-#>    orcid_id            authors       year title journal volume issue doi   page 
-#>    <chr>               <chr>        <int> <chr> <chr>   <chr>  <chr> <chr> <chr>
-#>  1 0000-0001-6515-827X "Michael Ly…  2016 Choi… Bullet… 78     2     10.1… 293-…
-#>  2 0000-0001-6515-827X "Thiripura …  2017 Indi… PeerJ   5      2017… 10.7… e3958
-#>  3 0000-0001-6515-827X "M. J. Lyde…  2018 Calc… Epidem… 146    9     10.1… 1194…
-#>  4 0000-0001-6515-827X "M.J. Lydea…  2019 A bi… Mathem… 309    2019… 10.1… 163-…
-#>  5 0000-0001-6515-827X "Will Cunin…  2019 High… Austra… 43     2     10.1… 149-…
-#>  6 0000-0001-6515-827X "MICHAEL J.…  2019 MECH… Bullet… 101    1     10.1… 174-…
-#>  7 0000-0001-6515-827X "James H Mc…  2020 Brin… Journa… 76     3     10.1… 547-…
-#>  8 0000-0001-6515-827X "Michael J.…  2020 Esti… PLOS C… 16     10    10.1… e100…
-#>  9 0000-0001-6515-827X ""            2021 Popu… The La… 17     2021… 10.1… 1002…
-#> 10 0000-0001-6515-827X "Cameron Za…  2021 Risk… Journa… 18     174   10.1… 2020…
-#> 11 0000-0001-6515-827X "James M. T…  2021 Unde… Nature… 12     1     10.1… <NA> 
-#> 12 0000-0001-6515-827X "M. J. Lyde…  2022 Burd… Antimi… 11     1     10.1… <NA> 
-#> 13 0000-0001-6515-827X "Cameron Za…  2022 COVI… Scienc… 8      14    10.1… <NA> 
-#> 14 0000-0003-2531-9408 "Pratap Bir…  2019 Unde… Journa… 9      3     10.1… 255-…
-#> 15 0000-0003-2531-9408 "Akanksha N…  2020 Revi… Econom… 40     5     10.1… 504-…
-#> 16 0000-0003-2531-9408 "Akanksha N…  2024 Robu… Journa… 43     2     10.1… 454-…
-#> 17 0000-0003-2531-9408 "Akanksha N…  2025 Diff… Journa… 40     4     10.1… 411-…
+#>   orcid_id            authors                         year title journal volume issue doi   page 
+#>   <chr>               <chr>                          <int> <chr> <chr>   <chr>  <chr> <chr> <chr>
+#> 1 0000-0001-6515-827X Michael Lydeamore; Nigel Bean…  2016 Choi… Bullet… 78     2     10.1… 293-…
+#> 2 0000-0001-6515-827X Thiripura Vino; Gurmeet R. Si…  2017 Indi… PeerJ   5      2017… 10.7… e3958
+#> 3 0000-0001-6515-827X M. J. Lydeamore; P. T. Campbe…  2018 Calc… Epidem… 146    9     10.1… 1194…
+#> 4 0000-0001-6515-827X M.J. Lydeamore; P.T. Campbell…  2019 A bi… Mathem… 309    2019… 10.1… 163-…
+#> 5 0000-0001-6515-827X Will Cuningham; Jodie McVerno…  2019 High… Austra… 43     2     10.1… 149-…
+#> # ℹ 12 more rows
 ```
-
-The `fetch_orcid()` function requires authentication on ORCID. If you
-have not previously authenticated, it will prompt you to do so when
-first run. If you just follow the prompts, you will be authenticated,
-but only for downloading your own papers. If you want to download papers
-from other ORCID IDs, you will need to authenticate with a 2-legged
-OAuth. Follow the instructions at
-<https://info.orcid.org/register-a-client-application-production-member-api/>.
-To avoid having to do this in each session, store the token obtained
-from `orcid_auth()` in your `.Renviron` file by running
-`usethis::edit_r_environ()`. It should be of the form
-`ORCID_TOKEN=<your token>`.
 
 ## DOI publications
 
@@ -171,10 +138,10 @@ c(
 ) |>
   fetch_doi()
 #> # A tibble: 2 × 8
-#>   doi                             authors  year title journal volume issue page 
-#>   <chr>                           <chr>   <int> <chr> <chr>   <chr>  <chr> <chr>
-#> 1 10.1016/j.ijforecast.2023.10.0… Daniel…  2024 Cros… Intern… 40     3     1134…
-#> 2 10.1080/10618600.2020.1807353   Sevvan…  2020 Dime… Journa… 30     1     204-…
+#>   doi                              authors                  year title journal volume issue page 
+#>   <chr>                            <chr>                   <int> <chr> <chr>   <chr>  <chr> <chr>
+#> 1 10.1016/j.ijforecast.2023.10.003 Daniele Girolimetto; G…  2024 Cros… Intern… 40     3     1134…
+#> 2 10.1080/10618600.2020.1807353    Sevvandi Kandanaarachc…  2020 Dime… Journa… 30     1     204-…
 ```
 
 ## PURE publications
@@ -187,20 +154,15 @@ Department of Econometrics & Business Statistics, Monash University.
 fetch_pure(2024)
 ```
 
-    #> # A tibble: 83 × 8
-    #>    pure_id    year authors                     title journal subtype bib   doi  
-    #>    <chr>     <int> <chr>                       <chr> <chr>   <chr>   <chr> <chr>
-    #>  1 580119537  2024 Negi, A & Wooldridge, JM    Doub… Econom… Article Negi… 10.1…
-    #>  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…
-    #>  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…
-    #>  4 576146015  2024 Rostami-Tabar, B & Hyndman… Hier… Journa… Article Rost… 10.1…
-    #>  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…
-    #>  6 571851299  2024 Kim, HY & McLaren, KR       Inte… Resear… Article Kim,… 10.1…
-    #>  7 571257919  2024 Gao, J, Peng, B, Wu, WB & … Time… Journa… Article Gao,… 10.1…
-    #>  8 571257838  2024 Yan, Y, Gao, J & Peng, B    Asym… Econom… Article Yan,… 10.1…
-    #>  9 565992428  2024 Athanasopoulos, G, Hyndman… Fore… Intern… Article Atha… 10.1…
-    #> 10 564353599  2024 Wang, G, Zhou, J, Pantelou… A de… Comput… Article Wang… 10.1…
-    #> # ℹ 73 more rows
+    #> # A tibble: 95 × 8
+    #>   pure_id    year authors                                 title       journal subtype bib   doi  
+    #>   <chr>     <int> <chr>                                   <chr>       <chr>   <chr>   <chr> <chr>
+    #> 1 580119537  2024 Negi, A & Wooldridge, JM                Doubly rob… Econom… Article Negi… 10.1…
+    #> 2 578896645  2024 Negi, A                                 Doubly wei… Journa… Article Negi… 10.1…
+    #> 3 577211348  2024 Nibbering, D                            A high-dim… Journa… Article Nibb… 10.1…
+    #> 4 576146015  2024 Rostami-Tabar, B & Hyndman, RJ          Hierarchic… Journa… Article Rost… 10.1…
+    #> 5 574756920  2024 Fang, X, Zhou, J, Pantelous, AA & Lu, W A machine … Expert… Article Fang… 10.1…
+    #> # ℹ 90 more rows
 
 The `fetch_pure()` function requires an API key to access the PURE
 system. The API key is stored in the environment variable
@@ -216,20 +178,15 @@ May 2025.
 
 ``` r
 ebs_pure
-#> # A tibble: 613 × 8
-#>    pure_id    year authors                     title journal subtype bib   doi  
-#>    <chr>     <int> <chr>                       <chr> <chr>   <chr>   <chr> <chr>
-#>  1 580119537  2024 Negi, A & Wooldridge, JM    Doub… Econom… Article Negi… 10.1…
-#>  2 578896645  2024 Negi, A                     Doub… Journa… Article Negi… 10.1…
-#>  3 577211348  2024 Nibbering, D                A hi… Journa… Article Nibb… 10.1…
-#>  4 576146015  2024 Rostami-Tabar, B & Hyndman… Hier… Journa… Article Rost… 10.1…
-#>  5 574756920  2024 Fang, X, Zhou, J, Pantelou… A ma… Expert… Article Fang… 10.1…
-#>  6 574375066  2023 Pullin, JM, Gurrin, LC & V… Stat… The R … Article Pull… 10.3…
-#>  7 571851299  2024 Kim, HY & McLaren, KR       Inte… Resear… Article Kim,… 10.1…
-#>  8 571257919  2024 Gao, J, Peng, B, Wu, WB & … Time… Journa… Article Gao,… 10.1…
-#>  9 571257838  2024 Yan, Y, Gao, J & Peng, B    Asym… Econom… Article Yan,… 10.1…
-#> 10 567405205  2023 Zhou, J, Jiang, G, Pantelo… Onli… IEEE T… Article Zhou… 10.1…
-#> # ℹ 603 more rows
+#> # A tibble: 665 × 8
+#>   pure_id    year authors                                 title       journal subtype bib   doi  
+#>   <chr>     <int> <chr>                                   <chr>       <chr>   <chr>   <chr> <chr>
+#> 1 580119537  2024 Negi, A & Wooldridge, JM                Doubly rob… Econom… Article Negi… 10.1…
+#> 2 578896645  2024 Negi, A                                 Doubly wei… Journa… Article Negi… 10.1…
+#> 3 577211348  2024 Nibbering, D                            A high-dim… Journa… Article Nibb… 10.1…
+#> 4 576146015  2024 Rostami-Tabar, B & Hyndman, RJ          Hierarchic… Journa… Article Rost… 10.1…
+#> 5 574756920  2024 Fang, X, Zhou, J, Pantelous, AA & Lu, W A machine … Expert… Article Fang… 10.1…
+#> # ℹ 660 more rows
 ```
 
 ## CRAN packages
@@ -245,21 +202,16 @@ c(
   "Dianne Cook"
 ) |>
   fetch_cran()
-#> # A tibble: 43 × 11
-#>    package         date       title   description version authors url   cran_url
-#>    <chr>           <date>     <chr>   <chr>       <chr>   <chr>   <chr> <chr>   
-#>  1 cardinalR       2025-12-18 "Colle… "A collect… 1.0.6   "Jayan… http… https:/…
-#>  2 condensr        2023-08-30 "Acade… "Helps aut… 1.0.0   "Micha… http… https:/…
-#>  3 HospitalNetwork 2024-12-22 "Build… "Set of to… 0.9.4   "Pasca… http… https:/…
-#>  4 quollr          2025-12-18 "Visua… "To constr… 1.0.6   "Jayan… http… https:/…
-#>  5 brolgar         2025-09-03 "Brows… "Provides … 1.0.2   "Nicho… http… https:/…
-#>  6 eechidna        2021-02-25 "Explo… "Data from… 1.4.1   "Jerem… http… https:/…
-#>  7 fabletools      2025-09-01 "Core … "Provides … 0.5.1   "Mitch… http… https:/…
-#>  8 feasts          2025-08-27 "Featu… "Provides … 0.4.2   "Mitch… http… https:/…
-#>  9 geozoo          2016-05-07 "Zoo o… "Geometric… 0.5.1   "Barre… http… https:/…
-#> 10 GGally          2025-08-23 "Exten… "The R pac… 2.4.0   "Barre… http… https:/…
-#> # ℹ 33 more rows
-#> # ℹ 3 more variables: github_url <chr>, first_download <date>, downloads <dbl>
+#> # A tibble: 48 × 11
+#>   package   date       title description version authors url   cran_url github_url first_download
+#>   <chr>     <date>     <chr> <chr>       <chr>   <chr>   <chr> <chr>    <chr>      <date>        
+#> 1 blockstr… 2026-02-01 "Sam… "Sample da… 1.0.0   "Micha… http… https:/… https://g… 2026-02-01    
+#> 2 cardinalR 2025-12-18 "Col… "A collect… 1.0.6   "Jayan… http… https:/… <NA>       2024-04-16    
+#> 3 condensr  2023-08-30 "Aca… "Helps aut… 1.0.0   "Micha… http… https:/… <NA>       2023-08-30    
+#> 4 Hospital… 2024-12-22 "Bui… "Set of to… 0.9.4   "Pasca… http… https:/… <NA>       2023-02-27    
+#> 5 mapycusm… 2026-02-06 "Foc… "Focus-glu… 1.0.7   "Alex … http… https:/… <NA>       2025-12-20    
+#> # ℹ 43 more rows
+#> # ℹ 1 more variable: downloads <dbl>
 ```
 
 ## Journal rankings
@@ -291,8 +243,8 @@ journal_ranking("Forecasting")
 #> # A tibble: 3 × 2
 #>   title                                       rank   
 #>   <chr>                                       <fct>  
-#> 1 International Journal of Forecasting        Group 2
-#> 2 Journal of Forecasting                      Group 2
+#> 1 Journal of Forecasting                      Group 2
+#> 2 International Journal of Forecasting        Group 2
 #> 3 Technological Forecasting and Social Change Group 2
 ```
 

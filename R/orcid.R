@@ -47,31 +47,19 @@ fetch_orcid <- function(orcid_ids) {
     if (file.exists(dest_file)) {
       all_pubs[[orcid_id]] <- readRDS(dest_file)
     } else {
+      pubs <- orcidtr::orcid_works(orcid_id)
       # Read it from ORCID
-      pubs <- tryCatch(
-        rorcid::orcid_works(orcid_id),
-        error = function(e) {
-          if (inherits(e, "http_404")) {
-            stop(sprintf("Invalid ORCID ID: %s", orcid_id))
-          } else {
-            print(e)
-          }
-        }
-      )
-      if (!is.null(pubs[[1]]$works) && nrow(pubs[[1]]$works) > 0) {
-        ids <- pubs[[1]]$works$`external-ids.external-id`
-        dois <- purrr::map_chr(ids, function(x) {
-          if (length(x) == 0L) {
-            return(NA)
-          }
-          doi <- dplyr::filter(x, `external-id-type` == "doi") |>
-            dplyr::pull(`external-id-value`)
-          if (length(doi) == 0L) {
-            return(NA)
-          } else {
-            return(doi[1])
-          }
-        })
+      # pubs <- tryCatch(
+      #   error = function(e) {
+      #     if (inherits(e, "http_404")) {
+      #       stop(sprintf("Invalid ORCID ID: %s", orcid_id))
+      #     } else {
+      #       print(e)
+      #     }
+      #   }
+      # )
+      if (!is.null(pubs) && nrow(pubs) > 0) {
+        dois <- pubs$doi
         all_pubs[[orcid_id]] <- fetch_doi(stats::na.omit(unique(dois))) |>
           dplyr::mutate(orcid_id = orcid_id)
         saveRDS(all_pubs[[orcid_id]], dest_file)

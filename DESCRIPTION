@@ -17,7 +17,7 @@ Imports:
     jsonlite,
     pkgmeta,
     purrr,
-    rorcid,
+    orcidtr,
     scholar,
     stringr,
     tibble

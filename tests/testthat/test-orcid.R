@@ -36,5 +36,5 @@ test_that("fetch_orcid returns empty data frame for ORCID with no works", {
 
 test_that("fetch_orcid returns empty data frame for invalid ORCID IDs", {
   orcid_ids <- c("0000-0000-0000-0000")
-  expect_error(fetch_orcid(orcid_ids), "Invalid ORCID ID")
+  expect_error(fetch_orcid(orcid_ids), "ORCID record not found")
 })

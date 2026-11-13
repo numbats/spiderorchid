@@ -18,15 +18,8 @@ Only publications with DOIs are returned. The function uses the ORCID API to fet
 the DOIs, and then uses the DOI API to fetch the publication details for each DOI.
 }
 \details{
-This function requires authentication on ORCID. If you have not previously
-authenticated, it will prompt you to do so when first run. If you just
-follow the prompts, you will be authenticated, but only for downloading your
-own papers. If you want to download papers from other ORCID IDs, you will
-need to authenticate with a 2-legged OAuth. Follow the instructions at
-\url{https://info.orcid.org/register-a-client-application-production-member-api/}.
-To avoid having to do this in each session, store the token obtained from
-\code{orcid_auth()} in your \code{.Renviron} file by running \code{usethis::edit_r_environ()}.
-It should be of the form \code{ORCID_TOKEN=<your token>}.
+Data are retrieved from the ORCID public API via the \pkg{orcidtr} package,
+so no authentication is required.
 }
 \examples{
 \dontrun{

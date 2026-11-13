@@ -27,8 +27,14 @@ fetch_doi <- function(doi) {
         paste0("dx.doi.org/", id),
         httr::accept("application/json")
       )
-      a <- httr::content(res, as = "text", encoding = "UTF-8") |>
-        jsonlite::fromJSON()
+      # Unresolvable DOIs return an HTML error page; keep the row of NAs
+      failed <- httr::http_error(res)
+      a <- if (failed) {
+        list()
+      } else {
+        httr::content(res, as = "text", encoding = "UTF-8") |>
+          jsonlite::fromJSON()
+      }
       all_pubs[[id]] <- data.frame(
         doi = id,
         authors = NA_character_,
@@ -65,7 +71,9 @@ fetch_doi <- function(doi) {
       if (!is.null(a$page)) {
         all_pubs[[id]]$page = a$page
       }
-      saveRDS(all_pubs[[id]], dest_file)
+      if (!failed) {
+        saveRDS(all_pubs[[id]], dest_file)
+      }
     }
   }
   # Combine all data frames into one

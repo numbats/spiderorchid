@@ -10,10 +10,13 @@ ui <- shinyUI(pageWithSidebar(
   # Sidebar with controls to select a dataset and specify the number
   # of observations to view
   sidebarPanel(
-    selectInput(
+    selectizeInput(
       "dataset",
-      "Choose a rankings database:",
-      choices = c("Monash", "ABDC", "CORE", "ERA2010", "SCImago")
+      "Choose rankings databases:",
+      choices = c("Monash", "ABDC", "CORE", "ERA2010", "SCImago"),
+      selected = "Monash",
+      multiple = TRUE,
+      options = list(plugins = list("remove_button"))
     ),
     textInput("title", "Title to search for:", ""),
     checkboxInput("fuzzy", "Fuzzy matching?", TRUE),
@@ -29,15 +32,18 @@ ui <- shinyUI(pageWithSidebar(
 server <- shinyServer(function(input, output) {
   # Return the requested dataset
   datasetInput <- reactive({
-    if (input$title == "") {
+    if (input$title == "" || length(input$dataset) == 0) {
       NULL
     } else {
-      journal_ranking(
-        title = input$title,
-        source = tolower(input$dataset),
-        fuzzy = input$fuzzy,
-        only_best = input$only_best
-      )
+      purrr::map_dfr(input$dataset, \(db) {
+        journal_ranking(
+          title = input$title,
+          source = tolower(db),
+          fuzzy = input$fuzzy,
+          only_best = input$only_best
+        ) |>
+          mutate(database = db, rank = as.character(rank), .before = 1)
+      })
     }
   })
 

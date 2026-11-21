@@ -146,3 +146,8 @@ monash <- monash |>
 
 # save into rcademy
 usethis::use_data(monash, overwrite = TRUE)
+
+# Remind to keep the Shiny app's "About the rankings" tab in step with the data
+cli::cli_alert_warning(
+  "Update the {.val Last updated} date (and any year in the text) on the {.strong Monash Business School} card in {.file shinyapp/app.R}."
+)

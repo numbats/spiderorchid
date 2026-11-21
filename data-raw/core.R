@@ -34,3 +34,8 @@ core_journals <- here("data-raw", "CORE_journals.csv") |>
 # save into rcademy
 usethis::use_data(core, overwrite = TRUE)
 usethis::use_data(core_journals, overwrite = TRUE)
+
+# Remind to keep the Shiny app's "About the rankings" tab in step with the data
+cli::cli_alert_warning(
+  "Update the {.val Last updated} date (and any year in the text) on the {.strong CORE} card in {.file shinyapp/app.R}."
+)
